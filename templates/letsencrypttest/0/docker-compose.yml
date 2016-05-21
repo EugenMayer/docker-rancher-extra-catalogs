@@ -1,5 +1,5 @@
 letsencrypt:
-  image: janeczku/rancher-letsencrypt:v0.2.7
+  image: janeczku/rancher-letsencrypt:v0.2.9
   environment:
     EULA: ${EULA}
     API_VERSION: ${API_VERSION}
