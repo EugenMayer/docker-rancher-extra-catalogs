@@ -115,3 +115,13 @@
       description: "Enter your Dyn password."
       type: "string"
       required: false
+    - variable: "NAMECHEAP_API_USER"
+      label: "Namecheap API User"
+      description: "Enter your Namecheap user name."
+      type: "string"
+      required: false
+    - variable: : "NAMECHEAP_API_KEY"
+      label: "Namecheap API Key"
+      description: "Enter your Namecheap API Key."
+      type: "string"
+      required: false
