@@ -1,5 +1,0 @@
-name: "letsencrypttest"
-description: |
-  Trusted SSL certificates at zero cost
-version: 0.2.9
-category: Security

@@ -19,8 +19,6 @@ letsencrypt:
     DYN_CUSTOMER_NAME: ${DYN_CUSTOMER_NAME}
     DYN_USER_NAME: ${DYN_USER_NAME}
     DYN_PASSWORD: ${DYN_PASSWORD}
-    NAMECHEAP_API_USER: ${NAMECHEAP_API_USER}
-    NAMECHEAP_API_KEY: ${NAMECHEAP_API_KEY}
   labels:
     io.rancher.container.create_agent: 'true'
     io.rancher.container.agent.role: 'environment'
