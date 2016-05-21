@@ -1,4 +1,4 @@
-letsencrypt:
+letsencrypttest:
   image: janeczku/rancher-letsencrypt:v0.2.9
   environment:
     EULA: ${EULA}
