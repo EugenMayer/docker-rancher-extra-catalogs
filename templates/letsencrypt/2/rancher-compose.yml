@@ -120,7 +120,7 @@
       description: "Enter your Namecheap user name."
       type: "string"
       required: false
-    - variable: : "NAMECHEAP_API_KEY"
+    - variable: "NAMECHEAP_API_KEY"
       label: "Namecheap API Key"
       description: "Enter your Namecheap API Key."
       type: "string"
