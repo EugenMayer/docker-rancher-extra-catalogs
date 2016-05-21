@@ -65,6 +65,7 @@
         - Route53
         - DNSimple
         - Dyn
+        - Namecheap
     - variable: "AWS_ACCESS_KEY"
       label: "AWS Access Key Id"
       description: "Enter the Access Key Id for your AWS account."
