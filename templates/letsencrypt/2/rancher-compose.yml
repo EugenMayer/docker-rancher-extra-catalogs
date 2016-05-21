@@ -1,7 +1,7 @@
 .catalog:
   name: "Let's Encrypt"
-  version: 0.2.7
-  uuid: letsencrypt-1
+  version: 0.2.9
+  uuid: letsencrypt-2
   description: "Trusted SSL certificates at zero cost"
   minimum_rancher_version: v0.63.0
   questions:
@@ -66,6 +66,7 @@
         - Route53
         - DNSimple
         - Dyn
+        - Namecheap
     - variable: "AWS_ACCESS_KEY"
       label: "AWS Access Key Id"
       description: "Enter the Access Key Id for your AWS account."
@@ -114,5 +115,15 @@
     - variable: "DYN_PASSWORD"
       label: "Dyn Password"
       description: "Enter your Dyn password."
+      type: "string"
+      required: false
+    - variable: "NAMECHEAP_API_USER"
+      label: "Namecheap API User"
+      description: "Enter your Namecheap user name."
+      type: "string"
+      required: false
+    - variable: : "NAMECHEAP_API_KEY"
+      label: "Namecheap API Key"
+      description: "Enter your Namecheap API Key."
       type: "string"
       required: false

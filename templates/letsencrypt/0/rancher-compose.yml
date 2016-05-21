@@ -1,6 +1,7 @@
 .catalog:
   name: "Let's Encrypt"
   version: 0.2.5
+  uuid: letsencrypt-0
   description: "Trusted SSL certificates at zero cost"
   minimum_rancher_version: v0.63.0
   questions:
