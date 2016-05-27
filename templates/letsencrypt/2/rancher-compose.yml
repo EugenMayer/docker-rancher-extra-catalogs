@@ -1,6 +1,6 @@
 .catalog:
   name: "Let's Encrypt"
-  version: "0.2.9"
+  version: "0.3.0"
   description: "Trusted SSL certificates at zero cost"
   minimum_rancher_version: v0.63.0
   questions:
@@ -21,6 +21,11 @@
       options:
         - "Production"
         - "Sandbox"
+    - variable: "STORAGEPATH"
+      label: "Certificate Storage path"
+      description: "The path of on the host to store the certificates on"
+      required: true
+      type: "string"
     - variable: "EMAIL"
       label: "Your Email Address"
       description: "Enter the email address to be associated with the Let's Encrypt account."
@@ -114,15 +119,5 @@
     - variable: "DYN_PASSWORD"
       label: "Dyn Password"
       description: "Enter your Dyn password."
-      type: "string"
-      required: false
-    - variable: "NAMECHEAP_API_USER"
-      label: "Namecheap API User"
-      description: "Enter your Namecheap user name."
-      type: "string"
-      required: false
-    - variable: "NAMECHEAP_API_KEY"
-      label: "Namecheap API Key"
-      description: "Enter your Namecheap API Key."
       type: "string"
       required: false
