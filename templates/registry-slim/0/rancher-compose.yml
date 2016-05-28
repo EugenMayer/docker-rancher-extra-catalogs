@@ -37,13 +37,13 @@
       default: 443
       type: "string"
     - variable: "SSL_SIGN_KEY"
-      label: "SSL Private key"
+      label: "SSL private key"
       description: "used for token signing. The cert mount point is under /certs, so basically all your paths start with /certs/"
       required: true
       default: '/certs/privkey.pem'
       type: "string"
     - variable: "SSL_SIGN_CERT"
-      label: "SSL certicate"
+      label: "SSL certificate"
       description: "used for token signing.  The cert mount point is under /certs, so basically all your paths start with /certs/"
       required: true
       default: '/certs/fullchain.pem'

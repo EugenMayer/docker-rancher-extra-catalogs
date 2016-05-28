@@ -39,7 +39,8 @@ portus:
     io.rancher.scheduler.affinity:container_label_soft: registry.portus.db=1
     registry.portus.app: 1
 registry:
-  image: registry:2.4.1
+  image: registry:2.3.1
+  #image: registry:2.4.1
   environment:
     REGISTRY_LOG_LEVEL: warn
     REGISTRY_STORAGE_DELETE_ENABLED: true
