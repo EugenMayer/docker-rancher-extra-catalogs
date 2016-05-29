@@ -1,4 +1,4 @@
-letsencrypt:
+apacheds:
   image: h3nrik/apacheds:latest
   environment:
     EULA: ${EULA}
