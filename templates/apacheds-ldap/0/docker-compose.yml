@@ -1,9 +1,7 @@
 apacheds:
-  image: h3nrik/apacheds:latest
-  environment:
-    EULA: ${EULA}
+  image: h3nrik/apacheds:2.0.0-M20
   volumes:
-    - ${STORAGEPATH}:${APACHEDS_DATA}
+    - ${STORAGEPATH}:/var/lib/apacheds-2.0.0-M20
     - ${SSLSTORAGE}:/certs
   labels:
     io.rancher.container.create_agent: 'true'
