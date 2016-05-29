@@ -1,9 +1,9 @@
 ### Installs Portus and the docker Regstry v2 - but with a rather slim infrastructural footprint
 
 It is based on [registry](https://github.com/rancher/community-catalog/tree/master/templates/registry)
-and serves exactly the same need while having some infrastructural differences and also additional features ( domains and ssl):
+and serves exactly the same need while having a newer portus build, some infrastructural differences and also additional features ( domains and ssl ):
 
-The original registry catalog offers a better "out of the box" experience, since it probably runs right out of the box ( beside the host port issue )
+While original registry catalog might offer a better "out of the box" experience, this catalog aims for production an
 
 ## 1. More recent builds of portus
 As a companion to this catalog, i started to build/package portus [myself](https://github.com/EugenMayer/portus-build) and released on [hub.github.io](https://hub.docker.com/r/eugenmayer/portus/)
@@ -12,13 +12,15 @@ This builds of portus include the newest feature like deleting images and tags a
 
 ## 2. Not including LB/Nginx
 We do not expose or add a loadbalancer/ssl proxy but rather require you to use your rancher-lb for routing
+
 Reason: 
+
 The current catalogs seem to boldly bind on the hosts 443 port - well that will work for one catalog app, all the others will fail.
 Instead you are now required to use a central load-balancer that binds to 443 and then routes to all your catalog apps, also doing ssl termination.
 Sound complicated, but in case, its very easy, see [ranchers virtual host routing howto](http://rancher.com/virtual-host-routing-using-rancher-load-balancer/)
 
 + Your portus lb entry usually routes from 443 to port 3000 of the portus service
-+ Your registry lb entry usually routes from 443 to port 50000 of the registry service   
++ Your registry lb entry usually routes from 443 to port 5000 of the registry service   
 
 Also, there is no need for an nginx ssl proxy at all, i yet do not know why its there in the original approach at all.
 
