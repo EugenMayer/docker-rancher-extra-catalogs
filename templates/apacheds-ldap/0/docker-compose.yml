@@ -1,0 +1,10 @@
+letsencrypt:
+  image: h3nrik/apacheds:latest
+  environment:
+    EULA: ${EULA}
+  volumes:
+    - ${STORAGEPATH}:${APACHEDS_DATA}
+    - ${SSLSTORAGE}:/certs
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: 'environment'

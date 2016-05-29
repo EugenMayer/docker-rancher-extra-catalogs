@@ -1,0 +1,16 @@
+.catalog:
+  name: "ApacheDS Ldap Server"
+  version: "0.0.1"
+  description: "LDAP Auth-Server based on ApacheDS"
+  minimum_rancher_version: v0.63.0
+  questions:
+    - variable: "STORAGEPATH"
+      label: "Data storage on the host"
+      description: "Where should the ldap database be stored on the host"
+      required: true
+      type: "string"
+    - variable: "SSLSTORAGE"
+      label: "Storage of your SSL Certificates"
+      description: "Where are your SSL certificates stored"
+      required: true
+      type: "string"
