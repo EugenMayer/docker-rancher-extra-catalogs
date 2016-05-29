@@ -1,5 +1,5 @@
 portus:
-  image: sshipway/portus:2.0.5
+  image: eugenmayer/portus:2.4-rc1
   environment:
     REGISTRY_SSL_ENABLED: true
     REGISTRY_HOSTNAME: ${REG_DOMAIN}
@@ -29,7 +29,7 @@ portus:
     PORTUS_LDAP_AUTHENTICATION_PASSWORD: ${LDAPBINDPASS}
     PORTUS_LDAP_GUESS_EMAIL_ENABLED: true
     PORTUS_LDAP_GUESS_EMAIL_ATTR: mail
-    PORTUS_DELETE_ENABLED: 'true'
+    PORTUS_DELETE_ENABLED: true
   tty: true
   stdin_open: true
   volumes:

@@ -24,7 +24,7 @@
       description: "The EXTERNAL port for the Registry. So how you will access the registry from external"
       default: 443
       required: true
-      type: "string"
+      type: "int"
     - variable: "PORTUS_DOMAIN"
       label: "PORTUS Domain"
       description: "The domain for Portus"
@@ -35,7 +35,7 @@
       description: "The EXTERNAL port for portus. So how you will access the portus from external. If its just https://portus.domain.tld, just leave 443 here"
       required: true
       default: 443
-      type: "string"
+      type: "int"
     - variable: "SSL_SIGN_KEY"
       label: "SSL private key"
       description: "used for token signing. The cert mount point is under /certs, so basically all your paths start with /certs/"

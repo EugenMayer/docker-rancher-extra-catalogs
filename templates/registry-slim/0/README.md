@@ -5,7 +5,12 @@ and serves exactly the same need while having some infrastructural differences a
 
 The original registry catalog offers a better "out of the box" experience, since it probably runs right out of the box ( beside the host port issue )
 
-#### 1. Not including LB/Nginx
+## 1. More recent builds of portus
+As a companion to this catalog, i started to build/package portus [myself](https://github.com/EugenMayer/portus-build) and released on [hub.github.io](https://hub.docker.com/r/eugenmayer/portus/)
+
+This builds of portus include the newest feature like deleting images and tags and also some important bugfixes for portus all build on the vanilla [SUSE/portus repo](https://github.com/SUSE/Portus) 
+
+## 2. Not including LB/Nginx
 We do not expose or add a loadbalancer/ssl proxy but rather require you to use your rancher-lb for routing
 Reason: 
 The current catalogs seem to boldly bind on the hosts 443 port - well that will work for one catalog app, all the others will fail.
@@ -17,7 +22,7 @@ Sound complicated, but in case, its very easy, see [ranchers virtual host routin
 
 Also, there is no need for an nginx ssl proxy at all, i yet do not know why its there in the original approach at all.
 
-### 2. We do not setup a mysql server
+## 3. We do not setup a mysql server
 .. , but rather require you to setup one.
 Reason:
 Since portus yet does not enable you to connect to several registries, you end up having several portus+registry "packs" - each for the registry you need.
@@ -32,10 +37,10 @@ Deploy yourself a mysql-server as a service, use the image you like most.
 
 Set MYSQL_ROOT_PASSWORD as you like and set the same password when setting up this catalog in "Password for the mysql root connection"
 
-### 3. You can use different domains for the registry and portus
+## 4. You can use different domains for the registry and portus
 While the original image forces you to run both on the same domain, here its supported to run them on different ones like portus.domain.tld and registry.domain.tld
 
-### 4. Official SSL the easy way: 
+## 5. Official SSL the easy way: 
 Using the letsencrypt catalog [letsencrypt](https://github.com/EugenMayer/kontextwork-catalog/tree/master/templates/letsencrypt) which is based on [the original](https://github.com/rancher/community-catalog/tree/master/templates/letsencrypt)
 you can easily manage your certificates by exporting the certificates from the letsencrypt container to the host and then mount those in the registry / portus to be used 
 for signing the tokens. The SSL tertrination using the load balancer can also easily access the certificates uing the rancher certificate API.
