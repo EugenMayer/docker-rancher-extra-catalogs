@@ -9,3 +9,8 @@
       description: "Where should the ldap database be stored on the host"
       required: true
       type: "string"
+    - variable: "CONFIGPATH"
+      label: "Data where your bootstrap ist store"
+      description: "Define where your ldap configuration bootstrap is stored"
+      required: true
+      type: "string"

@@ -1,8 +1,8 @@
 apacheds:
   image: greggigon/apacheds
   volumes:
-    - ${STORAGEPATH}:/var/lib/apacheds-2.0.0-M20
-    - ${SSLSTORAGE}:/certs
+    - ${STORAGEPATH}:/data
+    - ${CONFIGPATH}:/bootstrap
   labels:
     io.rancher.container.create_agent: 'true'
     io.rancher.container.agent.role: 'environment'
