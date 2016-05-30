@@ -9,8 +9,3 @@
       description: "Where should the ldap database be stored on the host"
       required: true
       type: "string"
-    - variable: "SSLSTORAGE"
-      label: "Storage of your SSL Certificates"
-      description: "Where are your SSL certificates stored"
-      required: true
-      type: "string"
