@@ -19,7 +19,10 @@ Yes you map the SSL port on the non SSL port, since you do SSL termination on th
 ## First login
 
 You can login with 
+
 + user : uid=admin,ou=system
 + password: secret
+
+I suggest to use [ApacheStudio](http://directory.apache.org/studio/downloads.html) to adminster the LDAP Server: 
 
 Change your password and add the configuration your need.
