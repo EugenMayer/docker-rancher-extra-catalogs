@@ -11,8 +11,8 @@ Using [this docker image](https://hub.docker.com/r/h3nrik/apacheds/~/dockerfile/
 
 When installed, you should use your load-balancer to map the following ports:
 
-+ Port 363 TCP no ssl on th the container port 10363
-+ Port 686 TCP ssl on th the container port 10363
++ Port 389 TCP no ssl on th the container port 10389
++ Port 636 TCP ssl on th the container port 10389
 
 Yes you map the SSL port on the non SSL port, since you do SSL termination on the load-balancer
 
