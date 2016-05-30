@@ -1,5 +1,5 @@
 apacheds:
-  image: h3nrik/apacheds:2.0.0-M20
+  image: greggigon/apacheds
   volumes:
     - ${STORAGEPATH}:/var/lib/apacheds-2.0.0-M20
     - ${SSLSTORAGE}:/certs

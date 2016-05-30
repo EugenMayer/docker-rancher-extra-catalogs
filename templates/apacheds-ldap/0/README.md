@@ -1,7 +1,7 @@
 Offering the [apacheDS](https://directory.apache.org/apacheds/) ldap server with kerberos and other services
 as described on the homepage. You can use it with SSL termination using the load balancer, see below
 
-Using [this docker image](https://hub.docker.com/r/h3nrik/apacheds/~/dockerfile/) as the base for now.
+Using [this docker image](https://hub.docker.com/r/greggigon/apacheds/) as the base for now.
 
 ## Installation
 
