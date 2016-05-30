@@ -14,3 +14,8 @@
       description: "Define where your ldap configuration bootstrap is stored"
       required: true
       type: "string"
+    - variable: "BOOSTRAPFILE"
+      label: "Path to a file to import"
+      description: "Path to a file to import into you LDAP server on inital start"
+      required: false
+      type: "string"
