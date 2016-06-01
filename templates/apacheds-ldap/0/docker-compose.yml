@@ -1,8 +1,10 @@
 apacheds:
-  image: greggigon/apacheds
+  image: eugenmayer/apacheds:M21
+  environment:
+    DS_KEYSTORE_PATH: "/certs/apacheds.keystore"
   volumes:
     - ${STORAGEPATH}:/data
-    - ${CONFIGPATH}:/bootstrap
+    - ${BOOTSTRAPPATH}:/bootstrap
   labels:
     io.rancher.container.create_agent: 'true'
     io.rancher.container.agent.role: 'environment'

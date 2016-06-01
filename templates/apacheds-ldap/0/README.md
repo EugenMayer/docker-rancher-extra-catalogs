@@ -1,20 +1,22 @@
-Offering the [apacheDS](https://directory.apache.org/apacheds/) ldap server with kerberos and other services
-as described on the homepage. You can use it with SSL termination using the load balancer, see below
+Offering the [apacheDS](https://directory.apache.org/apacheds/) ldap server with the basic configuration
+using rancher answers and also support for TLS, especially hand with [letsencrypt](https://github.com/EugenMayer/kontextwork-catalog/tree/master/templates/letsencrypt)
 
-Using [this docker image](https://hub.docker.com/r/greggigon/apacheds/) as the base for now.
+Using [this docker image](https://hub.docker.com/r/eugenmayer/apacheds/).
 
-## Installation
+## Installation / Full docs
 
-+ Enter the Storage path where your LDAP-Database will get written
+Please see the [documentation](https://github.com/EugenMayer/apacheds-build) for the installation steps and further details 
 
 ## After the installation
 
 When installed, you should use your load-balancer to map the following ports:
 
 + Port 389 TCP no ssl on th the container port 10389
-+ Port 636 TCP ssl on th the container port 10389
 
-Yes you map the SSL port on the non SSL port, since you do SSL termination on the load-balancer
+## SSL / Encryption
+
+Port 389, if you provided a SSL certificate, will be used fo startTLS, so the current way to encrypt LDAP connections. See the [documentation](https://github.com/EugenMayer/apacheds-build) 
+Combining with [letsencrypt](https://github.com/EugenMayer/kontextwork-catalog/tree/master/templates/letsencrypt) is a pretty elegant solution to handle the SSL certificates.
 
 ## First login
 
@@ -22,7 +24,10 @@ You can login with
 
 + user : uid=admin,ou=system
 + password: secret
++ Change the password!
 
-I suggest to use [ApacheStudio](http://directory.apache.org/studio/downloads.html) to adminster the LDAP Server: 
+I suggest to use [ApacheStudio](http://directory.apache.org/studio/downloads.html) to administer the LDAP Server: 
 
-Change your password and add the configuration your need.
+## Logs
+
+You find the logs under ```/var/lib/apacheds-2.0.0_M20/default/log/apacheds.log```
