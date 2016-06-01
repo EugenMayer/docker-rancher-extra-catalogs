@@ -16,7 +16,7 @@ When installed, you should use your load-balancer to map the following ports:
 ## SSL / Encryption
 
 Port 389, if you provided a SSL certificate, will be used fo startTLS, so the current way to encrypt LDAP connections. See the [documentation](https://github.com/EugenMayer/apacheds-build) 
-Combining with [letsencrypt](https://github.com/EugenMayer/kontextwork-catalog/tree/master/templates/letsencrypt) is a pretty elegant solution to handle the SSL certificates.
+Combining with [letsencrypt](https://github.com/rancher/community-catalog/tree/master/templates/letsencrypt) is a pretty elegant solution to handle the SSL certificates.
 
 ## First login
 
