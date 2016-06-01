@@ -1,5 +1,5 @@
 apacheds:
-  image: eugenmayer/apacheds:M21
+  image: eugenmayer/apacheds:m21-beta1
   environment:
     DS_KEYSTORE_PATH: "/certs/apacheds.keystore"
   volumes:
