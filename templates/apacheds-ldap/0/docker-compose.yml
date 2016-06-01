@@ -1,7 +1,7 @@
 apacheds:
   image: eugenmayer/apacheds:m21-beta1
   environment:
-    DS_KEYSTORE_PATH: "/certs/apacheds.keystore"
+    DS_KEYSTORE_PATH: "/bootstrap/apacheds.keystore"
   volumes:
     - ${STORAGEPATH}:/data
     - ${BOOTSTRAPPATH}:/bootstrap
