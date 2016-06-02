@@ -1,27 +1,37 @@
 .catalog:
   name: "ApacheDS Ldap Server"
-  version: 0.1.2
+  version: 0.1.7
   description: "LDAP Auth-Server based on ApacheDS with easy configuration"
   minimum_rancher_version: v0.63.0
   questions:
-    - variable: "STORAGEPATH"
-      label: "Data storage on the host"
-      description: "(optional, will be a anon volume otherwise) !!INCLUDE a ':' as a suffix! Where should the ldap database be stored on the host"
-      required: false
+    - variable: "DATAPATH"
+      label: "Volume name or host path for the ldap-data storage"
+      description: "(optional, will be a anon volume otherwise) Where should the ldap database be stored on the host or a named volume"
+      required: true
       type: "string"
     - variable: "BOOTSTRAPPATH"
-      label: "Data where your bootstrap ist stored on your host or volume"
-      description: "(optional, will be a anon volume otherwise) !!INCLUDE a ':' as a suffix! Define where your ldap bootstrap is stored on the host. There, your custom configuration, data and other things will be stored. This will be mounted on /bootstrap in the container"
-      required: false
+      label: "Volume name or host path for the bootstrap storage"
+      description: "Define where your ldap bootstrap is stored on the host or a named volume. There, your custom configuration, data and other things will be stored. This will be mounted on /bootstrap in the container"
+      required: true
+      type: "string"
+    - variable: "CONFPATH"
+      label: "Volume name or host path for the configuration storage"
+      description: "Define where your ldap live configuration is stored on the host or a named volume. Mounted as /conf in the container"
+      required: true
       type: "string"
     - variable: "CERTSTOREPATH"
-      label: "Where are your SSL storage"
-      description: "NOT include a ':'! Where are your SSL certificates stored on your host (for startTLS). The certificate must be named 'fullchain.pem' and the key 'privkey.pem' "
+      label: "Where are your SSL certificates located on the host (or named volume)"
+      description: "Where are your SSL certificates stored on your host or name volume. If the folder is empty, no TLS is provided. If The certificate must be named 'fullchain.pem' and the key 'privkey.pem' "
+      required: true
+      type: "string"
+    - variable: "DS_HOST"
+      label: "ApacheDS Host"
+      description: "Your apacheDS host, like auth.example.com"
       required: true
       type: "string"
     - variable: "DS_SASL_HOST"
       label: "SASL Host"
-      description: "Your SASL host, like auth.example.com"
+      description: "Your SASL host, like auth.example.com, most probably like the apcheDS host"
       required: true
       type: "string"
     - variable: "DS_SASL_REALM"

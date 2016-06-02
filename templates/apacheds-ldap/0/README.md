@@ -7,6 +7,10 @@ Using [this docker image](https://hub.docker.com/r/eugenmayer/apacheds/).
 
 Please see the [documentation](https://github.com/EugenMayer/apacheds-build) for the installation steps and further details 
 
+## Volumes
+
+You end up having 3 named volumes or folders on your host : boostrap ,conf and data. See the [documentation](https://github.com/EugenMayer/apacheds-build) for further details
+
 ## After the installation
 
 When installed, you should use your load-balancer to map the following ports:
@@ -24,10 +28,10 @@ You can login with
 
 + user : uid=admin,ou=system
 + password: secret
-+ Change the password!
++ **Change the password!**
 
-I suggest to use [ApacheStudio](http://directory.apache.org/studio/downloads.html) to administer the LDAP Server: 
+I suggest to use [ApacheStudio](http://directory.apache.org/studio/downloads.html) to administer the LDAP Server 
 
 ## Logs
 
-You find the logs under ```/var/lib/apacheds-2.0.0_M20/default/log/apacheds.log```
+You find the logs under ```/var/lib/apacheds-2.0.0_M21/default/log/apacheds.log```
