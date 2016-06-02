@@ -1,6 +1,6 @@
 .catalog:
   name: "ApacheDS Ldap Server"
-  version: "0.1.2"
+  version: "0.1.4"
   description: "LDAP Auth-Server based on ApacheDS with easy configuration"
   minimum_rancher_version: v0.63.0
   questions:
@@ -18,11 +18,6 @@
       label: "Where are your SSL storage"
       description: "NOT include a ':'! Where are your SSL certificates stored on your host (for startTLS). The certificate must be named 'fullchain.pem' and the key 'privkey.pem' "
       required: true
-      type: "string"
-    - variable: "BOOSTRAPFILE"
-      label: "Import your data"
-      description: "Optional, pth to a file to import into you LDAP server on inital start (prefill)"
-      required: false
       type: "string"
     - variable: "DS_SASL_HOST"
       label: "SASL Host"
