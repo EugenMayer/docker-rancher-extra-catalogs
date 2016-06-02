@@ -1,0 +1,25 @@
+apacheds:
+  image: eugenmayer/apacheds:m21-beta5
+  environment:
+    DS_KEYSTORE_PATH: "/bootstrap/apacheds.keystore"
+    DS_HOST: ${DS_HOST}
+    DS_SASL_HOST: ${DS_SASL_HOST}
+    DS_SASL_REALM: ${DS_SASL_REALM}
+    DS_SASL_DOMAIN: ${DS_SASL_DOMAIN}
+    DS_SASL_BASEDN: ${DS_SASL_BASEDN}
+    DS_PARTITION1_ID: ${DS_PARTITION1_ID}
+    DS_PARTITION1_SUFFIX: ${DS_PARTITION1_SUFFIX}
+    DS_KRB_REALM: ${DS_KRB_REALM}
+    DS_KRB_BASEDN: ${DS_KRB_BASEDN}
+    DS_KEYSTORE_PATH: /bootstrap/apacheds.keystore
+    STORAGEPATH: ${STORAGEPATH}
+    BOOTSTRAPPATH: ${BOOTSTRAPPATH}
+    CERTSTOREPATH: ${CERTSTOREPATH}
+  volumes:
+    - ${STORAGEPATH}/data
+    - ${BOOTSTRAPPATH}/bootstrap
+    - ${CERTSTOREPATH}:/certs
+
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: 'environment'
