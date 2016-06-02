@@ -1,22 +1,22 @@
 .catalog:
   name: "ApacheDS Ldap Server"
-  version: "0.1.1"
+  version: "0.1.2"
   description: "LDAP Auth-Server based on ApacheDS with easy configuration"
   minimum_rancher_version: v0.63.0
   questions:
     - variable: "STORAGEPATH"
       label: "Data storage on the host"
-      description: "Where should the ldap database be stored on the host"
-      required: true
+      description: "(optional, will be a anon volume otherwise) !!INCLUDE a ':' as a suffix! Where should the ldap database be stored on the host"
+      required: false
       type: "string"
     - variable: "BOOTSTRAPPATH"
-      label: "Data where your bootstrap ist store"
-      description: "Define where your ldap bootstrap is stored on the host. There, your custom configuration, data and other things will be stored. This will be mounted on /bootstrap in the container"
-      required: true
+      label: "Data where your bootstrap ist stored on your host or volume "
+      description: "(optional, will be a anon volume otherwise) !!INCLUDE a ':' as a suffix! Define where your ldap bootstrap is stored on the host. There, your custom configuration, data and other things will be stored. This will be mounted on /bootstrap in the container"
+      required: false
       type: "string"
     - variable: "CERTSTOREPATH"
       label: "Where are your SSL storage"
-      description: "Where are your SSL certificates stored on your host (for startTLS). The certificate must be named 'fullchain.pem' and the key 'privkey.pem' "
+      description: "NOT include a ':'! Where are your SSL certificates stored on your host (for startTLS). The certificate must be named 'fullchain.pem' and the key 'privkey.pem' "
       required: true
       type: "string"
     - variable: "BOOSTRAPFILE"
