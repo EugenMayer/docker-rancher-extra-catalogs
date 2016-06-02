@@ -17,7 +17,7 @@ apacheds:
     CONFPATH: ${CONFPATH}
     DS_KEYSTORE_PATH: "/bootstrap/apacheds.keystore"
   volumes:
-    - ${STORAGEPATH}:/data
+    - ${DATAPATH}:/data
     - ${BOOTSTRAPPATH}:/bootstrap
     - ${CERTSTOREPATH}:/certs
     - ${CONFPATH}:/conf
