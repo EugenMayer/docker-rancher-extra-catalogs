@@ -10,7 +10,7 @@
       required: false
       type: "string"
     - variable: "BOOTSTRAPPATH"
-      label: "Data where your bootstrap ist stored on your host or volume "
+      label: "Data where your bootstrap ist stored on your host or volume"
       description: "(optional, will be a anon volume otherwise) !!INCLUDE a ':' as a suffix! Define where your ldap bootstrap is stored on the host. There, your custom configuration, data and other things will be stored. This will be mounted on /bootstrap in the container"
       required: false
       type: "string"
