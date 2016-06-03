@@ -1,5 +1,5 @@
 apacheds:
-  image: eugenmayer/apacheds:m21-rc2
+  image: eugenmayer/apacheds:m21-beta9
   environment:
     DS_HOST: ${DS_HOST}
     DS_SASL_HOST: ${DS_SASL_HOST}
