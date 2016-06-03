@@ -16,10 +16,13 @@ You end up having 3 named volumes or folders on your host : boostrap ,conf and d
 When installed, you should use your load-balancer to map the following ports:
 
 + Port 389 TCP no ssl on th the container port 10389
++ login to your ldap server, see first login
++ create a partition for your domain
++ restart the server once to see the partition
 
 ## SSL / Encryption
 
-Port 389, if you provided a SSL certificate, will be used fo startTLS, so the current way to encrypt LDAP connections. See the [documentation](https://github.com/EugenMayer/apacheds-build) 
+Port 389 (not 636), if you provided a SSL certificate, it will be used fo startTLS, so the current way to encrypt LDAP connections. See the [documentation](https://github.com/EugenMayer/apacheds-build) 
 Combining with [letsencrypt](https://github.com/rancher/community-catalog/tree/master/templates/letsencrypt) is a pretty elegant solution to handle the SSL certificates.
 
 ## First login

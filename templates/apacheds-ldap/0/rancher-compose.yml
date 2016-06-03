@@ -1,6 +1,6 @@
 .catalog:
   name: "ApacheDS Ldap Server"
-  version: 0.1.7
+  version: 0.1.11
   description: "LDAP Auth-Server based on ApacheDS with easy configuration"
   minimum_rancher_version: v0.63.0
   questions:
@@ -47,17 +47,6 @@
     - variable: "DS_SASL_BASEDN"
       label: "SASL BaseDN"
       description: "Your SASL basedn, like ou=users,dc=example,dc=com"
-      required: true
-      type: "string"
-    - variable: "DS_PARTITION1_ID"
-      label: "Partition ID"
-      description: "Your which id should your partition have"
-      default: "partition1"
-      required: true
-      type: "string"
-    - variable: "DS_PARTITION1_SUFFIX"
-      label: "Parition SUFFIX"
-      description: "Your partition dn, like dc=example,dc=com - will be created automatically"
       required: true
       type: "string"
     - variable: "DS_KRB_REALM"
