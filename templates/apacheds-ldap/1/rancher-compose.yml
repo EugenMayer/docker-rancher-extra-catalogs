@@ -1,6 +1,6 @@
 .catalog:
   name: "ApacheDS Ldap Server"
-  version: 0.2.0
+  version: 0.1.11
   description: "LDAP Auth-Server based on ApacheDS with easy configuration"
   minimum_rancher_version: v0.63.0
   questions:
