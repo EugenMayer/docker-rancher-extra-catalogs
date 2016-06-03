@@ -43,11 +43,8 @@ Set MYSQL_ROOT_PASSWORD as you like and set the same password when setting up th
 While the original image forces you to run both on the same domain, here its supported to run them on different ones like portus.domain.tld and registry.domain.tld
 
 ## 5. Official SSL the easy way: 
-Using the letsencrypt catalog [letsencrypt](https://github.com/EugenMayer/kontextwork-catalog/tree/master/templates/letsencrypt) which is based on [the original](https://github.com/rancher/community-catalog/tree/master/templates/letsencrypt)
-you can easily manage your certificates by exporting the certificates from the letsencrypt container to the host and then mount those in the registry / portus to be used 
+Using the letsencrypt catalog [letsencrypt](https://github.com/rancher/community-catalog/tree/master/templates/letsencrypt) you can easily manage your certificates by exporting the certificates from the letsencrypt container to the host and then mount those in the registry / portus to be used 
 for signing the tokens. The SSL tertrination using the load balancer can also easily access the certificates uing the rancher certificate API.
-
-[letsencrypt](https://github.com/EugenMayer/kontextwork-catalog/tree/master/templates/letsencrypt) has been forked temporary until [this issue](https://github.com/janeczku/rancher-letsencrypt/issues/6) has been merged
 
 + Set the STORAGEPATH in the letencrypt catalog, lets say /data/ssl/<certificatename>
 + set the CERTSTORAGEPATH in this catalog to /data/ssl/<certificatename>/production/certificates/<certificatename>

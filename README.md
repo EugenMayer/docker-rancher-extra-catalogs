@@ -1,4 +1,4 @@
-# My little own rancher catalog library
+# Public Catalogs to be used free of everything
 
 Nothing really special, just some public catalog files i use and have to share.
 Partially, some have been forked from the community library, in most cases due to version updates or similar. In those all the credits for the hard work shall go to the initial authors.
