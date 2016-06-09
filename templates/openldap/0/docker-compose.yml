@@ -9,6 +9,8 @@ apacheds:
     LDAP_DOMAIN: ${SLAPD_COMPANY_DOMAIN}
     LDAP_ADMIN_PASSWORD: ${SLAPD_PASSWORD}
     LDAP_CONFIG_PASSWORD: ${SLAPD_PASSWORD}
+    LDAP_TLS_CIPHER_SUITE: "NORMAL"
+    LDAP_TLS_VERIFY_CLIENT: "allow"
   volumes:
     - ${DATAPATH}:/var/lib/ldap
     - ${CONFIGPATH}:/etc/ldap/slapd.d

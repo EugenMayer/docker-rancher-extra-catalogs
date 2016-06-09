@@ -7,11 +7,13 @@ services:
       LDAP_TLS: 'true'
       LDAP_TLS_CRT_FILENAME: 'fullchain.pem'
       LDAP_TLS_KEY_FILENAME: 'privkey.pem'
-      LDAP_TLS_CA_CRT_FILENAME: 'fullchain.pem'
+      LDAP_TLS_CA_CRT_FILENAME: 'ca.pem'
       LDAP_ORGANISATION: "KontextWork"
       LDAP_DOMAIN: "kontextwork.com"
       LDAP_BASE_DN: "dc=kontextwork,dc=de"
       LDAP_ADMIN_PASSWORD: "verysecret"
+      LDAP_TLS_CIPHER_SUITE: "NORMAL"
+      LDAP_TLS_VERIFY_CLIENT: "allow"
     tty: true
     stdin_open: true
     volumes:
@@ -20,6 +22,7 @@ services:
       - /container/service/slapd/assets/certs/
     ports:
       - "389:389"
+      - "639:639"
     hostname: "kontextwork.com"
   phpldapadmin:
     image: osixia/phpldapadmin:latest
