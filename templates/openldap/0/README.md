@@ -4,6 +4,12 @@ For further information how to customize it, please see the image readme: https:
 
 You can even setup replication.
 
+### Features
++ supports TLS out of the box
++ build in support for memberof (module and overly configured)
++ creates basic BASE from the start, so you are ready to go after the start
+
+### After the installation
 After the installation, you can login using your password and the user
 
 + cn=admin,dc=yourgiverndomain,dc=tld
