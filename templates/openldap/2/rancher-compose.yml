@@ -60,7 +60,7 @@
       label: "TLS Cipher suite"
       description: "The cipher suite to use for your TLS connections, see openssl cipher -v"
       required: true
-      default: "ALL"
+      default: "NORMAL:+SECURE256:+MAC-ALL"
       type: "string"
     - variable: "SLAPD_TLS_VERIFY_CLIENT"
       label: "TLS Validate client"
@@ -72,5 +72,5 @@
       label: "TLS minimum protocol version"
       description: "Min. protocol verison auf tls"
       required: true
-      default: 1.2
+      default: 3.1
       type: "int"
