@@ -58,7 +58,7 @@
       type: "boolean"
     - variable: "SLAPD_TLS_CIPHER_SUITE"
       label: "TLS Cipher suite"
-      description: "The cipher suite to use for your TLS connections, see openssl cipher -v"
+      description: "The cipher suite to use for your TLS connections, see gnutls ciphers https://gnutls.org/manual/html_node/Priority-Strings.html"
       required: true
       default: "NORMAL:+SECURE256:+MAC-ALL"
       type: "string"
