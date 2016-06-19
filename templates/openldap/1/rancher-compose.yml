@@ -1,6 +1,6 @@
 .catalog:
   name: "OpenLDAP Server"
-  version: w
+  version: 0.0.2
   description: "slapd openldap server with out of the box configuration and SSL support"
   minimum_rancher_version: v0.63.0
   questions:
