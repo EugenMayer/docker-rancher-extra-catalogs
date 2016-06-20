@@ -44,7 +44,7 @@
       label: "READONLY Username"
       description: "Username of the readonly user"
       required: false
-      default: "readonluy"
+      default: "readonly"
       type: "string"
     - variable: "SLAPD_READONLY_PASSWORD"
       label: "READONLY User Password"
