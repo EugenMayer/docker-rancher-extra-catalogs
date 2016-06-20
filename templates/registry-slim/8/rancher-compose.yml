@@ -1,6 +1,6 @@
 .catalog:
   name: "Registry Slim"
-  version: "0.1."
+  version: "0.1.4"
   description: "Registry and Portus in combination. Production focus with a slim approach"
   minimum_rancher_version: v0.63.0
   questions:
