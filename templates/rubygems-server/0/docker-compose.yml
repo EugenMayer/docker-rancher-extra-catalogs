@@ -1,4 +1,4 @@
-openldap:
+rubygems:
   image: spoonest/geminabox:latest
   environment:
     USERNAME: ${USER}
