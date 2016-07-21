@@ -1,0 +1,13 @@
+rubygems:
+  image: spoonest/geminabox:latest
+  environment:
+    USERNAME: ${USER}
+    PASSWORD: ${PASSWORD}
+    PRIVATE: ${PRIVATE_ONLY}
+  volumes:
+    - ${DATA}:/webapps/geminabox
+  tty: true
+  stdin_open: true
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: 'environment'

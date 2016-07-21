@@ -1,0 +1,26 @@
+.catalog:
+  name: "Rubygems-Server"
+  version: 0.0.2
+  description: "A rubygems server to host your private ruby gems"
+  minimum_rancher_version: v0.63.0
+  questions:
+    - variable: "DATA"
+      label: "Volume name or host path for the rubygem serverr storage"
+      description: "Where should the gems be stored"
+      required: true
+      type: "string"
+    - variable: "USER"
+      label: "Set a user to restrict upload/delete operations"
+      description: "Set a user to restrict upload/delete operations"
+      required: true
+      type: "string"
+    - variable: "PASSWORD"
+      label: "Set a password to restrict upload/delete operations"
+      description: "Set a password to restrict upload/delete operations"
+      required: true
+      type: "password"
+    - variable: "PRIVATE_ONLY"
+      label: "Private only"
+      description: "If checked, only users with the credentials given above can pull gems"
+      required: true
+      type: "boolean"
