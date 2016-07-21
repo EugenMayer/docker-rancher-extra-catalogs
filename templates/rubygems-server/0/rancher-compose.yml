@@ -23,4 +23,4 @@
       label: "Private only"
       description: "If checked, only users with the credentials given above can pull gems"
       required: true
-      type: "checkbox"
+      type: "boolean"
