@@ -1,7 +1,7 @@
 name: "Registry Slim"
 description: |
   Registry and Portus in combination - but the slim approach
-version: 0.1.6
+version: 0.1.7
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: https://github.com/EugenMayer/kontextwork-catalog/tree/master/templates/registry-slim
