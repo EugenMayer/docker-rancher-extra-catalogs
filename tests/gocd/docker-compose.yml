@@ -1,0 +1,19 @@
+version: '2'
+services:
+  gocd-server:
+    image: gocd/gocd-server:latest
+    container_name: gocd-server
+    environment:
+      AGENT_KEY: 'prettydamnsecret'
+      SERVER_MAX_MEM: '1024M'
+      SERVER_MEM: '512M'
+      #GO_SERVER_SSL_PORT: '8154'
+      #GO_SERVER_PORT: '8153'
+      #SERVER_STARTUP_ARGS: '-
+      #MANUAL_SETTING: 'N'
+    tty: true
+    stdin_open: true
+    volumes:
+      - /var/lib/go-server
+    ports:
+      - "8153:8153"
