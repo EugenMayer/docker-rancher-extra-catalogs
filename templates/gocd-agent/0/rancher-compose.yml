@@ -13,4 +13,4 @@
       label: "GoCD Server Address"
       description: "how the agent should reach your gocd-server"
       required: true
-      type: "password"
+      type: "string"
