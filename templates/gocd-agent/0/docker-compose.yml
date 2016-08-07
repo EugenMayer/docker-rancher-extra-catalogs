@@ -1,0 +1,7 @@
+gocd-server:
+  image: gocd/gocd-agent
+  environment:
+    AGENT_KEY: ${AGENT_SECRET_KEY}
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: 'environment'
