@@ -26,6 +26,6 @@
       type: "string"
     - variable: "AGENT_SECRET_KEY"
       label: "Agent Secret Key"
-      description: "The ky your agents need to provide to register with the gocd server"
+      description: "The key your agents need to provide to register with the gocd server"
       required: true
       type: "password"

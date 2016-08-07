@@ -6,6 +6,11 @@
   questions:
     - variable: "AGENT_SECRET_KEY"
       label: "Agent Secret Key"
-      description: "The ky your agents need to provide to register with the gocd server"
+      description: "The agent-key you configured on your gocd-server"
+      required: true
+      type: "password"
+    - variable: "GO_SERVER"
+      label: "GoCD Server Address"
+      description: "how the agent should reach your gocd-server"
       required: true
       type: "password"
