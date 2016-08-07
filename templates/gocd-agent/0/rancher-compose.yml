@@ -1,6 +1,6 @@
 .catalog:
   name: "GoCD agent"
-  version: 0.0.2
+  version: 0.0.1
   description: "The GoCD agent based on the original images"
   minimum_rancher_version: v0.63.0
   questions:

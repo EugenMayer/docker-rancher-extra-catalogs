@@ -1,4 +1,4 @@
-gocd-server:
+gocd-agent:
   image: gocd/gocd-agent
   environment:
     AGENT_KEY: ${AGENT_SECRET_KEY}
