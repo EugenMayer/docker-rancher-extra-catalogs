@@ -1,6 +1,6 @@
-name: "KW Volume Persistence Tester"
+name: "Volume Persistence Tester"
 description: |
-  KW Volume Persistence Tester
+  Volume Persistence Tester
 version: 0.0.1
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"

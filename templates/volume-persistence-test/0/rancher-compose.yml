@@ -1,5 +1,5 @@
 .catalog:
-  name: KW Volume Persistence Tester"
+  name: Volume Persistence Tester"
   version: 0.0.1
   description: "KW Volume Persistence Tester"
   minimum_rancher_version: v0.63.0
