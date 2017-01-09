@@ -1,5 +1,5 @@
 portus:
-  image: eugenmayer/portus:2.4-rc9
+  image: eugenmayer/portus:2.4-rc10
   environment:
     REGISTRY_SSL_ENABLED: true
     REGISTRY_HOSTNAME: ${REG_DOMAIN}
