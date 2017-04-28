@@ -1,7 +1,7 @@
 name: "OpenLDAP Server"
 description: |
   slapd openldap server with out of the box configuration and SSL support
-version: 0.1.5
+version: 0.1.8.1
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: https://github.com/EugenMayer/kontextwork-catalog/tree/master/templates/openldap

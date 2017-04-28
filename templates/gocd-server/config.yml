@@ -1,7 +1,0 @@
-name: "GoCD Server"
-description: |
-  The GoCD server based on the original images
-version: 0.0.2
-category: Applications
-maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
-projectURL: https://github.com/EugenMayer/kontextwork-catalog/tree/master/templates/gocd-server
