@@ -1,0 +1,7 @@
+name: "Volume Persistence Tester"
+description: |
+  Volume Persistence Tester
+version: 0.0.1
+category: Applications
+maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
+projectURL: https://code.kontextwork.de/projects/PUB/repos/rancher_kw_internal_catalaog/browse/templates/goedit-standalone-staging
