@@ -23,3 +23,8 @@ openldap:
   labels:
     io.rancher.container.create_agent: 'true'
     io.rancher.container.agent.role: 'environment'
+
+volumes:
+  cert_volume:
+    external: true
+    name: ${CERT_VOLUME}

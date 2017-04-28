@@ -16,8 +16,13 @@
       type: "string"
     - variable: "CERTSTOREPATH"
       label: "TLS Storage:Where are your SSL certificates located on the host (or named volume)"
-      description: "Where are your SSL certificates stored on your host or name volume. If the folder is empty, no TLS is provided. If The certificate must be named 'fullchain.pem' and the key 'privkey.pem' "
+      description: "Where are your SSL certificates stored on your host or name volume. If you use the keyword ssl_volume the volume defined under CERT_VOLUME 'CERT Volume name' is mounted If The certificate must be named 'fullchain.pem' and the key 'privkey.pem' "
       required: true
+      type: "string"
+    - variable: "CERT_VOLUME"
+      label: "CERT Volume name"
+      description: "The volume to mount, where your SSL certificates are located, e.g. letsencrypt_lets-encrypt_5cbe0"
+      required: false
       type: "string"
     - variable: "SLAPD_COMPANY_NAME"
       label: "Organization name"
@@ -98,8 +103,3 @@
       required: true
       default: 3.1
       type: "int"
-    - variable: "SSL_VOLUME"
-      label: "SSL Volumem name"
-      description: "The volume to mount, where your SSL certificates are located, e.g. letsencrypt_lets-encrypt_5cbe0 "
-      required: true
-      type: "string"
