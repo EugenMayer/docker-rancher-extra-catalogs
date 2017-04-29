@@ -1,0 +1,7 @@
+nexus:
+  image: sonatype/docker-nexus3
+  volumes:
+    - ${DATA}:/nexus-data
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: 'environment'
