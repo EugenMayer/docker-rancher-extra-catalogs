@@ -1,7 +1,7 @@
 name: "ApacheDS Ldap Server"
 description: |
   LDAP Auth-Server based on ApacheDS
-version: 0.2.1
+version: 2.0.0-rc23
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: https://github.com/EugenMayer/kontextwork-catalog/tree/master/templates/apacheds-ldap
