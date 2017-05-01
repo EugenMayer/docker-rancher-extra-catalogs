@@ -1,5 +1,5 @@
 nexus:
-  image: sonatype/nexus3:3.3
+  image: sonatype/nexus3:3.3.0
   volumes:
     - ${DATA}:/nexus-data
   labels:
