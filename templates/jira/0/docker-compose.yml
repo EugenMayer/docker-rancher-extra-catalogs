@@ -15,8 +15,6 @@ services:
 {{- end }}
     volumes:
       - jira_data:/var/atlassian/jira
-    ports:
-      - 80:8080
     labels:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: 'environment'
