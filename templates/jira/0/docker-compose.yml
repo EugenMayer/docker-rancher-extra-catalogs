@@ -5,13 +5,12 @@ services:
     image: blacklabelops/jira:${JIRA_VERSION}
     environment:
       JIRA_DATABASE_URL: "postgresql://jirauser@db/jiradb"
-      JIRA_DB_PASSWORD: "testcasepw"
       JIRA_DB_PASSWORD: ${DB_PASSWORD}
       CATALINA_OPTS: ${CATALINA_OPTS}
 {{- if .Values.USE_PROXY}}
-     JIRA_PROXY_NAME: ${JIRA_PROXY_DOMAIN}
-     JIRA_PROXY_PORT: ${JIRA_PROXY_PORT}
-     JIRA_PROXY_SCHEME: ${JIRA_PROXY_SCHEME}
+      JIRA_PROXY_NAME: ${JIRA_PROXY_DOMAIN}
+      JIRA_PROXY_PORT: ${JIRA_PROXY_PORT}
+      JIRA_PROXY_SCHEME: ${JIRA_PROXY_SCHEME}
 {{- end }}
     volumes:
       - jira_data:/var/atlassian/jira
