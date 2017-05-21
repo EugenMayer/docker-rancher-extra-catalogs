@@ -1,0 +1,7 @@
+name: "Atlassian Bitbucket Server"
+description: |
+  Atlassian Bitbucket Server
+version: 5.0.1.1
+category: Applications
+maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
+projectURL: https://de.atlassian.com/software/bitbucket
