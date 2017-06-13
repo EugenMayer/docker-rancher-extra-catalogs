@@ -2,7 +2,7 @@ pureftp:
   image: stilliard/pure-ftpd:hardened-latest
   volumes:
     - pureftpdata:/home/ftpusers
-    - pureftppassword:"/etc/pure-ftpd/passwd"
+    - pureftppassword:/etc/pure-ftpd/passwd
   environment:
     PUBLICHOST: ${PUBLICHOST}
   labels:
