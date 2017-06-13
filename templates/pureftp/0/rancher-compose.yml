@@ -1,0 +1,11 @@
+.catalog:
+  name: "PureFTP Server"
+  version: 0.1.0
+  description: "The pureftp FTP server"
+  minimum_rancher_version: v0.63.0
+  questions:
+    - variable: "PUBLICHOST"
+      label: "The public host the FTP server is accessed from "
+      description: "Which host will be used to access the FTP server"
+      required: true
+      type: "string"
