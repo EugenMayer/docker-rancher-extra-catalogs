@@ -14,7 +14,7 @@ services:
       CONFLUENCEPROXY_SCHEME: ${CONFLUENCEPROXY_SCHEME}
 {{- end }}
     volumes:
-      - confluence_data:/var/atlassian/jira
+      - confluence_data:/var/atlassian/confluence
     labels:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: 'environment'
