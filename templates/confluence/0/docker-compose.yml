@@ -1,7 +1,7 @@
 version: "2"
 
 services:
-  jira:
+  confluence:
     image: blacklabelops/confluence:${CONFLUENCEVERSION}
     environment:
       CONFLUENCEDELAYED_START: 10
