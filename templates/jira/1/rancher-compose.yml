@@ -19,7 +19,7 @@
       description: "Your proxy port"
       required: false
       default: 443
-      type: "number"
+      type: "int"
     - variable: "JIRA_PROXY_SCHEME"
       label: "Proxy scheme"
       description: "Your proxy scheme, http or https"
