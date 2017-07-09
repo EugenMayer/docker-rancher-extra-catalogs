@@ -46,7 +46,6 @@
       default: "en-7.4.0"
       type: "enum"
       options:
-        - latest
         - en-7.4.0
         - de-7.4.0
         - en-7.3.8

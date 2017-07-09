@@ -46,7 +46,6 @@
       default: "6.2.3"
       type: "enum"
       options:
-        - latest
         - 6.2.3
         - 6.2.2
         - 6.1.3
