@@ -1,6 +1,6 @@
 .catalog:
   name: "OpenLDAP Server"
-  version: 0.1.1
+  version: 0.1.9.0
   description: "slapd openldap server with out of the box configuration and SSL support"
   minimum_rancher_version: v0.63.0
   questions:
@@ -16,7 +16,7 @@
       type: "string"
     - variable: "CERTSTOREPATH"
       label: "TLS Storage:Where are your SSL certificates located on the host (or named volume)"
-      description: "Where are your SSL certificates stored on your host or name volume. If the folder is empty, no TLS is provided. If The certificate must be named 'fullchain.pem' and the key 'privkey.pem' "
+      description: "Where are your SSL certificates stored on your host or name volume. If the folder is empty, no TLS is provided. If The certificate should be named 'cert.pem' / 'ca.pem' and the key 'privkey.pem' "
       required: true
       type: "string"
     - variable: "SLAPD_COMPANY_NAME"
@@ -29,16 +29,45 @@
       description: "Your main Domain, like kontextwork.de. This will become your base dn: dc=kontextwork,dc=de"
       required: true
       type: "string"
+    - variable: "SLAPD_EXTERNAL_DOMAIN"
+      label: "Your External Damain"
+      description: "The domain you will access your ldap from, like ldap.mycompany.tld"
+      required: true
+      type: "string"
     - variable: "SLAPD_PASSWORD"
       label: "Password"
       description: "Your desired admin and config password Password. You can login using cn=admin,dc=yourgiverndomain,dc=tld"
       required: true
       type: "password"
+    - variable: "SLAPD_READONLY_USER_ENABLE"
+      label: "READONLY add user?"
+      description: "Should the read-only user be added automatically?"
+      required: true
+      default: false
+      type: "boolean"
+    - variable: "SLAPD_READONLY_USER_NAME"
+      label: "READONLY Username"
+      description: "Username of the readonly user"
+      required: false
+      default: "readonly"
+      type: "string"
+    - variable: "SLAPD_READONLY_PASSWORD"
+      label: "READONLY User Password"
+      description: "The password of the readonly user"
+      required: false
+      default: ""
+      type: "password"
+    - variable: "SLAPD_TLS_CERT_CA_FILENAME"
+      label: "TLS CA Cert filename"
+      description: "Filename of your TLS CA certificate"
+      required: true
+      default: "ca.pem"
+      type: "string"
     - variable: "SLAPD_TLS_CERT_FILENAME"
       label: "TLS Cert filename"
       description: "Filename of your TLS certificate"
       required: true
-      default: "fullchain.pem"
+      default: "cert.pem"
       type: "string"
     - variable: "SLAPD_TLS_KEY_FILENAME"
       label: "TLS Key filename"
