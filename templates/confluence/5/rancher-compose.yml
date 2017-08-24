@@ -1,0 +1,83 @@
+.catalog:
+  name: "Atlassian JIRA"
+  version: 6.4.0-beta1
+  description: "Atlassian Jira"
+  minimum_rancher_version: v1.5.0
+  questions:
+    - variable: "USE_PROXY"
+      label: "Use proxy"
+      description: "Are you going to run a proxy in front of the confluence server, e.g. for SSL interception?"
+      default: true
+      type: "boolean"
+    - variable: "CONFLUENCE_PROXY_NAME"
+      label: "Your external proxy domain"
+      description: "Your external proxy domain confluence.domain.tld"
+      required: false
+      type: "string"
+    - variable: "CONFLUENCE_PROXY_PORT"
+      label: "External domain port"
+      description: "Your proxy port"
+      required: false
+      default: 443
+      type: "int"
+    - variable: "CONFLUENCE_PROXY_SCHEME"
+      label: "Proxy scheme"
+      description: "Your proxy scheme, http or https"
+      required: false
+      default: "https"
+      type: "enum"
+      options:
+        - https
+        - http
+    - variable: "DB_PASSWORD"
+      label: "Database password"
+      required: true
+      type: "password"
+    - variable: "CATALINA_OPTS"
+      label: "CATALINA OPTS"
+      description: "e.g. heapsize -Xms256m -Xmx1g"
+      required: false
+      type: "string"
+      default: "-Xms256m -Xmx1g"
+    - variable: "CONFLUENCEVERSION"
+      label: "The confluence version you want to use"
+      description: "The confluence version you want to use. This will change when upgrading the catalog, if you used default"
+      required: false
+      default: "6.3.2"
+      type: "enum"
+      options:
+        - 6.4.0-beta1
+        - 6.3.2
+        - 6.3.1
+        - 6.2.3
+        - 6.2.2
+        - 6.1.3
+        - 6.0.4
+        - 5.10.8
+        - 5.10.7
+        - 5.9.14
+        - 5.8.18
+        - 5.7.6
+    - variable: "CONFLUENCEDB_USER"
+      label: "CONFLUENCEDB_USER"
+      description: "db user for confluence"
+      required: true
+      type: "string"
+      default: "confluenceuser"
+    - variable: "CONFLUENCEDB_NAME"
+      label: "CONFLUENCEDB_NAME"
+      description: "db name for confluence"
+      required: true
+      type: "string"
+      default: "confluencedb"
+    - variable: "USE_EXTERNAL_DB_SERVICE"
+      label: "Use external db service"
+      description: "If you want to use an external db, e.g. to share the same db with different applications, activate this, we wont start an own container. This means the DB runs in the same environment as a service"
+      default: false
+      type: "boolean"
+    - variable: "EXTERNAL_DB_SERVICE"
+      label: "Extern DB Service"
+      description: "External DB Service"
+      required: false
+      type: "service"
+
