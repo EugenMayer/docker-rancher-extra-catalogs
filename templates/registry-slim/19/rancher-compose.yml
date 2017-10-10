@@ -1,7 +1,7 @@
 .catalog:
-  name: "Registry Slim"
+  name: "Registry Slim - DISCONTINUED! Read the readme"
   version: "0.2.7"
-  description: "Registry and Portus in combination. Production focus with a slim approach"
+  description: "DISCONTINUED - read the readme"
   minimum_rancher_version: v0.63.0
   questions:
     - variable: "CERTSTORAGEPATH"
