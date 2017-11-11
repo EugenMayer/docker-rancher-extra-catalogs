@@ -9,6 +9,8 @@ services:
       CONFLUENCE_PROXY_NAME: ${CONFLUENCE_PROXY_NAME}
       CONFLUENCE_PROXY_PORT: ${CONFLUENCE_PROXY_PORT}
       CONFLUENCE_PROXY_SCHEME: ${CONFLUENCE_PROXY_SCHEME}
+      CONFLUENCE_DB_HOST: db
+      CONFLUENCE_DB_PORT: 5432
 {{- end }}
     volumes:
       - confluence_data:/var/atlassian/confluence
