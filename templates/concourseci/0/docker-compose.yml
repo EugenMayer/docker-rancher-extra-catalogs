@@ -1,0 +1,56 @@
+version: "2"
+
+services:
+  keygen:
+    image: eugenmayer/concourse-keygen
+    volumes:
+      - concourse-keys-web:/concourse-keys/web
+      - concourse-keys-worker:/concourse-keys/worker
+    restart: 'no' # required
+
+  db:
+    image: postgres:10.1
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    image: concourse/concourse:3.6.0
+    command: web
+    depends_on:
+      - keygen
+      - db
+    volumes:
+      - concourse-keys-web:/concourse-keys
+    restart: unless-stopped # required so that it retries until conocurse-db comes up
+    environment:
+      CONCOURSE_BASIC_AUTH_USERNAME: ${ADMIN_USER}
+      CONCOURSE_BASIC_AUTH_PASSWORD: ${ADMIN_PASSWORD}
+      CONCOURSE_EXTERNAL_URL: ${CONCOURSE_EXTERNAL_URL}
+      CONCOURSE_POSTGRES_HOST: db
+      CONCOURSE_POSTGRES_USER: ${DB_USER}
+      CONCOURSE_POSTGRES_PASSWORD: ${DB_PASSWORD}
+      CONCOURSE_POSTGRES_DATABASE: ${DB_NAME}
+
+  worker:
+    image: concourse/concourse:3.6.0
+    privileged: true
+    depends_on:
+      - keygen
+      - web
+    command: worker
+    volumes:
+      - concourse-keys-worker:/concourse-keys
+    environment:
+      CONCOURSE_TSA_HOST: web
+
+volumes:
+  pgdata:
+    driver: local
+  concourse-keys-web:
+    driver: local
+  concourse-keys-worker:
+    driver: local

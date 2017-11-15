@@ -1,0 +1,7 @@
+name: "Concourse CI"
+description: |
+  Concourse CI - a CI/CD server "CI that scales with your project"
+version: 3.6.0.1
+category: Applications
+maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
+projectURL: http://concourse.ci/
