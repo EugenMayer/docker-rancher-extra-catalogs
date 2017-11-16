@@ -1,5 +1,5 @@
-## Atlassian JIRA server
+## Concourse CI Server
 
-Helps you setting up a jira server, running on a local or external database.
+Includes all you need and configures automatically. Also includes vault as a secret key storage
 
-Based on https://github.com/eugenmayer/jira and https://hub.docker.com/r/eugenmayer/jira
+More about handling and setup under https://github.com/EugenMayer/concourseci-server-boilerplate

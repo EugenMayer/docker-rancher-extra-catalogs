@@ -1,6 +1,6 @@
 name: "Concourse CI"
 description: |
-  Concourse CI - a CI/CD server "CI that scales with your project"
+  Concourse CI including a preset, autoconfigured vault
 version: 3.6.0.1
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
