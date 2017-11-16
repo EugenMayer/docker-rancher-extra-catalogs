@@ -17,14 +17,17 @@
       label: "Database user"
       required: true
       type: "string"
+      default: "concourse"
     - variable: "DB_NAME"
       label: "Database name"
       required: true
       type: "string"
+      default: "concourse"
     - variable: "ADMIN_USER"
       label: "Admin password"
       required: true
       type: "string"
+      default: "concourse"
     - variable: "ADMIN_PASSWORD"
       label: "Admin password"
       required: true
