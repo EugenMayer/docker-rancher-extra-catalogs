@@ -71,7 +71,6 @@ services:
     depends_on:
       - config
       - web
-    command: worker
     volumes:
       - concourse-keys-worker:/concourse-keys
     environment:
