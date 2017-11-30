@@ -36,34 +36,34 @@
       label: "Volume driver"
       description: "Driver to use for managing volumes"
       required: true
-      default: 'overlay'
+      default: "overlay"
       type: "enum"
       options:
-        - overlay
-        - detect
-        - naive
-        - btrfs
+      - overlay
+      - detect
+      - naive
+      - btrfs
     - variable: "CONCOURSE_BAGGAGECLAIM_LOG_LEVEL"
       label: "Baggageclaim loglevel"
       description: "Driver to use for managing volumes"
       required: true
-      default: 'info'
+      default: "info"
       type: "enum"
       options:
-        - debug
-        - info
-        - error
-        - fatal
+      - debug
+      - info
+      - error
+      - fatal
     - variable: "CONCOURSE_GARDEN_LOG_LEVEL"
       label: "Garden loglevel"
       required: true
-      default: 'info'
+      default: "info"
       type: "enum"
       options:
-        - debug
-        - info
-        - error
-        - fatal
+      - debug
+      - info
+      - error
+      - fatal
    - variable: "CONCOURSE_GARDEN_NETWORK_POOL"
       label: "Network pool"
       description: "Network range to use for dynamically allocated container subnets."
