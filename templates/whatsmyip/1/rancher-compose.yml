@@ -1,0 +1,6 @@
+.catalog:
+  name: "whats my ip"
+  version: 0.2
+  description: "Atlassian Jira"
+  minimum_rancher_version: v1.5.0
+  questions:
