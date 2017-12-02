@@ -1,0 +1,7 @@
+version: "2"
+
+services:
+  app:
+    labels:
+      io.rancher.container.pull_image: always
+    image: eeugenmayer/whatsmyip
