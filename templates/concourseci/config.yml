@@ -1,7 +1,7 @@
 name: "Concourse CI"
 description: |
   Concourse CI including a preset, autoconfigured vault
-version: 3.8.0.0
+version: 3.8.0.1
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: http://concourse.ci/
