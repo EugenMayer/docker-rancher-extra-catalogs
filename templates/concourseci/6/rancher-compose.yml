@@ -73,48 +73,48 @@
   - variable: VAULT_START_PARAMS
     label: Vault start params (optional)
     description: |
-      E.g. us -log-level=trace for having debug logs
+      E.g. ues `-log-level=trace` for having debug logs in vault
     required: false
     type: string
   - variable: WEB_KEYS_VOLUME_NAME
     label: "VOLUME: web_keys / Path"
     description: |
-      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolum' for volume mounts
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
     required: true
     type: string
     default: '/mnt/data_fast/stacks/concourseci/web_keys'
   - variable: WORKER_KEYS_VOLUME_NAME
     label: "VOLUME: worker_keys / Path"
     description: |
-      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolum' for volume mounts
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
     required: true
     type: string
     default: '/mnt/data_fast/stacks/concourseci/worker_keys'
   - variable: DB_VOLUME_NAME
     label: "VOLUME: db / Path"
     description: |
-      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolum' for volume mounts
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
     required: true
     type: string
     default: '/mnt/data_fast/stacks/concourseci/db'
   - variable: VAULT_CLIENT_CONFIG_VOLUME_NAME
     label: "VOLUME: vault_client_config / Path"
     description: |
-      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolum' for volume mounts
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
     required: true
     type: string
     default: '/mnt/data_fast/stacks/concourseci/vault_client_config'
   - variable: VAULT_SERVER_CONFIG_VOLUME_NAME
     label: "VOLUME: vault_server_config / Path"
     description: |
-      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolum' for volume mounts
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
     required: true
     type: string
     default: '/mnt/data_fast/stacks/concourseci/vault_server_config'
   - variable: VAULT_SERVER_DATA_VOLUME_NAME
     label: "VOLUME: vault_server_data / Path"
     description: |
-      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolum' for volume mounts
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
     required: true
     type: string
     default: '/mnt/data_fast/stacks/concourseci/vault_server_data'
