@@ -1,28 +1,28 @@
 .catalog:
-  name: "Atlassian JIRA"
-  version: 3.8.0.2
+  name: "Concourse CI Standalone worker"
+  version: 3.8.0.0
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
-  - variable: "TSA_HOST"
+  - variable: "CONCOURSE_TSA_HOST"
     label: "Your external proxy domain"
     description: "The hostname of your TSA, no scheme"
     required: true
     type: "string"
-  - variable: "TSA_PORT"
+  - variable: "CONCOURSE_TSA_PORT"
     label: "Your TSA port"
     description: "The port of your TSA"
     required: true
     type: "int"
-    default: 8080
-  - variable: "TSA_PUBLIC_KEY"
+    default: 2222
+  - variable: "TSA_EXISTING_PUBLIC_KEY"
     label: "TSA public key"
-    description: "Your TSA public key to expect"
+    description: "Your TSA public key to expect (host verficiation)"
     required: true
     type: "text"
-  - variable: "TSA_PRIVATE_KEY"
-    label: "TSA public key"
-    description: "Your TSA public key to expect"
+  - variable: "WORKER_EXISTING_PRIVATE_KEY"
+    label: "The workery private key"
+    description: " the private key of an existing worker (shared key) or an key you deployed into authorized_workers on the tsa"
     required: true
     type: "text"
   - variable: "CONCOURSE_BAGGAGECLAIM_DRIVER"
@@ -69,4 +69,4 @@
       Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
     required: true
     type: string
-    default: '/mnt/data_fast/stacks/concourseci/worker_keys'
+    default: 'concourse-worker-keys'

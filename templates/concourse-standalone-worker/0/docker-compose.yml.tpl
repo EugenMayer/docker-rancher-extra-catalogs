@@ -1,7 +1,7 @@
 version: "2"
 
 services:
-  config:
+  config_worker:
     labels:
       io.rancher.container.pull_image: always
     image: eugenmayer/concourse-worker-configurator
@@ -13,18 +13,17 @@ services:
       {{- end }}
     restart: unless-stopped
     environment:
-      TSA_PUBLIC_KEY: ${TSA_PUBLIC_KEY}
-      TSA_PRIVATE_KEY: ${TSA_PRIVATE_KEY}
+      TSA_EXISTING_PUBLIC_KEY: ${TSA_EXISTING_PUBLIC_KEY}
+      WORKER_EXISTING_PRIVATE_KEY: ${WORKER_EXISTING_PRIVATE_KEY}
 
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
-  worker:
+  worker-standalone:
     labels:
       io.rancher.container.pull_image: always
     image: eugenmayer/concourse-worker-solid:3.8.0
     privileged: true
     depends_on:
-      - config
-      - web
+      - config_worker
     volumes:
       {{- if .Values.WORKER_KEYS_VOLUME_NAME}}
       - {{.Values.WORKER_KEYS_VOLUME_NAME}}:/concourse-keys
@@ -32,8 +31,8 @@ services:
       - concourse-keys-worker:/concourse-keys
       {{- end }}
     environment:
-      CONCOURSE_TSA_HOST: ${TSA_HOST}
-      CONCOURSE_TSA_PORT: ${TSA_PORT}
+      CONCOURSE_TSA_HOST: ${CONCOURSE_TSA_HOST}
+      CONCOURSE_TSA_PORT: ${CONCOURSE_TSA_PORT}
       CONCOURSE_GARDEN_NETWORK_POOL: ${CONCOURSE_GARDEN_NETWORK_POOL}
       CONCOURSE_BAGGAGECLAIM_DRIVER: ${CONCOURSE_BAGGAGECLAIM_DRIVER}
       CONCOURSE_BAGGAGECLAIM_LOG_LEVEL: ${CONCOURSE_BAGGAGECLAIM_LOG_LEVEL}
