@@ -4,7 +4,7 @@ services:
   vault:
     {{- if .Values.HOST_AFFINITY_LABEL}}
     labels:
-      io.rancher.scheduler.affinity:{{.Values.HOST_AFFINITY_LABEL}}
+      io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
     restart: unless-stopped # required so that it retries until conocurse-db comes up
     image: vault:0.9.0
@@ -19,7 +19,6 @@ services:
       {{- else}}
       - vault-server-config:/vault/config
       {{- end }}
-
       {{- if .Values.VAULT_SERVER_DATA_VOLUME_NAME}}
       - {{.Values.VAULT_SERVER_DATA_VOLUME_NAME}}:/vault/file
       {{- else}}
@@ -29,7 +28,7 @@ services:
   db:
     {{- if .Values.HOST_AFFINITY_LABEL}}
     labels:
-      io.rancher.scheduler.affinity:{{.Values.HOST_AFFINITY_LABEL}}
+      io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
     image: postgres:10.1
     environment:
@@ -46,7 +45,7 @@ services:
   config:
     {{- if .Values.HOST_AFFINITY_LABEL}}
     labels:
-      io.rancher.scheduler.affinity:{{.Values.HOST_AFFINITY_LABEL}}
+      io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
       io.rancher.sidekicks: config
     image: eugenmayer/concourse-configurator
