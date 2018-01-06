@@ -2,9 +2,6 @@ version: "2"
 
 services:
   vault:
-    {{- if .Values.HOST_AFFINITY_LABEL}}
-    labels:
-      io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
     restart: unless-stopped # required so that it retries until conocurse-db comes up
     image: vault:0.9.0
@@ -47,7 +44,6 @@ services:
     labels:
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
-      io.rancher.sidekicks: config
     image: eugenmayer/concourse-configurator
     volumes:
       {{- if .Values.VAULT_CLIENT_CONFIG_VOLUME_NAME}}
