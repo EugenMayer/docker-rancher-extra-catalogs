@@ -139,8 +139,8 @@ services:
       CONCOURSE_BAGGAGECLAIM_DRIVER: ${CONCOURSE_BAGGAGECLAIM_DRIVER}
       CONCOURSE_BAGGAGECLAIM_LOG_LEVEL: ${CONCOURSE_BAGGAGECLAIM_LOG_LEVEL}
       CONCOURSE_GARDEN_LOG_LEVEL: ${CONCOURSE_GARDEN_LOG_LEVEL}
-      CONCOURSE_TSA_WORKER_PRIVATE_KEY=/run/secrets/concourse-worker-private-key
-      CONCOURSE_TSA_PUBLIC_KEY=/run/secrets/concourse-tsa-public-key
+      CONCOURSE_TSA_WORKER_PRIVATE_KEY: /run/secrets/concourse-worker-private-key
+      CONCOURSE_TSA_PUBLIC_KEY: /run/secrets/concourse-tsa-public-key
 volumes:
   {{- if .Values.DB_VOLUME_NAME}}
   {{- else}}
