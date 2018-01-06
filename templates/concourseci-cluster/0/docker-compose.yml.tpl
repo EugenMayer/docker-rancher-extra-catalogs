@@ -131,7 +131,8 @@ services:
     # CONCOURSE_TSA_PUBLIC_KEY=/run/secrets/concourse-tsa-public-key
     # CONCOURSE_TSA_WORKER_PRIVATE_KEY=/run/secrets/concourse-worker-private-key
     # but we get a handshake error, so the private key path seems to not get picked up by the env variable here
-    command: retire-worker --tsa-worker-private-key=/run/secrets/concourse-worker-private-key --tsa-public-key=/run/secrets/concourse-tsa-public-key
+    #command: retire-worker --tsa-worker-private-key=/run/secrets/concourse-worker-private-key --tsa-public-key=/run/secrets/concourse-tsa-public-key
+    command: retire-worker
     environment:
       CONCOURSE_TSA_HOST: tsa
       CONCOURSE_TSA_PORT: 2222
