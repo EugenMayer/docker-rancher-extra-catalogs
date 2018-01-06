@@ -5,7 +5,7 @@ of deploying workers across hosts - the cluster version.
 
 To do that, you need to pre-create the actual private keys
 
-```bash
+```
 ssh-keygen -t rsa -f tsa_host_key
 rancher secrets create concourse-tsa-private-key tsa_host_key
 rancher secrets create concourse-tsa-public-key tsa_host_key.pub
