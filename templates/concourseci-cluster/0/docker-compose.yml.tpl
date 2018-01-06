@@ -48,6 +48,7 @@ services:
     labels:
       io.rancher.scheduler.affinity:{{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
+      io.rancher.sidekicks: config
     image: eugenmayer/concourse-configurator
     volumes:
       {{- if .Values.VAULT_CLIENT_CONFIG_VOLUME_NAME}}
