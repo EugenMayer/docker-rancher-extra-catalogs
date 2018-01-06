@@ -3,9 +3,9 @@ version: "2"
 services:
   config_worker:
     restart: unless-stopped
-    environment:
-      TSA_EXISTING_PUBLIC_KEY: ${TSA_EXISTING_PUBLIC_KEY}
-      WORKER_EXISTING_PRIVATE_KEY: ${WORKER_EXISTING_PRIVATE_KEY}
+    #environment:
+    #  TSA_EXISTING_PUBLIC_KEY: ${TSA_EXISTING_PUBLIC_KEY}
+    #  WORKER_EXISTING_PRIVATE_KEY: ${WORKER_EXISTING_PRIVATE_KEY}
     labels:
       {{- if .Values.HOST_WORKER_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
@@ -18,7 +18,6 @@ services:
       {{- else}}
       - concourse-keys-worker:/concourse-keys/worker
       {{- end }}
-
 
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   worker-standalone:
