@@ -21,4 +21,8 @@ rancher secrets create concourse-worker-private-key worker_key
 rancher secrets create concourse-tsa-authorized-workers worker_key.pub
 ```
 
-Reading up the general topic about secrets would be http://rancher.com/docs/rancher/latest/en/cattle/secrets/
+Do not forget to launch the secret catalog container: http://rancher.com/docs/rancher/latest/en/cattle/secrets/#enabling-secrets-in-containers
+
+
+- You can also create those secrets using the UI, see http://rancher.com/docs/rancher/latest/en/cattle/secrets/#adding-secrets-in-the-ui
+- Reading up the general topic about secrets would be http://rancher.com/docs/rancher/latest/en/cattle/secrets/
