@@ -32,13 +32,6 @@
     label: "Admin password"
     required: true
     type: "password"
-  - variable: "DEPLOY_WORKERS"
-    label: "Should build-in workers be deployed"
-    description: |
-      if not, you want to use the standalone-worker catalog to deploy workers offside
-    required: true
-    default: true
-    type: "boolean"
   - variable: "CONCOURSE_BAGGAGECLAIM_DRIVER"
     label: "Volume driver"
     description: "Driver to use for managing volumes"
@@ -83,13 +76,6 @@
       E.g. ues `-log-level=trace` for having debug logs in vault
     required: false
     type: string
-  - variable: WEB_KEYS_VOLUME_NAME
-    label: "VOLUME: web_keys / Path"
-    description: |
-      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
-    required: true
-    type: string
-    default: '/mnt/data_fast/stacks/concourseci/web_keys'
   - variable: DB_VOLUME_NAME
     label: "VOLUME: db / Path"
     description: |
