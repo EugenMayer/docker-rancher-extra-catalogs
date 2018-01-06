@@ -54,7 +54,6 @@ services:
       {{- else}}
       - vault-client-config:/vault/concourse
       {{- end }}
-
       {{- if .Values.VAULT_SERVER_CONFIG_VOLUME_NAME}}
       - {{.Values.VAULT_SERVER_CONFIG_VOLUME_NAME}}:/vault/server
       {{- else}}
@@ -102,7 +101,8 @@ services:
       CONCOURSE_POSTGRES_DATABASE: ${DB_NAME}
 
       CONCOURSE_TSA_HOST_KEY: /run/secrets/concourse-tsa-private-key
-      CONCOURSE_TSA_SESSION_SIGNING_KEY: /run/secrets/concourse-tsa-session-signing-key
+      # its not, even though it should be CONCOURSE_TSA_SESSION_SIGNING_KEY according to `concourse web --help`
+      CONCOURSE_SESSION_SIGNING_KEY: /run/secrets/concourse-tsa-session-signing-key
       CONCOURSE_TSA_AUTHORIZED_KEYS: /run/secrets/concourse-tsa-authorized-workers
 
       CONCOURSE_VAULT_CA_CERT: /vault/client/server.crt
