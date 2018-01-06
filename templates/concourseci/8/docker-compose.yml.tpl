@@ -123,8 +123,8 @@ services:
   worker:
     labels:
       io.rancher.container.pull_image: always
-    {{- if .Values.HOST_WORKER_AFFINITY_LABEL}}
-      io.rancher.scheduler.affinity:{{.Values.HOST_WORKER_AFFINITY_LABEL}}
+    {{- if .Values.HOST_AFFINITY_LABEL}}
+      io.rancher.scheduler.affinity:{{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
     image: eugenmayer/concourse-worker-solid:3.8.0
     privileged: true

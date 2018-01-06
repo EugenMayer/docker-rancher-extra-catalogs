@@ -119,13 +119,7 @@
     type: string
     default: '/mnt/data_fast/stacks/concourseci/vault_server_data'
   - variable: HOST_AFFINITY_LABEL
-    label: "Affinity label for all services except the workers. If blank, no affinity will be set"
-    description: |
-      The label for the host affinity of rancher io.rancher.scheduler.affinity:<yourlabelhere> - If blank, no affinity will be set
-    required: false
-    type: string
-  - variable: HOST_WORKER_AFFINITY_LABEL
-    label: "Affinity label for workers only. If blank, no affinity will be set"
+    label: "Affinity label for all services . If blank, no affinity will be set"
     description: |
       The label for the host affinity of rancher io.rancher.scheduler.affinity:<yourlabelhere> - If blank, no affinity will be set
     required: false
