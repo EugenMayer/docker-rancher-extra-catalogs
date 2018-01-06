@@ -63,8 +63,8 @@ services:
       {{- end }}
     restart: unless-stopped
     environment:
-      DO_NOT_GENERATE_TSA_KEYS: 1
-      DO_NOT_GENERATE_WORKER_KEYS: 1
+      DO_GENERATE_TSA_KEYS: 0
+      DO_GENERATE_WORKER_KEYS: 0
       VAULT_ENABLED: 1
       VAULT_DO_AUTOCONFIGURE: 1
 
