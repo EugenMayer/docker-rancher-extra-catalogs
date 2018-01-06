@@ -38,7 +38,7 @@
       if not, you want to use the standalone-worker catalog to deploy workers offside
     required: true
     default: true
-    type: bool
+    type: "boolean"
   - variable: "CONCOURSE_BAGGAGECLAIM_DRIVER"
     label: "Volume driver"
     description: "Driver to use for managing volumes"
