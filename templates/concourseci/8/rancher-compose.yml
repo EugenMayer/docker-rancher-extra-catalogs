@@ -1,0 +1,132 @@
+.catalog:
+  name: "Atlassian JIRA"
+  version: 3.8.0.3
+  description: "Atlassian Jira"
+  minimum_rancher_version: v1.5.0
+  questions:
+  - variable: "CONCOURSE_EXTERNAL_URL"
+    label: "Your external proxy domain"
+    description: "Your external proxy domain concourseci.domain.tld"
+    required: true
+    type: "string"
+  - variable: "DB_PASSWORD"
+    label: "Database password"
+    required: true
+    type: "password"
+  - variable: "DB_USER"
+    label: "Database user"
+    required: true
+    type: "string"
+    default: "concourse"
+  - variable: "DB_NAME"
+    label: "Database name"
+    required: true
+    type: "string"
+    default: "concourse"
+  - variable: "ADMIN_USER"
+    label: "Admin password"
+    required: true
+    type: "string"
+    default: "concourse"
+  - variable: "ADMIN_PASSWORD"
+    label: "Admin password"
+    required: true
+    type: "password"
+  - variable: "CONCOURSE_BAGGAGECLAIM_DRIVER"
+    label: "Volume driver"
+    description: "Driver to use for managing volumes"
+    required: true
+    default: "overlay"
+    type: "enum"
+    options:
+    - overlay
+    - detect
+    - naive
+    - btrfs
+  - variable: "CONCOURSE_BAGGAGECLAIM_LOG_LEVEL"
+    label: "Baggageclaim loglevel"
+    description: "Driver to use for managing volumes"
+    required: true
+    default: "info"
+    type: "enum"
+    options:
+    - debug
+    - info
+    - error
+    - fatal
+  - variable: "CONCOURSE_GARDEN_LOG_LEVEL"
+    label: "Garden loglevel"
+    required: true
+    default: "info"
+    type: "enum"
+    options:
+    - debug
+    - info
+    - error
+    - fatal
+  - variable: "CONCOURSE_GARDEN_NETWORK_POOL"
+    label: "Network pool"
+    description: "Network range to use for dynamically allocated container subnets."
+    required: false
+    default: "10.254.0.0/22"
+    type: "string"
+  - variable: VAULT_START_PARAMS
+    label: Vault start params (optional)
+    description: |
+      E.g. ues `-log-level=trace` for having debug logs in vault
+    required: false
+    type: string
+  - variable: WEB_KEYS_VOLUME_NAME
+    label: "VOLUME: web_keys / Path"
+    description: |
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+    required: true
+    type: string
+    default: '/mnt/data_fast/stacks/concourseci/web_keys'
+  - variable: WORKER_KEYS_VOLUME_NAME
+    label: "VOLUME: worker_keys / Path"
+    description: |
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+    required: true
+    type: string
+    default: '/mnt/data_fast/stacks/concourseci/worker_keys'
+  - variable: DB_VOLUME_NAME
+    label: "VOLUME: db / Path"
+    description: |
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+    required: true
+    type: string
+    default: '/mnt/data_fast/stacks/concourseci/db'
+  - variable: VAULT_CLIENT_CONFIG_VOLUME_NAME
+    label: "VOLUME: vault_client_config / Path"
+    description: |
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+    required: true
+    type: string
+    default: '/mnt/data_fast/stacks/concourseci/vault_client_config'
+  - variable: VAULT_SERVER_CONFIG_VOLUME_NAME
+    label: "VOLUME: vault_server_config / Path"
+    description: |
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+    required: true
+    type: string
+    default: '/mnt/data_fast/stacks/concourseci/vault_server_config'
+  - variable: VAULT_SERVER_DATA_VOLUME_NAME
+    label: "VOLUME: vault_server_data / Path"
+    description: |
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+    required: true
+    type: string
+    default: '/mnt/data_fast/stacks/concourseci/vault_server_data'
+  - variable: HOST_AFFINITY_LABEL
+    label: "Affinity label for all services except the workers. If blank, no affinity will be set"
+    description: |
+      The label for the host affinity of rancher io.rancher.scheduler.affinity:<yourlabelhere> - If blank, no affinity will be set
+    required: false
+    type: string
+  - variable: HOST_WORKER_AFFINITY_LABEL
+    label: "Affinity label for workers only. If blank, no affinity will be set"
+    description: |
+      The label for the host affinity of rancher io.rancher.scheduler.affinity:<yourlabelhere> - If blank, no affinity will be set
+    required: false
+    type: string
