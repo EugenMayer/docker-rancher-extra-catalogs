@@ -3,9 +3,9 @@ version: "2"
 services:
   config_worker:
     restart: unless-stopped
-    #environment:
-    #  TSA_EXISTING_PUBLIC_KEY: ${TSA_EXISTING_PUBLIC_KEY}
-    #  WORKER_EXISTING_PRIVATE_KEY: ${WORKER_EXISTING_PRIVATE_KEY}
+    environment:
+      TSA_EXISTING_PUBLIC_KEY: ${TSA_EXISTING_PUBLIC_KEY}
+      WORKER_EXISTING_PRIVATE_KEY: ${WORKER_EXISTING_PRIVATE_KEY}
     labels:
       {{- if .Values.HOST_WORKER_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
@@ -23,7 +23,7 @@ services:
   worker-standalone:
     labels:
       {{- if .Values.HOST_WORKER_AFFINITY_LABEL}}
-      io.rancher.scheduler.affinity:{{.Values.HOST_WORKER_AFFINITY_LABEL}}
+      io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
       {{- end }}
       io.rancher.container.pull_image: always
     image: eugenmayer/concourse-worker-solid:3.8.0
