@@ -178,4 +178,14 @@ volumes:
     driver: local
   {{- end }}
 
-
+secrets:
+  concourse-tsa-authorized-workers:
+    external: true
+  concourse-tsa-private-key:
+    external: true
+  concourse-session-signing-key:
+    external: true
+  concourse-worker-private-key:
+    external: true
+  concourse-tsa-public-key:
+    external: true
