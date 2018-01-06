@@ -120,6 +120,7 @@ services:
       CONCOURSE_VAULT_CLIENT_KEY: /vault/client/key.pem
 
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
+  {{- if .Values.DEPLOY_WORKERS}}
   worker:
     labels:
       io.rancher.container.pull_image: always
@@ -143,7 +144,7 @@ services:
       CONCOURSE_BAGGAGECLAIM_DRIVER: ${CONCOURSE_BAGGAGECLAIM_DRIVER}
       CONCOURSE_BAGGAGECLAIM_LOG_LEVEL: ${CONCOURSE_BAGGAGECLAIM_LOG_LEVEL}
       CONCOURSE_GARDEN_LOG_LEVEL: ${CONCOURSE_GARDEN_LOG_LEVEL}
-
+  {{- end }}
 volumes:
   {{- if .Values.DB_VOLUME_NAME}}
   {{- else}}
