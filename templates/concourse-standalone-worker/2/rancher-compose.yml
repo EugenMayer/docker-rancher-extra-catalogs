@@ -21,10 +21,10 @@
     required: true
     type: "string"
   - variable: "WORKER_EXISTING_PRIVATE_KEY"
-    label: "The workery private key"
-    description: " the private key of an existing worker (shared key) or an key you deployed into authorized_workers on the tsa"
+    label: "The worker private key - as a one-liner! (user \n)"
+    description: "the private key of an existing worker (shared key) or an key you deployed into authorized_workers on the tsa"
     required: true
-    type: "multiline"
+    type: "string"
   - variable: "CONCOURSE_BAGGAGECLAIM_DRIVER"
     label: "Volume driver"
     description: "Driver to use for managing volumes"

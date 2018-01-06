@@ -16,8 +16,7 @@ services:
       {{- end }}
     restart: unless-stopped
     environment:
-      TSA_EXISTING_PUBLIC_KEY: |
-        ${TSA_EXISTING_PUBLIC_KEY}
+      TSA_EXISTING_PUBLIC_KEY: ${TSA_EXISTING_PUBLIC_KEY}
       WORKER_EXISTING_PRIVATE_KEY: ${WORKER_EXISTING_PRIVATE_KEY}
 
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
