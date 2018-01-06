@@ -11,7 +11,7 @@ rancher secrets create concourse-tsa-private-key tsa_host_key
 rancher secrets create concourse-tsa-public-key tsa_host_key.pub
 
 ssh-keygen -t rsa -f session_signing_key
-rancher secrets create concourse-session-signing-key session_signing_key
+rancher secrets create concourse-tsa-session-signing-key session_signing_key
 
 
 ssh-keygen -t rsa -f worker_key

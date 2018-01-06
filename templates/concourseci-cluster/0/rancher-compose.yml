@@ -82,28 +82,28 @@
       Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
     required: true
     type: string
-    default: '/mnt/data_fast/stacks/concourseci/db'
+    default: '/mnt/data_fast/stacks/concourseci_cluster/db'
   - variable: VAULT_CLIENT_CONFIG_VOLUME_NAME
     label: "VOLUME: vault_client_config / Path"
     description: |
       Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
     required: true
     type: string
-    default: '/mnt/data_fast/stacks/concourseci/vault_client_config'
+    default: '/mnt/data_fast/stacks/concourseci_cluster/vault_client_config'
   - variable: VAULT_SERVER_CONFIG_VOLUME_NAME
     label: "VOLUME: vault_server_config / Path"
     description: |
       Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
     required: true
     type: string
-    default: '/mnt/data_fast/stacks/concourseci/vault_server_config'
+    default: '/mnt/data_fast/stacks/concourseci_cluster/vault_server_config'
   - variable: VAULT_SERVER_DATA_VOLUME_NAME
     label: "VOLUME: vault_server_data / Path"
     description: |
       Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
     required: true
     type: string
-    default: '/mnt/data_fast/stacks/concourseci/vault_server_data'
+    default: '/mnt/data_fast/stacks/concourseci_cluster/vault_server_data'
   - variable: HOST_AFFINITY_LABEL
     label: "Affinity label for all services BUT the workers . If blank, no affinity will be set"
     description: |

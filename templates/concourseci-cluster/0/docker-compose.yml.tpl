@@ -76,11 +76,11 @@ services:
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
     image: concourse/concourse:3.8.0
-    command: web --vault-ca-cert /vault/client/server.crt --tsa-host-key=/run/secrets/concourse-tsa-private-key --tsa-authorized-keys=/run/secrets/concourse-tsa-authorized-workers --tsa-session-signing-key=/run/secrets/concourse-session-signing-key
+    command: web
     secrets:
       - concourse-tsa-authorized-workers
       - concourse-tsa-private-key
-      - concourse-session-signing-key
+      - concourse-tsa-session-signing-key
     depends_on:
       - config
       - db
@@ -102,7 +102,7 @@ services:
       CONCOURSE_POSTGRES_DATABASE: ${DB_NAME}
 
       CONCOURSE_TSA_HOST_KEY: /run/secrets/concourse-tsa-private-key
-      CONCOURSE_TSA_SESSION_SIGNING_KEY: /run/secrets/concourse-session-signing-key
+      CONCOURSE_TSA_SESSION_SIGNING_KEY: /run/secrets/concourse-tsa-session-signing-key
       CONCOURSE_TSA_AUTHORIZED_KEYS: /run/secrets/concourse-tsa-authorized-workers
 
       CONCOURSE_VAULT_CA_CERT: /vault/client/server.crt
@@ -179,13 +179,13 @@ volumes:
   {{- end }}
 
 secrets:
-  concourse-tsa-authorized-workers:
-    external: true
   concourse-tsa-private-key:
     external: true
-  concourse-session-signing-key:
+  concourse-tsa-public-key:
+    external: true
+  concourse-tsa-session-signing-key:
+    external: true
+  concourse-tsa-authorized-workers:
     external: true
   concourse-worker-private-key:
-    external: true
-  concourse-tsa-public-key:
     external: true
