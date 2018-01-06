@@ -71,8 +71,7 @@ services:
   tsa:
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.sidekicks: config
-      io.rancher.sidekicks: vault
+      io.rancher.sidekicks: config, vault
     {{- if .Values.HOST_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
