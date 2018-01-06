@@ -21,7 +21,7 @@
     required: true
     type: "string"
   - variable: "WORKER_EXISTING_PRIVATE_KEY"
-    label: "The worker private key - as a one-liner! (user \n)"
+    label: "The worker private key - as a one-liner! (use \\n)"
     description: "the private key of an existing worker (shared key) or an key you deployed into authorized_workers on the tsa"
     required: true
     type: "string"
