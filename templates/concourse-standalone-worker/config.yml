@@ -1,6 +1,6 @@
 name: "Concourse CI Standalone Worker"
 description: |
-version: 3.8.0.1
+version: 3.8.0.2
   Concourse CI Standalone Worker
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
