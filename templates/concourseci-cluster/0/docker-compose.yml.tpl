@@ -134,8 +134,8 @@ services:
     # but we get a handshake error, so the private key path seems to not get picked up by the env variable here
     command: retire-worker --tsa-worker-private-key=/run/secrets/concourse-worker-private-key --tsa-public-key=/run/secrets/concourse-tsa-public-key
     environment:
-      CONCOURSE_TSA_HOST: ${CONCOURSE_TSA_HOST}
-      CONCOURSE_TSA_PORT: ${CONCOURSE_TSA_PORT}
+      CONCOURSE_TSA_HOST: web
+      CONCOURSE_TSA_PORT: 2222
       CONCOURSE_GARDEN_NETWORK_POOL: ${CONCOURSE_GARDEN_NETWORK_POOL}
       CONCOURSE_BAGGAGECLAIM_DRIVER: ${CONCOURSE_BAGGAGECLAIM_DRIVER}
       CONCOURSE_BAGGAGECLAIM_LOG_LEVEL: ${CONCOURSE_BAGGAGECLAIM_LOG_LEVEL}
