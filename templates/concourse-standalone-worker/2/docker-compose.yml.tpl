@@ -4,7 +4,7 @@ services:
   config_worker:
     labels:
       {{- if .Values.HOST_WORKER_AFFINITY_LABEL}}
-      io.rancher.scheduler.affinity:{{.Values.HOST_WORKER_AFFINITY_LABEL}}
+      io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
       {{- end }}
       io.rancher.container.pull_image: always
     image: eugenmayer/concourse-worker-configurator
