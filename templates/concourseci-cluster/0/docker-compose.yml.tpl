@@ -72,8 +72,9 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: config
+      io.rancher.sidekicks: vault
     {{- if .Values.HOST_AFFINITY_LABEL}}
-      io.rancher.scheduler.affinity:{{.Values.HOST_AFFINITY_LABEL}}
+      io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
     image: concourse/concourse:3.8.0
     command: web --vault-ca-cert /vault/client/server.crt --tsa-host-key=/run/secrets/concourse-tsa-private-key --tsa-authorized-keys=/run/secrets/concourse-tsa-authorized-workers --tsa-session-signing-key==/run/secrets/concourse-session-signing-key
