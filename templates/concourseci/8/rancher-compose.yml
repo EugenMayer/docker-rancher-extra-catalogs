@@ -32,8 +32,8 @@
     label: "Admin password"
     required: true
     type: "password"
-  - variable: DEPLOY_WORKERS
-    label: Should build-in workers be deployed
+  - variable: "DEPLOY_WORKERS"
+    label: "Should build-in workers be deployed"
     description: |
       if not, you want to use the standalone-worker catalog to deploy workers offside
     required: true

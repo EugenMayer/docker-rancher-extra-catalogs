@@ -119,8 +119,8 @@ services:
       CONCOURSE_VAULT_CLIENT_CERT: /vault/client/cert.pem
       CONCOURSE_VAULT_CLIENT_KEY: /vault/client/key.pem
 
+  {{- if eq .Values.DEPLOY_WORKERS "true"}}
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
-  {{- if .Values.DEPLOY_WORKERS}}
   worker:
     labels:
       io.rancher.container.pull_image: always
