@@ -123,6 +123,8 @@ services:
       CONCOURSE_VAULT_CLIENT_CERT: /vault/client/cert.pem
       CONCOURSE_VAULT_CLIENT_KEY: /vault/client/key.pem
       CONCOURSE_VAULT_CA_CERT: /vault/client/server.crt
+
+      CONCOURSE_RESOURCE_CHECKING_INTERVAL: 10m
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   worker-standalone:
     labels:
@@ -137,6 +139,7 @@ services:
       - concourse-tsa-public-key
     command: retire-worker
     environment:
+      CONCOURSE_GARDEN_PERSISTENT_IMAGE: ${CONCOURSE_GARDEN_PERSISTENT_IMAGE}
       CONCOURSE_TSA_HOST: ${TSA_PEER_IP}
       CONCOURSE_TSA_PORT: 2222
       CONCOURSE_TSA_LOG_LEVEL: ${CONCOURSE_TSA_LOG_LEVEL}
@@ -146,6 +149,9 @@ services:
       CONCOURSE_GARDEN_LOG_LEVEL: ${CONCOURSE_GARDEN_LOG_LEVEL}
       CONCOURSE_TSA_WORKER_PRIVATE_KEY: /run/secrets/concourse-worker-private-key
       CONCOURSE_TSA_PUBLIC_KEY: /run/secrets/concourse-tsa-public-key
+
+      CONCOURSE_GARDEN_MAX_CONTAINERS: ${CONCOURSE_GARDEN_MAX_CONTAINERS}
+      CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE: ${CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE}
 volumes:
   {{- if .Values.DB_VOLUME_NAME}}
   {{- else}}

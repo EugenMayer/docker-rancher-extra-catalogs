@@ -42,6 +42,21 @@
     required: true
     type: "string"
     default: "tsa"
+  - variable: "WORKER_KEEP_IMAGES"
+    label: "Which images should never get removed on the worker"
+    required: true
+    type: "string"
+    default: ""
+  - variable: "CONCOURSE_GARDEN_MAX_CONTAINERS"
+    label: "Max amount of containers on a worker (0 means no limit)"
+    required: true
+    type: "int"
+    default: 0
+  - variable: "CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE"
+    label: "CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE on a worker (0 means no limit)"
+    required: true
+    type: "int"
+    default: 0
   - variable: "CONCOURSE_BAGGAGECLAIM_DRIVER"
     label: "Volume driver"
     description: "Driver to use for managing volumes"
