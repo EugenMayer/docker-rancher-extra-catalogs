@@ -128,7 +128,7 @@ services:
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   worker-standalone:
     {{- if .Values.RANCHER_WORKER_LIMIT_MEMORY}}
-    mem_reservation: ${RANCHER_WORKER_LIMIT_MEMORY}
+    #mem_reservation: ${RANCHER_WORKER_LIMIT_MEMORY}
     mem_limit: ${RANCHER_WORKER_LIMIT_MEMORY}
     {{- end }}
     {{- if .Values.RANCHER_WORKER_LIMIT_CPU_RESERVATION}}
