@@ -127,6 +127,7 @@ services:
       CONCOURSE_RESOURCE_CHECKING_INTERVAL: 10m
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   worker-standalone:
+    cpus: 0.8
     {{- if .Values.RANCHER_WORKER_LIMIT_MEMORY}}
     #mem_reservation: ${RANCHER_WORKER_LIMIT_MEMORY}
     mem_limit: ${RANCHER_WORKER_LIMIT_MEMORY}
