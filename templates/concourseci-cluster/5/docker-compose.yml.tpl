@@ -127,12 +127,6 @@ services:
       CONCOURSE_RESOURCE_CHECKING_INTERVAL: 10m
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   worker-standalone:
-    {{- if .Values.RANCHER_WORKER_LIMIT_MEMORY}}
-    mem_reservation: ${RANCHER_WORKER_LIMIT_MEMORY}
-    {{- end }}
-    {{- if .Values.RANCHER_WORKER_LIMIT_CPU_RESERVATION}}
-    milli_cpu_reservation: ${RANCHER_WORKER_LIMIT_CPU_RESERVATION}
-    {{- end }}
     labels:
       {{- if .Values.HOST_WORKER_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
