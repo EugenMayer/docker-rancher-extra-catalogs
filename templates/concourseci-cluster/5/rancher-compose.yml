@@ -57,6 +57,18 @@
     required: true
     type: "int"
     default: 0
+  - variable: "RANCHER_WORKER_LIMIT_MEMORY"
+    label: "RANCHER: Limit MEMORY (in bytes) of the worker-container itself in rancher"
+    required: true
+    description: "0 means no limit"
+    type: "int"
+    default: 0
+  - variable: "RANCHER_WORKER_LIMIT_CPU_RESERVATION"
+    label: "RANCHER: Limit CPU_RESERVATION of the worker-container itself in rancher"
+    description: "0 means no limit"
+    required: true
+    type: "int"
+    default: 0
   - variable: "CONCOURSE_BAGGAGECLAIM_DRIVER"
     label: "WORKER: Volume driver"
     description: "Driver to use for managing volumes"
@@ -121,7 +133,7 @@
     default: "30s"
     type: "string"
   - variable: VAULT_START_PARAMS
-    label: TSA: Vault start params (optional)
+    label: "TSA: Vault start params (optional)"
     description: |
       E.g. ues `-log-level=trace` for having debug logs in vault
     required: false
