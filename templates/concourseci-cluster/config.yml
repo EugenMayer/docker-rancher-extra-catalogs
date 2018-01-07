@@ -1,7 +1,7 @@
 name: "Concourse CI Cluster"
 description: |
   Concourse CI Cluster version with spreaded workers
-version: 3.8.0.3
+version: 3.8.0.4
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: http://concourse.ci/
