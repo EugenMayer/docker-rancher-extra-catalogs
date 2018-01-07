@@ -130,9 +130,6 @@ services:
     {{- if .Values.VAULT_CLIENT_CONFIG_VOLUME_NAME}}
     mem_reservation: ${RANCHER_WORKER_LIMIT_MEMORY}
     {{- end }}
-    {{- if .Values.RANCHER_WORKER_LIMIT_CPU_RESERVATION}}
-    milli_cpu_reservation: ${RANCHER_WORKER_LIMIT_CPU_RESERVATION}
-    {{- end }}
     labels:
       {{- if .Values.HOST_WORKER_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
