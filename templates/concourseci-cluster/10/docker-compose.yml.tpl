@@ -92,6 +92,22 @@ services:
       {{- end }}
     restart: unless-stopped # required so that it retries until conocurse-db comes up
     environment:
+      CONCOURSE_LOG_LEVEL: ${CONCOURSE_LOG_LEVEL}
+
+      # that seems to be important otherwise the workers seem to malfunction
+      # most probably trying to use the CONCOURSE_EXTERNAL_URL for the connection, which might be inaccesible
+      # if it is on a private network and the worker is outside this e.g. hosted on vultr
+      # but between all hosts we have an automatic ipsec based network which services can use to communicate
+      CONCOURSE_TSA_ATC_URL: ${TSA_ATC_URL}
+      CONCOURSE_TSA_PEER_IP: ${TSA_PEER_IP}
+      CONCOURSE_TSA_LOG_LEVEL: ${CONCOURSE_TSA_LOG_LEVEL}
+      CONCOURSE_TSA_AUTHORIZED_KEYS: /run/secrets/concourse-tsa-authorized-workers
+      CONCOURSE_TSA_HEARTBEAT_INTERVAL: ${CONCOURSE_TSA_HEARTBEAT_INTERVAL}
+      CONCOURSE_TSA_HOST_KEY: /run/secrets/concourse-tsa-private-key
+      # its not, even though it should be CONCOURSE_TSA_SESSION_SIGNING_KEY according to `concourse web --help`
+      CONCOURSE_SESSION_SIGNING_KEY: /run/secrets/concourse-tsa-session-signing-key
+      CONCOURSE_AUTH_DURATION: ${CONCOURSE_AUTH_DURATION}
+
       CONCOURSE_BASIC_AUTH_USERNAME: ${ADMIN_USER}
       CONCOURSE_BASIC_AUTH_PASSWORD: ${ADMIN_PASSWORD}
       CONCOURSE_EXTERNAL_URL: ${CONCOURSE_EXTERNAL_URL}
@@ -99,11 +115,6 @@ services:
       CONCOURSE_POSTGRES_USER: ${DB_USER}
       CONCOURSE_POSTGRES_PASSWORD: ${DB_PASSWORD}
       CONCOURSE_POSTGRES_DATABASE: ${DB_NAME}
-
-      CONCOURSE_TSA_HOST_KEY: /run/secrets/concourse-tsa-private-key
-      # its not, even though it should be CONCOURSE_TSA_SESSION_SIGNING_KEY according to `concourse web --help`
-      CONCOURSE_SESSION_SIGNING_KEY: /run/secrets/concourse-tsa-session-signing-key
-      CONCOURSE_TSA_AUTHORIZED_KEYS: /run/secrets/concourse-tsa-authorized-workers
 
       CONCOURSE_VAULT_URL: https://vault:8200
       CONCOURSE_VAULT_TLS_INSECURE_SKIP_VERIFY: "true"
@@ -113,8 +124,19 @@ services:
       CONCOURSE_VAULT_CLIENT_CERT: /vault/client/cert.pem
       CONCOURSE_VAULT_CLIENT_KEY: /vault/client/key.pem
       CONCOURSE_VAULT_CA_CERT: /vault/client/server.crt
+
+      CONCOURSE_RESOURCE_CHECKING_INTERVAL: 10m
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   worker-standalone:
+    #cpu_quota: 100000
+    #cpu_period: 180000
+    {{- if .Values.RANCHER_WORKER_LIMIT_MEMORY}}
+    #mem_reservation: ${RANCHER_WORKER_LIMIT_MEMORY}
+    mem_limit: ${RANCHER_WORKER_LIMIT_MEMORY}
+    {{- end }}
+    {{- if .Values.RANCHER_WORKER_LIMIT_CPU_RESERVATION}}
+    cpu_shares: ${RANCHER_WORKER_LIMIT_CPU_RESERVATION}
+    {{- end }}
     labels:
       {{- if .Values.HOST_WORKER_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
@@ -125,16 +147,23 @@ services:
     secrets:
       - concourse-worker-private-key
       - concourse-tsa-public-key
-    command: retire-worker
+    command: ${WORKER_DRAINING_STRATEGY}
     environment:
-      CONCOURSE_TSA_HOST: tsa
+      CONCOURSE_GARDEN_PERSISTENT_IMAGE: ${CONCOURSE_GARDEN_PERSISTENT_IMAGE}
+      CONCOURSE_TSA_HOST: ${TSA_PEER_IP}
       CONCOURSE_TSA_PORT: 2222
+      CONCOURSE_TSA_LOG_LEVEL: ${CONCOURSE_TSA_LOG_LEVEL}
       CONCOURSE_GARDEN_NETWORK_POOL: ${CONCOURSE_GARDEN_NETWORK_POOL}
       CONCOURSE_BAGGAGECLAIM_DRIVER: ${CONCOURSE_BAGGAGECLAIM_DRIVER}
       CONCOURSE_BAGGAGECLAIM_LOG_LEVEL: ${CONCOURSE_BAGGAGECLAIM_LOG_LEVEL}
       CONCOURSE_GARDEN_LOG_LEVEL: ${CONCOURSE_GARDEN_LOG_LEVEL}
       CONCOURSE_TSA_WORKER_PRIVATE_KEY: /run/secrets/concourse-worker-private-key
       CONCOURSE_TSA_PUBLIC_KEY: /run/secrets/concourse-tsa-public-key
+
+      CONCOURSE_GARDEN_PERSISTENT_IMAGE: ${WORKER_KEEP_IMAGES}
+
+      CONCOURSE_GARDEN_MAX_CONTAINERS: ${CONCOURSE_GARDEN_MAX_CONTAINERS}
+      CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE: ${CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE}
 volumes:
   {{- if .Values.DB_VOLUME_NAME}}
   {{- else}}

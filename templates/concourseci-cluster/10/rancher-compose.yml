@@ -1,6 +1,6 @@
 .catalog:
   name: "Atlassian JIRA"
-  version: 3.8.0.1
+  version: 3.8.0.10
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
@@ -24,7 +24,7 @@
     type: "string"
     default: "concourse"
   - variable: "ADMIN_USER"
-    label: "Admin password"
+    label: "Admin user"
     required: true
     type: "string"
     default: "concourse"
@@ -32,8 +32,53 @@
     label: "Admin password"
     required: true
     type: "password"
+  - variable: "TSA_ATC_URL"
+    label: "TSA_ATC_URL"
+    required: true
+    type: "string"
+    default: "http://tsa:8080"
+  - variable: "TSA_PEER_IP"
+    label: "TSA_PEER_IP"
+    required: true
+    type: "string"
+    default: "tsa"
+  - variable: "WORKER_KEEP_IMAGES"
+    label: "WORKER: Which images should never get removed on the worker"
+    required: false
+    type: "string"
+    default: ""
+  - variable: "CONCOURSE_GARDEN_MAX_CONTAINERS"
+    label: "WORKER: Max amount of containers _IN_ a worker (0 means no limit)"
+    required: true
+    type: "int"
+    default: 0
+  - variable: "CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE"
+    label: "WORKER: CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE _IN_ a worker (0 means no limit)"
+    required: true
+    type: "int"
+    default: 0
+  - variable: "RANCHER_WORKER_LIMIT_MEMORY"
+    label: "RANCHER: Limit MEMORY (in bytes) of the worker-container itself in rancher"
+    required: true
+    description: "0 means no limit"
+    type: "int"
+    default: 0
+  - variable: "RANCHER_WORKER_LIMIT_CPU_RESERVATION"
+    label: "RANCHER: Limit CPU_SHARES of the worker-container itself in rancher"
+    description: "0 means no limit"
+    required: true
+    type: "int"
+    default: 0
+  - variable: "WORKER_DRAINING_STRATEGY"
+    label: "WORKER: Draining strategy"
+    required: true
+    default: "retire-worker"
+    type: "enum"
+    options:
+    - retire-worker
+    - land-worker
   - variable: "CONCOURSE_BAGGAGECLAIM_DRIVER"
-    label: "Volume driver"
+    label: "WORKER: Volume driver"
     description: "Driver to use for managing volumes"
     required: true
     default: "overlay"
@@ -44,7 +89,7 @@
     - naive
     - btrfs
   - variable: "CONCOURSE_BAGGAGECLAIM_LOG_LEVEL"
-    label: "Baggageclaim loglevel"
+    label: "WORKER: Baggageclaim loglevel"
     description: "Driver to use for managing volumes"
     required: true
     default: "info"
@@ -55,7 +100,7 @@
     - error
     - fatal
   - variable: "CONCOURSE_GARDEN_LOG_LEVEL"
-    label: "Garden loglevel"
+    label: "WORKER: Garden loglevel"
     required: true
     default: "info"
     type: "enum"
@@ -65,7 +110,7 @@
     - error
     - fatal
   - variable: "CONCOURSE_TSA_LOG_LEVEL"
-    label: "TSA loglevel"
+    label: "TSA: TSA loglevel"
     required: true
     default: "info"
     type: "enum"
@@ -75,7 +120,7 @@
     - error
     - fatal
   - variable: "CONCOURSE_LOG_LEVEL"
-    label: "General loglevel"
+    label: "TSA: General loglevel"
     required: true
     default: "info"
     type: "enum"
@@ -85,18 +130,24 @@
     - error
     - fatal
   - variable: "CONCOURSE_GARDEN_NETWORK_POOL"
-    label: "Network pool"
+    label: "WORKER: Network pool"
     description: "Network range to use for dynamically allocated container subnets."
     required: false
     default: "10.254.0.0/22"
     type: "string"
-  - variable: "CONCOURSE_TSA_HEARTBEAT_INTERVAL"
-    label: "Worker alive poll interval"
+  - variable: "CONCOURSE_GARDEN_NETWORK_POOL"
+    label: "WORKER: Network pool"
+    description: "Network range to use for dynamically allocated container subnets."
     required: false
-    default: 30
-    type: "int"
+    default: "10.254.0.0/22"
+    type: "string"
+  - variable: "CONCOURSE_AUTH_DURATION"
+    label: "TSA: Auth duration - when should the auth expire"
+    required: true
+    default: "24h"
+    type: "string"
   - variable: VAULT_START_PARAMS
-    label: Vault start params (optional)
+    label: "TSA: Vault start params (optional)"
     description: |
       E.g. ues `-log-level=trace` for having debug logs in vault
     required: false
@@ -130,13 +181,13 @@
     type: string
     default: '/mnt/data_fast/stacks/concourseci_cluster/vault_server_data'
   - variable: HOST_AFFINITY_LABEL
-    label: "Affinity label for all services BUT the workers . If blank, no affinity will be set"
+    label: "RANCHER: Affinity label for all services BUT the workers . If blank, no affinity will be set"
     description: |
       The label for the host affinity of rancher io.rancher.scheduler.affinity:<yourlabelhere> - If blank, no affinity will be set
     required: false
     type: string
   - variable: HOST_WORKER_AFFINITY_LABEL
-    label: "Affinity label for the workers .If blank, no affinity will be set"
+    label: "RANCHER: Affinity label for the workers .If blank, no affinity will be set"
     description: |
       The label for the host affinity of rancher io.rancher.scheduler.affinity:<yourlabelhere> - If blank, no affinity will be set
     required: false
