@@ -74,7 +74,7 @@
     required: false
     type: "password"
   - variable: "SMTP_HOST"
-    label: "SMTP user"
+    label: "SMTP host"
     type: "string"
     required: false
   - variable: "SMTP_PORT"
