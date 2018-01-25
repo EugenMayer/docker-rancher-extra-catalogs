@@ -1,0 +1,59 @@
+version: "2"
+
+services:
+  app:
+    image: eugenmayer/rundeck:2.10.4
+    depends_on:
+      - db
+    environment:
+      DB_TYPE: postgresql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: rundeckdb
+      DB_USER: rundeck
+      DB_PASSWORD: ${DB_PASSWORD}
+      EXTERNAL_SERVER_URL: ${EXTERNAL_SERVER_URL}
+      RUNDECK_ADMIN_PASSWORD: ${RUNDECK_ADMIN_PASSWORD}
+      GUI_BRAND_HTML: ${GUI_BRAND_HTML}
+      RDECK_JVM_SETTINGS: ${RDECK_JVM_SETTINGS}
+      RUNDECK_WITH_SSL: ${RUNDECK_WITH_SSL}
+      RUNDECK_STORAGE_PROVIDER: ${RUNDECK_STORAGE_PROVIDER}
+      RUNDECK_PROJECT_STORAGE_TYPE: ${RUNDECK_PROJECT_STORAGE_TYPE}
+      SMTP_USERNAME: ${SMTP_USERNAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_DEFAULT_FROM: ${SMTP_DEFAULT_FROM}
+    volumes:
+      - rundeck_plugins:/opt/rundeck-plugins
+      - rundeck_config:/etc/rundeck
+      - rundeck_logs:/var/log/rundeck
+      - rundeck_storage:/var/lib/rundeck/var/storage
+      - rundeck_tmp:/var/rundeck
+    labels:
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent.role: 'environment'
+
+  db:
+    image: postgres:10
+    volumes:
+      - rundeck_db:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: rundeckdb
+volumes:
+  rundeck_config:
+    driver: local
+  rundeck_tmp:
+    driver: local
+  rundeck_storage:
+    driver: local
+  rundeck_logs:
+    driver: local
+  rundeck_plugins:
+    driver: local
+  rundeck_plugins:
+    driver: local
+  rundeck_db:
+    driver: local
