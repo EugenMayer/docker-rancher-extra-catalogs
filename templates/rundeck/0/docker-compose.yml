@@ -9,10 +9,10 @@ services:
       DATABASE_ADMIN_USER: ${DB_USER}
       EXTERNAL_SERVER_URL: ${EXTERNAL_SERVER_URL}
       RUNDECK_ADMIN_PASSWORD: ${RUNDECK_ADMIN_PASSWORD}
-      GUI_BRAND_HTML: {GUI_BRAND_HTML}
-      RDECK_JVM_SETTINGS: {RDECK_JVM_SETTINGS}
-      NO_LOCAL_MYSQL: true
-      SKIP_DATABASE_SETUP: true
+      GUI_BRAND_HTML: ${GUI_BRAND_HTML}
+      RDECK_JVM_SETTINGS: ${RDECK_JVM_SETTINGS}
+      NO_LOCAL_MYSQL: "true"
+      SKIP_DATABASE_SETUP: "true"
       SMTP_USERNAME: ${SMTP_USERNAME}
       SMTP_PASSWORD: ${SMTP_PASSWORD}
       SMTP_HOST: ${SMTP_HOST}
@@ -20,7 +20,7 @@ services:
       SMTP_DEFAULT_FROM: ${SMTP_DEFAULT_FROM}
     volumes:
       - rundeck_plugins:/opt/rundeck-plugins
-      - rundeck:/etc/rundeck
+      - rundeck_config:/etc/rundeck
       - rundeck_logs:/var/log/rundeck
       - rundeck_storage:/var/lib/rundeck/var/storage
       - rundeck_tmp:/var/rundeck
@@ -37,6 +37,8 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: rundeckdb
 volumes:
+  rundeck_config:
+    driver: local
   rundeck_tmp:
     driver: local
   rundeck_storage:
