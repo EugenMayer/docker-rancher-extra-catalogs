@@ -1,7 +1,7 @@
-name: "Rundeck"
+name: "OpenLDAP"
 description: |
-  Rundeck
+  OpenLDAP
 version: 0.1.11.0
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
-projectURL: http://rundeck.org/
+projectURL:
