@@ -3,7 +3,10 @@ version: "2"
 services:
   app:
     image: jordan/rundeck:2.10.4
+    depends_on:
+      - db
     environment:
+      DATABASE_URL: ${DATABASE_URL}
       DATABASE_ADMIN_PASSWORD: ${DB_PASSWORD}
       RUNDECK_PASSWORD: ${DB_PASSWORD}
       DATABASE_ADMIN_USER: ${DB_USER}
