@@ -1,6 +1,6 @@
 .catalog:
   name: "Rundeck"
-  version: 0.0.1
+  version: 2.10.4.1
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
