@@ -2,7 +2,7 @@ version: "2"
 
 services:
   app:
-    image: rundeck:2.10.4
+    image: jordan/rundeck:2.10.4
     environment:
       DATABASE_ADMIN_PASSWORD: ${DB_PASSWORD}
       RUNDECK_PASSWORD: ${DB_PASSWORD}
