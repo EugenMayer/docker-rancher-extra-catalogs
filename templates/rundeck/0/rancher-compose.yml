@@ -9,6 +9,12 @@
     description: "Your external proxy domain concourseci.domain.tld"
     required: true
     type: "string"
+  - variable: "RUNDECK_WITH_SSL"
+    label: "RUNDECK_WITH_SSL"
+    description: "Will generate a self signed certificate and you can use 4443"
+    required: true
+    type: "boolean"
+    default: true
   - variable: "RUNDECK_ADMIN_PASSWORD"
     label: "Admin Password"
     required: true

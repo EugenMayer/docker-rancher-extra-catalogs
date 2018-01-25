@@ -18,3 +18,8 @@ After the installation, you can login using your password and the user
 + your provided LDAP password
 
 where dc=yourgiverndomain,dc=tld is derived form your LDAP domain you have provided during the configuration
+
+## Ports
+
+- 389/TCP for ldap
+- 636/TCP for ldaps

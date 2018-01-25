@@ -26,3 +26,7 @@ Do not forget to launch the secret catalog container: http://rancher.com/docs/ra
 
 - You can also create those secrets using the UI, see http://rancher.com/docs/rancher/latest/en/cattle/secrets/#adding-secrets-in-the-ui
 - Reading up the general topic about secrets would be http://rancher.com/docs/rancher/latest/en/cattle/secrets/
+
+## Ports
+
+- 8080/TCP for http
