@@ -2,21 +2,23 @@ version: "2"
 
 services:
   app:
-    image: jordan/rundeck:2.10.4
+    image: eugenmayer/rundeck:2.10.4
     depends_on:
       - db
     environment:
-      DATABASE_URL: ${DATABASE_URL}
-      DATABASE_ADMIN_PASSWORD: ${DB_PASSWORD}
-      RUNDECK_PASSWORD: ${DB_PASSWORD}
-      DATABASE_ADMIN_USER: ${DB_USER}
+      DB_TYPE: postgresql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: rundeckdb
+      DB_USER: rundeck
+      DB_PASSWORD: ${DB_PASSWORD}
       EXTERNAL_SERVER_URL: ${EXTERNAL_SERVER_URL}
       RUNDECK_ADMIN_PASSWORD: ${RUNDECK_ADMIN_PASSWORD}
       GUI_BRAND_HTML: ${GUI_BRAND_HTML}
       RDECK_JVM_SETTINGS: ${RDECK_JVM_SETTINGS}
       RUNDECK_WITH_SSL: ${RUNDECK_WITH_SSL}
-      NO_LOCAL_MYSQL: "true"
-      SKIP_DATABASE_SETUP: "true"
+      RUNDECK_STORAGE_PROVIDER: ${RUNDECK_STORAGE_PROVIDER}
+      RUNDECK_PROJECT_STORAGE_TYPE: ${RUNDECK_PROJECT_STORAGE_TYPE}
       SMTP_USERNAME: ${SMTP_USERNAME}
       SMTP_PASSWORD: ${SMTP_PASSWORD}
       SMTP_HOST: ${SMTP_HOST}
