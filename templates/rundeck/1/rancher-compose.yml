@@ -45,13 +45,13 @@
     description: "Additional parameters sent to the rundeck JVM (ex: -Xmx1024m -Xms256m -XX:MaxMetaspaceSize=256m -server -Dfile.encoding=UTF-8 -Dserver.web.context=/rundeck)"
     required: false
     type: "string"
-    default: "-Djava.net.useSystemProxies=true"
+    default: "-Xmx1024m -Xms256m"
   - variable: "GUI_BRAND_HTML"
     label: "GUI_BRAND_HTML"
     description: "HTML to show as title in app header. See: http://rundeck.org/docs/administration/gui-customization.html. Useful to show Rundeck environment where multiple Rundeck instances are deployed"
     required: false
     type: "string"
-    default: "-Djava.net.useSystemProxies=true"
+    default: "My Rundeck Server"
   - variable: "SMTP_USERNAME"
     label: "SMTP user"
     type: "string"
