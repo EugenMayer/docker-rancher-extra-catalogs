@@ -17,6 +17,7 @@ services:
       RDECK_JVM_SETTINGS: "${RDECK_JVM_SETTINGS}"
       RUNDECK_STORAGE_PROVIDER: ${RUNDECK_STORAGE_PROVIDER}
       RUNDECK_PROJECT_STORAGE_TYPE: ${RUNDECK_PROJECT_STORAGE_TYPE}
+      RUNDECK_WITH_SSL: ${RUNDECK_WITH_SSL}
     volumes:
       - rundeck_plugins:/opt/rundeck-plugins
       - rundeck_config:/etc/rundeck

@@ -1,14 +1,20 @@
 .catalog:
   name: "Rundeck"
-  version: 2.10.4.5
+  version: 2.10.4.7
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
   - variable: "EXTERNAL_SERVER_URL"
     label: "Your external proxy domain INCLUDE scheme"
-    description: "Your external proxy domain concourseci.domain.tld, please include the scheme - this will decide if the rundeck runs on the 4443 port ( https ) or 4440!!"
+    description: "Your external proxy domain rundeck.domain.tld, please include the scheme"
     required: true
     type: "string"
+  - variable: "RUNDECK_WITH_SSL"
+    label: "RUNDECK_WITH_SSL"
+    description: "if true, SSL mode will be enabled, so port 4443 will be exposed with a snackoil cert. Otherwise 4440 plain"
+    required: true
+    default: false
+    type: "boolean"
   - variable: "RUNDECK_ADMIN_PASSWORD"
     label: "Admin Password"
     required: true
