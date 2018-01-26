@@ -1,6 +1,6 @@
 .catalog:
   name: "Rundeck"
-  version: 2.10.4.3
+  version: 2.10.4.5
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
@@ -46,31 +46,3 @@
     required: false
     type: "string"
     default: "-Xmx1024m -Xms256m"
-  - variable: "GUI_BRAND_HTML"
-    label: "GUI_BRAND_HTML"
-    description: "HTML to show as title in app header. See: http://rundeck.org/docs/administration/gui-customization.html. Useful to show Rundeck environment where multiple Rundeck instances are deployed"
-    required: false
-    type: "string"
-    default: "My Rundeck Server"
-  - variable: "SMTP_USERNAME"
-    label: "SMTP user"
-    type: "string"
-    required: false
-    default: ""
-  - variable: "SMTP_PASSWORD"
-    label: "SMTP password"
-    required: false
-    type: "password"
-  - variable: "SMTP_HOST"
-    label: "SMTP host"
-    type: "string"
-    required: false
-  - variable: "SMTP_PORT"
-    label: "SMTP PORT"
-    type: "string"
-    required: false
-  - variable: "SMTP_DEFAULT_FROM"
-    label: "SMTP Default from"
-    description: "The from address to use for email notifications."
-    type: "string"
-    required: false
