@@ -1,0 +1,54 @@
+.catalog:
+  name: "Rundeck"
+  version: 2.10.4.4
+  description: "Atlassian Jira"
+  minimum_rancher_version: v1.5.0
+  questions:
+  - variable: "EXTERNAL_SERVER_URL"
+    label: "Your external proxy domain INCLUDE scheme"
+    description: "Your external proxy domain concourseci.domain.tld, please include the scheme - this will decide if the rundeck runs on the 4443 port ( https ) or 4440!!"
+    required: true
+    type: "string"
+  - variable: "RUNDECK_ADMIN_PASSWORD"
+    label: "Admin Password"
+    required: true
+    type: "password"
+  - variable: "DB_USER"
+    label: "Database user"
+    required: true
+    type: "string"
+    default: "rundeck"
+  - variable: "DB_PASSWORD"
+    label: "Database password"
+    required: true
+    type: "password"
+  - variable: "RUNDECK_STORAGE_PROVIDER"
+    label: "RUNDECK_STORAGE_PROVIDER"
+    description: "http://rundeck.org/docs/plugins-user-guide/configuring.html#storage-plugins"
+    required: true
+    default: "file"
+    type: "enum"
+    options:
+    - db
+    - file
+  - variable: "RUNDECK_PROJECT_STORAGE_TYPE"
+    label: "RUNDECK_PROJECT_STORAGE_TYPE"
+    description: "http://rundeck.org/docs/administration/setting-up-an-rdb-datasource.html"
+    required: true
+    default: "file"
+    type: "enum"
+    options:
+    - db
+    - file
+  - variable: "RDECK_JVM_SETTINGS"
+    label: "RDECK_JVM_SETTINGS"
+    description: "Additional parameters sent to the rundeck JVM (ex: -Xmx1024m -Xms256m -XX:MaxMetaspaceSize=256m -server -Dfile.encoding=UTF-8 -Dserver.web.context=/rundeck)"
+    required: false
+    type: "string"
+    default: "-Xmx1024m -Xms256m"
+  - variable: "GUI_BRAND_HTML"
+    label: "GUI_BRAND_HTML"
+    description: "HTML to show as title in app header. See: http://rundeck.org/docs/administration/gui-customization.html. Useful to show Rundeck environment where multiple Rundeck instances are deployed"
+    required: false
+    type: "string"
+    default: "My Rundeck Server"
