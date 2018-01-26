@@ -35,7 +35,7 @@ services:
       io.rancher.container.pull_image: always
 
   db:
-    image: postgres:10
+    image: postgres:9.6
     volumes:
       - rundeck_db:/var/lib/postgresql
     environment:
