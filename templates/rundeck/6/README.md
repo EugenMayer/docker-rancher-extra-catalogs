@@ -1,6 +1,6 @@
 ## Rundeck
 
-Running http://rundeck.org/ using the docker image made by https://github.com/jjethwa/rundeck
+Running http://rundeck.org/ based on the image https://github.com/EugenMayer/rundeck
 
 ## Ports
 
