@@ -141,12 +141,6 @@
     required: false
     default: "10.254.0.0/22"
     type: "string"
-  - variable: "CONCOURSE_GARDEN_NETWORK_POOL"
-    label: "WORKER: Network pool"
-    description: "Network range to use for dynamically allocated container subnets."
-    required: false
-    default: "10.254.0.0/22"
-    type: "string"
   - variable: "CONCOURSE_AUTH_DURATION"
     label: "TSA: Auth duration - when should the auth expire"
     required: true
