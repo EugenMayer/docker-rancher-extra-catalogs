@@ -14,7 +14,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       EXTERNAL_SERVER_URL: ${EXTERNAL_SERVER_URL}
       RUNDECK_ADMIN_PASSWORD: ${RUNDECK_ADMIN_PASSWORD}
-      RDECK_JVM_SETTINGS: "${RDECK_JVM_SETTINGS}"
+      RDECK_JVM_SETTINGS: ${RDECK_JVM_SETTINGS}
       RUNDECK_STORAGE_PROVIDER: ${RUNDECK_STORAGE_PROVIDER}
       RUNDECK_PROJECT_STORAGE_TYPE: ${RUNDECK_PROJECT_STORAGE_TYPE}
       RUNDECK_WITH_SSL: ${RUNDECK_WITH_SSL}
@@ -25,8 +25,8 @@ services:
       RD_URL: http://localhost:4443
       SERVER_URL: http://localhost:4443
     {{- end }}
-      RD_USER=admin
-      RD_PASSWORD=${RUNDECK_ADMIN_PASSWORD}
+      RD_USER:admin
+      RD_PASSWORD:${RUNDECK_ADMIN_PASSWORD}
     volumes:
       - rundeck_plugins:/opt/rundeck-plugins
       - rundeck_config:/etc/rundeck
