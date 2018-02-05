@@ -1,7 +1,7 @@
 name: "Rundeck"
 description: |
   Rundeck a remote task runner http://rundeck.org/
-version: 2.10.4.10
+version: 2.10.6.0
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: http://rundeck.org/
