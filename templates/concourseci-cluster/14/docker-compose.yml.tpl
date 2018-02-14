@@ -7,7 +7,7 @@ services:
       io.rancher.scheduler.affinity:{{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
     restart: unless-stopped # required so that it retries until conocurse-db comes up
-    image: vault:0.9.0
+    image: vault:0.9.3
     cap_add:
      - IPC_LOCK
     depends_on:
@@ -74,7 +74,7 @@ services:
     {{- if .Values.HOST_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
-    image: concourse/concourse:3.8.0
+    image: concourse/concourse:3.9.0
     command: web
     secrets:
       - concourse-tsa-authorized-workers
@@ -106,6 +106,7 @@ services:
       CONCOURSE_TSA_HOST_KEY: /run/secrets/concourse-tsa-private-key
       # its not, even though it should be CONCOURSE_TSA_SESSION_SIGNING_KEY according to `concourse web --help`
       CONCOURSE_SESSION_SIGNING_KEY: /run/secrets/concourse-tsa-session-signing-key
+      CONCOURSE_AUTH_DURATION: ${CONCOURSE_AUTH_DURATION}
 
       CONCOURSE_BASIC_AUTH_USERNAME: ${ADMIN_USER}
       CONCOURSE_BASIC_AUTH_PASSWORD: ${ADMIN_PASSWORD}
@@ -125,10 +126,12 @@ services:
       CONCOURSE_VAULT_CA_CERT: /vault/client/server.crt
 
       CONCOURSE_RESOURCE_CHECKING_INTERVAL: 10m
+
+{{- if eq .Values.START_INCLUDED_WORKERS "true" }}
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   worker-standalone:
-    cpu_quota: 100000
-    cpu_period: 180000
+    #cpu_quota: 100000
+    #cpu_period: 180000
     {{- if .Values.RANCHER_WORKER_LIMIT_MEMORY}}
     #mem_reservation: ${RANCHER_WORKER_LIMIT_MEMORY}
     mem_limit: ${RANCHER_WORKER_LIMIT_MEMORY}
@@ -141,12 +144,12 @@ services:
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
       {{- end }}
       io.rancher.container.pull_image: always
-    image: eugenmayer/concourse-worker-solid:3.8.0
+    image: eugenmayer/concourse-worker-solid:3.9.0
     privileged: true
     secrets:
       - concourse-worker-private-key
       - concourse-tsa-public-key
-    command: retire-worker
+    command: ${WORKER_DRAINING_STRATEGY}
     environment:
       CONCOURSE_GARDEN_PERSISTENT_IMAGE: ${CONCOURSE_GARDEN_PERSISTENT_IMAGE}
       CONCOURSE_TSA_HOST: ${TSA_PEER_IP}
@@ -163,6 +166,7 @@ services:
 
       CONCOURSE_GARDEN_MAX_CONTAINERS: ${CONCOURSE_GARDEN_MAX_CONTAINERS}
       CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE: ${CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE}
+{{- end }}
 volumes:
   {{- if .Values.DB_VOLUME_NAME}}
   {{- else}}

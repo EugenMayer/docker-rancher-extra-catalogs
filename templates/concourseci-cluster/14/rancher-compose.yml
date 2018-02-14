@@ -1,6 +1,6 @@
 .catalog:
   name: "Atlassian JIRA"
-  version: 3.8.0.7
+  version: 3.9.0.0
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
@@ -9,6 +9,12 @@
     description: "Your external proxy domain concourseci.domain.tld"
     required: true
     type: "string"
+  - variable: "START_INCLUDED_WORKERS"
+    label: "Start workers in the stack"
+    description: "If false, no workers would be started and you would need to start and configure them yourself standalone"
+    required: true
+    default: true
+    type: "boolean"
   - variable: "DB_PASSWORD"
     label: "Database password"
     required: true
@@ -69,6 +75,14 @@
     required: true
     type: "int"
     default: 0
+  - variable: "WORKER_DRAINING_STRATEGY"
+    label: "WORKER: Draining strategy"
+    required: true
+    default: "retire-worker"
+    type: "enum"
+    options:
+    - retire-worker
+    - land-worker
   - variable: "CONCOURSE_BAGGAGECLAIM_DRIVER"
     label: "WORKER: Volume driver"
     description: "Driver to use for managing volumes"
@@ -127,10 +141,10 @@
     required: false
     default: "10.254.0.0/22"
     type: "string"
-  - variable: "CONCOURSE_TSA_HEARTBEAT_INTERVAL"
-    label: "TSA: Worker alive poll interval"
-    required: false
-    default: "30s"
+  - variable: "CONCOURSE_AUTH_DURATION"
+    label: "TSA: Auth duration - when should the auth expire"
+    required: true
+    default: "24h"
     type: "string"
   - variable: VAULT_START_PARAMS
     label: "TSA: Vault start params (optional)"
