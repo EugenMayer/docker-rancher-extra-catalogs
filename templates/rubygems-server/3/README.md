@@ -1,4 +1,7 @@
 ## Geminabox Rubygems-Server
+
+Hint: I moved on to [sonatype nexus](https://github.com/EugenMayer/docker-rancher-extra-catalogs/tree/master/templates/sona-nexus) as my gem-server - so you might checkout that ( also supports NPM, docker, maven and more ).
+
 A rubygems server build on [geminabox](https://github.com/geminabox/geminabox) to host your own private gems
 
 Expose the port 9292 using your HAproxy to let the gem-server be accessible to the outer world
