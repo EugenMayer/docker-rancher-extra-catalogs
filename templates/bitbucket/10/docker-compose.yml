@@ -2,7 +2,7 @@ version: "2"
 
 services:
   bitbucket:
-    image: blacklabelops/bitbucket:5.7.0
+    image: blacklabelops/bitbucket:5.7.1
     environment:
       BITBUCKET_DELAYED_START: 10
 {{- if eq .Values.USE_PROXY "true" }}
