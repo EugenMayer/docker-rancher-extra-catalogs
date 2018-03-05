@@ -1,7 +1,7 @@
 name: "OpenLDAP"
 description: |
   OpenLDAP
-version: 0.1.11.0
+version: 1.2.0.0
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL:
