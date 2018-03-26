@@ -10,7 +10,6 @@
       required: true
       default: "nexus"
       type: "string"
-  questions:
     - variable: "NEXUS_STORAGE_DRIVER"
       label: "Storage driver"
       description: "Driver to use for managing nexus persistant storage"
@@ -21,3 +20,9 @@
       - local
       - rancher-nfs
       - rancher-ebs
+    - variable: "EXTERNAL_PORT"
+      label: "External Port"
+      description: "Port to expose externally on the host"
+      required: true
+      default: "8081"
+      type: int
