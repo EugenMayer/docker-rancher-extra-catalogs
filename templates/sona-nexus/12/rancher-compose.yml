@@ -8,4 +8,16 @@
       label: "Volume name or host path for the nexus server storage"
       description: "Volume name you want the data to be stored on"
       required: true
+      default: "nexus"
       type: "string"
+  questions:
+    - variable: "NEXUS_STORAGE_DRIVER"
+      label: "Storage driver"
+      description: "Driver to use for managing nexus persistant storage"
+      required: true
+      default: "local"
+      type: "enum"
+      options:
+      - local
+      - rancher-nfs
+      - rancher-ebs
