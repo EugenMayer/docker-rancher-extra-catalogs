@@ -20,9 +20,3 @@
       - local
       - rancher-nfs
       - rancher-ebs
-    - variable: "EXTERNAL_PORT"
-      label: "External Port"
-      description: "Port to expose externally on the host"
-      required: true
-      default: "8081"
-      type: int
