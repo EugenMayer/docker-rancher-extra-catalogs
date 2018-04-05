@@ -1,7 +1,7 @@
 name: "Concourse CI Standalone Worker"
 description: |
 version: 3.8.0.3
-  Concourse CI Standalone Worker
+  unmaintained!
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: http://concourse.ci/
