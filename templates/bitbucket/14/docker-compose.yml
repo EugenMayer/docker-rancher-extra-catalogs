@@ -2,7 +2,7 @@ version: "2"
 
 services:
   bitbucket:
-    image: blacklabelops/bitbucket:5.6.1
+    image: eugenmayer/bitbucket:5.10.0
     environment:
       BITBUCKET_DELAYED_START: 10
 {{- if eq .Values.USE_PROXY "true" }}
@@ -16,7 +16,6 @@ services:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: 'environment'
 {{- if eq .Values.USE_EXTERNAL_DB_SERVICE "true" }}
-    links:
     external_links:
       - ${EXTERNAL_DB_SERVICE}:db
 {{- end }}
