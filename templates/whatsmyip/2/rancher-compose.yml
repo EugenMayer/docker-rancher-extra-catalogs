@@ -7,7 +7,7 @@
     - variable: "TRAEFIK_FRONTEND_RULE"
       label: "Traefik: Frontend Rule"
       description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
-      default: 'Host:jira.company.tld'
+      default: 'Host:myip.company.tld'
       type: "string"
       required: false
     - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"

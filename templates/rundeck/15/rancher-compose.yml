@@ -52,3 +52,15 @@
     required: false
     type: "string"
     default: "-Xmx1024m -Xms256m"
+  - variable: "TRAEFIK_FRONTEND_RULE"
+    label: "Traefik: Frontend Rule"
+    description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
+    default: 'Host:rundeck.company.tld'
+    type: "string"
+    required: false
+  - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"
+    label: "Traefik: Enable SSL"
+    description: "If you are using ranchers Traefik catalog, decide if you want to get a SSL cetificate for this service using ACME"
+    required: false
+    default: false
+    type: "boolean"
