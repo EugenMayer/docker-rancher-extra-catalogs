@@ -8,3 +8,9 @@ Docker image from https://hub.docker.com/r/sonatype/docker-nexus3
 ## Ports
 
 - 8081/TCP for http 
+
+
+## Traefik 
+
+Integrates with with ranchers traefik catalog https://github.com/rancher/community-catalog/tree/master/templates/traefik
+using rancher metadata

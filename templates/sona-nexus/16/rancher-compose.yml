@@ -1,6 +1,6 @@
 .catalog:
   name: "Sona nexus"
-  version: 3.11.0.0
+  version: 3.11.0.1
   description: "A docker-registry, gem, npm, java and more server with permissions, authentication backends a lot more:"
   minimum_rancher_version: v0.63.0
   questions:
