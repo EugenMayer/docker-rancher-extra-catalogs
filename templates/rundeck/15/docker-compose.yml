@@ -5,7 +5,7 @@ services:
     image: eugenmayer/rundeck:2.11.1
     labels:
       traefik.enable: true
-      traefik.port: 8080
+      traefik.port: 4440
       traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
       traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
       io.rancher.container.create_agent: 'true'
