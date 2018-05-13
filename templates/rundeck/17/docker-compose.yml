@@ -48,10 +48,10 @@ services:
     labels:
       # that basically means, register a front in traffic, so if the host matches TRAEFIK_FRONTEND_RULE, forward it to a traefik backend
       # called rundecknginx on port 80 (here) - so to the nginx daemon whit then upstreams to rundeck app
-      - traefik.backend: rundecknginx
-      - traefik.port: 80
-      - traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
-      - traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
+      traefik.backend: rundecknginx
+      traefik.port: 80
+      traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
+      traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
   db:
     image: postgres:9.6
     volumes:
