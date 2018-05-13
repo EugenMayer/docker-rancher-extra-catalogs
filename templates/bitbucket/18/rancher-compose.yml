@@ -21,7 +21,7 @@
       default: 443
       type: "int"
     - variable: "BITBUCKET_SSH_PORT"
-      label: "Host Exposed SSH Port"
+      label: "Configured Bitbucket SSH Port"
       description: "Your configured SSH port in bitbucket"
       required: true
       default: 22
