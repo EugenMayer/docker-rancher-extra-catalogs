@@ -24,7 +24,6 @@
       label: "Host Exposed SSH Port"
       description: "If not empty, this port will be used to expose SSH to the host"
       required: false
-      default:
       type: "int"
     - variable: "BITBUCKET_PROXY_SCHEME"
       label: "Proxy scheme"
