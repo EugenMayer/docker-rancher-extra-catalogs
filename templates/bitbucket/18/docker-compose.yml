@@ -12,7 +12,7 @@ services:
       traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
     {{- if .Values.BITBUCKET_SSH_EXPOSE_PORT }}
     ports:
-      - ${BITBUCKET_SSH_EXPOSE_PORT}:${ITBUCKET_SSH_PORT}
+      - ${BITBUCKET_SSH_EXPOSE_PORT}:${BITBUCKET_SSH_PORT}
     {{- end }}
     environment:
       BITBUCKET_DELAYED_START: 10
