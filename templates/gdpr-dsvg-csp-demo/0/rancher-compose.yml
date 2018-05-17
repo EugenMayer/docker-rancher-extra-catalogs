@@ -4,16 +4,15 @@
   description: "gdpr csp demo"
   minimum_rancher_version: v1.5.0
   questions:
-    questions:
-      - variable: "TRAEFIK_FRONTEND_RULE"
-        label: "Traefik: Frontend Rule"
-        description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
-        default: 'Host:myip.company.tld'
-        type: "string"
-        required: false
-      - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"
-        label: "Traefik: Enable SSL"
-        description: "If you are using ranchers Traefik catalog, decide if you want to get a SSL cetificate for this service using ACME"
-        required: false
-        default: false
-        type: "boolean"
+    - variable: "TRAEFIK_FRONTEND_RULE"
+      label: "Traefik: Frontend Rule"
+      description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
+      default: 'Host:myip.company.tld'
+      type: "string"
+      required: false
+    - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"
+      label: "Traefik: Enable SSL"
+      description: "If you are using ranchers Traefik catalog, decide if you want to get a SSL cetificate for this service using ACME"
+      required: false
+      default: false
+      type: "boolean"
