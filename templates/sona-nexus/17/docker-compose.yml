@@ -1,0 +1,11 @@
+nexus:
+  image: sonatype/nexus3:3.12.0
+  volumes:
+    - ${DATA}:/nexus-data
+  labels:
+    traefik.enable: true
+    traefik.port: 8081
+    traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
+    traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: 'environment'
