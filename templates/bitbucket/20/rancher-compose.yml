@@ -1,6 +1,6 @@
 .catalog:
   name: "Atlassian Bitbucket Server"
-  version: 5.8.1.0
+  version: 5.11.1.0
   description: "Atlassian Bitbucket Server"
   minimum_rancher_version: v1.5.0
   questions:
@@ -19,6 +19,17 @@
       description: "Your proxy port"
       required: false
       default: 443
+      type: "int"
+    - variable: "BITBUCKET_SSH_PORT"
+      label: "Configured Bitbucket SSH Port"
+      description: "Your configured SSH port in bitbucket"
+      required: true
+      default: 22
+      type: "int"
+    - variable: "BITBUCKET_SSH_EXPOSE_PORT"
+      label: "Host Exposed SSH Port"
+      description: "If not empty, this port will be used to expose SSH to the host"
+      required: false
       type: "int"
     - variable: "BITBUCKET_PROXY_SCHEME"
       label: "Proxy scheme"
@@ -55,4 +66,15 @@
       description: "External DB Service"
       required: false
       type: "service"
-
+    - variable: "TRAEFIK_FRONTEND_RULE"
+      label: "Traefik: Frontend Rule"
+      description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
+      default: 'Host:jira.company.tld'
+      type: "string"
+      required: false
+    - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"
+      label: "Traefik: Enable SSL"
+      description: "If you are using ranchers Traefik catalog, decide if you want to get a SSL cetificate for this service using ACME"
+      required: false
+      default: false
+      type: "boolean"
