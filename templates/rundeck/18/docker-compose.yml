@@ -1,0 +1,83 @@
+version: "2"
+
+services:
+  rundeck:
+    image: eugenmayer/rundeck:2.11.3
+    labels:
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent.role: 'environment'
+      io.rancher.container.pull_image: always
+    depends_on:
+      - db
+    environment:
+      DB_TYPE: postgresql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: rundeckdb
+      DB_USER: rundeck
+      DB_PASSWORD: ${DB_PASSWORD}
+      EXTERNAL_SERVER_URL: ${EXTERNAL_SERVER_URL}
+      RUNDECK_ADMIN_PASSWORD: ${RUNDECK_ADMIN_PASSWORD}
+      RDECK_JVM_SETTINGS: "${RDECK_JVM_SETTINGS}"
+      RUNDECK_STORAGE_PROVIDER: ${RUNDECK_STORAGE_PROVIDER}
+      RUNDECK_PROJECT_STORAGE_TYPE: ${RUNDECK_PROJECT_STORAGE_TYPE}
+      RUNDECK_WITH_SSL: ${RUNDECK_WITH_SSL}
+      # this will ensure RD will not try to connect from the outer URL, keep it intern and use RD_URL
+      # see https://rundeck.github.io/rundeck-cli/configuration/
+      RD_BYPASS_URL: ${EXTERNAL_SERVER_URL}
+    {{- if eq .Values.RUNDECK_WITH_SSL "true" }}
+      RD_URL: http://localhost:4443
+      SERVER_URL: http://localhost:4443
+    {{- else}}
+      RD_URL: http://localhost:4440
+      SERVER_URL: http://localhost:4440
+    {{- end }}
+      RD_USER: admin
+      RD_PASSWORD: ${RUNDECK_ADMIN_PASSWORD}
+    volumes:
+      - rundeck_plugins:/opt/rundeck-plugins
+      - rundeck_config:/etc/rundeck
+      - rundeck_logs:/var/log/rundeck
+      - rundeck_logs_jobs:/var/lib/rundeck/logs
+      - rundeck_storage:/var/lib/rundeck/var/storage
+      - rundeck_tmp:/var/rundeck
+  rundecknginx:
+    image: eugenmayer/rundeck_nginx
+    depends_on:
+      - rundeck
+    labels:
+      # that basically means, register a front in traffic, so if the host matches TRAEFIK_FRONTEND_RULE, forward it to a traefik backend
+      # called rundecknginx on port 80 (here) - so to the nginx daemon whit then upstreams to rundeck app
+      traefik.enable: true
+      traefik.backend: rundecknginx
+      traefik.port: 80
+      traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
+      traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
+  db:
+    image: postgres:9.6
+    volumes:
+      - rundeck_db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: rundeckdb
+    labels:
+      io.rancher.container.pull_image: always
+
+volumes:
+  rundeck_config:
+    driver: local
+  rundeck_tmp:
+    driver: local
+  rundeck_storage:
+    driver: local
+  rundeck_logs:
+    driver: local
+  rundeck_logs_jobs:
+    driver: local
+  rundeck_plugins:
+    driver: local
+  rundeck_plugins:
+    driver: local
+  rundeck_db:
+    driver: local

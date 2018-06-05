@@ -1,0 +1,66 @@
+.catalog:
+  name: "Rundeck"
+  version: 2.11.3.2
+  description: "Atlassian Jira"
+  minimum_rancher_version: v1.5.0
+  questions:
+  - variable: "EXTERNAL_SERVER_URL"
+    label: "Your external proxy domain INCLUDE scheme"
+    description: "Your external proxy domain rundeck.domain.tld, please include the scheme"
+    required: true
+    type: "string"
+  - variable: "RUNDECK_WITH_SSL"
+    label: "RUNDECK_WITH_SSL"
+    description: "if true, SSL mode will be enabled, so port 4443 will be exposed with a snackoil cert. Otherwise 4440 plain"
+    required: true
+    default: false
+    type: "boolean"
+  - variable: "RUNDECK_ADMIN_PASSWORD"
+    label: "Admin Password"
+    required: true
+    type: "password"
+  - variable: "DB_USER"
+    label: "Database user"
+    required: true
+    type: "string"
+    default: "rundeck"
+  - variable: "DB_PASSWORD"
+    label: "Database password"
+    required: true
+    type: "password"
+  - variable: "RUNDECK_STORAGE_PROVIDER"
+    label: "RUNDECK_STORAGE_PROVIDER"
+    description: "http://rundeck.org/docs/plugins-user-guide/configuring.html#storage-plugins"
+    required: true
+    default: "file"
+    type: "enum"
+    options:
+    - db
+    - file
+  - variable: "RUNDECK_PROJECT_STORAGE_TYPE"
+    label: "RUNDECK_PROJECT_STORAGE_TYPE"
+    description: "http://rundeck.org/docs/administration/setting-up-an-rdb-datasource.html"
+    required: true
+    default: "file"
+    type: "enum"
+    options:
+    - db
+    - file
+  - variable: "RDECK_JVM_SETTINGS"
+    label: "RDECK_JVM_SETTINGS"
+    description: "Additional parameters sent to the rundeck JVM (ex: -Xmx1024m -Xms256m -XX:MaxMetaspaceSize=256m -server -Dfile.encoding=UTF-8 -Dserver.web.context=/rundeck)"
+    required: false
+    type: "string"
+    default: "-Xmx1024m -Xms256m"
+  - variable: "TRAEFIK_FRONTEND_RULE"
+    label: "Traefik: Frontend Rule"
+    description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
+    default: 'Host:rundeck.company.tld'
+    type: "string"
+    required: false
+  - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"
+    label: "Traefik: Enable SSL"
+    description: "If you are using ranchers Traefik catalog, decide if you want to get a SSL cetificate for this service using ACME"
+    required: false
+    default: false
+    type: "boolean"
