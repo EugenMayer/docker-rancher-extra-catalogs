@@ -7,7 +7,7 @@ services:
       io.rancher.scheduler.affinity:{{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
     restart: unless-stopped # required so that it retries until conocurse-db comes up
-    image: vault:0.9.0
+    image: vault:0.9.6
     cap_add:
      - IPC_LOCK
     depends_on:
@@ -71,11 +71,19 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: config, vault
+      traefik.enable: true
+      traefik.port: 8080
+      traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
+      traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
     {{- if .Values.HOST_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
-    image: concourse/concourse:3.8.0
+    image: concourse/concourse:3.14.1
     command: web
+    {{- if .Values.TSA_HOST_EXPOSE_PORT }}
+    ports:
+    - ${TSA_HOST_EXPOSE_PORT}:2222
+    {{- end }}
     secrets:
       - concourse-tsa-authorized-workers
       - concourse-tsa-private-key
@@ -126,6 +134,8 @@ services:
       CONCOURSE_VAULT_CA_CERT: /vault/client/server.crt
 
       CONCOURSE_RESOURCE_CHECKING_INTERVAL: 10m
+
+{{- if eq .Values.START_INCLUDED_WORKERS "true" }}
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   worker-standalone:
     #cpu_quota: 100000
@@ -142,7 +152,7 @@ services:
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
       {{- end }}
       io.rancher.container.pull_image: always
-    image: eugenmayer/concourse-worker-solid:3.8.0
+    image: eugenmayer/concourse-worker-solid:3.14.1
     privileged: true
     secrets:
       - concourse-worker-private-key
@@ -150,8 +160,7 @@ services:
     command: ${WORKER_DRAINING_STRATEGY}
     environment:
       CONCOURSE_GARDEN_PERSISTENT_IMAGE: ${CONCOURSE_GARDEN_PERSISTENT_IMAGE}
-      CONCOURSE_TSA_HOST: ${TSA_PEER_IP}
-      CONCOURSE_TSA_PORT: 2222
+      CONCOURSE_TSA_HOST: ${TSA_PEER_IP}:2222
       CONCOURSE_TSA_LOG_LEVEL: ${CONCOURSE_TSA_LOG_LEVEL}
       CONCOURSE_GARDEN_NETWORK_POOL: ${CONCOURSE_GARDEN_NETWORK_POOL}
       CONCOURSE_BAGGAGECLAIM_DRIVER: ${CONCOURSE_BAGGAGECLAIM_DRIVER}
@@ -164,6 +173,7 @@ services:
 
       CONCOURSE_GARDEN_MAX_CONTAINERS: ${CONCOURSE_GARDEN_MAX_CONTAINERS}
       CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE: ${CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE}
+{{- end }}
 volumes:
   {{- if .Values.DB_VOLUME_NAME}}
   {{- else}}

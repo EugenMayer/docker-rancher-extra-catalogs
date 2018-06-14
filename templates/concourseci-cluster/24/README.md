@@ -30,3 +30,9 @@ Do not forget to launch the secret catalog container: http://rancher.com/docs/ra
 ## Ports
 
 - 8080/TCP for http
+- 2222/TCP for TSA
+
+## Traefik 
+
+Integrates with with ranchers traefik catalog https://github.com/rancher/community-catalog/tree/master/templates/traefik
+using rancher metadata

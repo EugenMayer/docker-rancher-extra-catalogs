@@ -1,6 +1,6 @@
 .catalog:
   name: "Atlassian JIRA"
-  version: 3.9.0.0
+  version: 3.14.1.0
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
@@ -87,7 +87,7 @@
     label: "WORKER: Volume driver"
     description: "Driver to use for managing volumes"
     required: true
-    default: "overlay"
+    default: "btrfs"
     type: "enum"
     options:
     - overlay
@@ -192,3 +192,20 @@
       The label for the host affinity of rancher io.rancher.scheduler.affinity:<yourlabelhere> - If blank, no affinity will be set
     required: false
     type: string
+  - variable: "TSA_HOST_EXPOSE_PORT"
+    label: "Host Exposed TSA Port (usually 2222)"
+    description: "Optional, if you want to expose the TSA port to the rancher host to let external works connect, define the port here"
+    required: false
+    type: "int"
+  - variable: "TRAEFIK_FRONTEND_RULE"
+    label: "Traefik: Frontend Rule"
+    description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
+    default: 'Host:jira.company.tld'
+    type: "string"
+    required: false
+  - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"
+    label: "Traefik: Enable SSL"
+    description: "If you are using ranchers Traefik catalog, decide if you want to get a SSL cetificate for this service using ACME"
+    required: false
+    default: false
+    type: "boolean"
