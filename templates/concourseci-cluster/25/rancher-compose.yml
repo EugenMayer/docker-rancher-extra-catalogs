@@ -1,7 +1,7 @@
 .catalog:
-  name: "Concourse CI Cluster"
-  version: 3.13.0.2
-  description: "Concourse CI Cluster"
+  name: "Atlassian JIRA"
+  version: 4.0.0.0
+  description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
   - variable: "CONCOURSE_EXTERNAL_URL"
@@ -29,15 +29,140 @@
     required: true
     type: "string"
     default: "concourse"
-  - variable: "ADMIN_USER"
-    label: "Admin user"
+  - variable: "AUTH_BACKEND"
+    label: "AUTH Backend"
     required: true
+    type: "enum"
+    default: "local"
+    options:
+    - local
+    - ldap
+  - variable: "LOCAL_ADMIN_USER"
+    label: "LOCAL: Admin user (auth-backend is local)"
+    required: false
     type: "string"
     default: "concourse"
-  - variable: "ADMIN_PASSWORD"
-    label: "Admin password"
-    required: true
+  - variable: "LOCAL_ADMIN_PASSWORD"
+    label: "LOCAL: Admin password (auth-backend is local)"
+    required: false
     type: "password"
+
+  - variable: "CONCOURSE_LDAP_HOST"
+    description: "LDAP: ldap FQDN with port like 'myldapserver.tld:389'"
+    label: "LDAP: ldap <host>:<port>"
+    required: false
+    type: "string"
+  - variable: "CONCOURSE_LDAP_BIND_DN"
+    description: "LDAP: bind dn like 'cn=admin,dc=company,dc=tld' "
+    label: "LDAP: ldap bind dn"
+    required: false
+    type: "string"
+  - variable: "CONCOURSE_LDAP_BIND_PW"
+    description: "LDAP: bind password, plaintext "
+    label: "LDAP: ldap bind password"
+    required: false
+    type: "password"
+  - variable: "CONCOURSE_LDAP_INSECURE_NO_SSL"
+    label: "LDAP: disable SSL"
+    description: "disable SSL if you enabled TLS"
+    required: false
+    default: true
+    type: "boolean"
+  - variable: "CONCOURSE_LDAP_START_TLS"
+    label: "LDAP: start TLS"
+    description: "You you enable startTLS, disable SSL please"
+    required: false
+    default: true
+    type: "boolean"
+  - variable: "CONCOURSE_LDAP_INSECURE_SKIP_VERIFY"
+    label: "LDAP: skip ssl/tls certificate validation"
+    description: "Use if you have self signed / invalid cetificated (never do that..)"
+    required: false
+    default: false
+    type: "boolean"
+    default: "myldapserver.tld:389"
+  - variable: "CONCOURSE_LDAP_USER_SEARCH_BASE_DN"
+    description: "LDAP: user search DN like ou=accounts,dc=kontextwork-test,dc=de"
+    label: "LDAP: user search DN"
+    required: false
+    type: "string"
+  - variable: "CONCOURSE_LDAP_USER_SEARCH_USERNAME"
+    description: "LDAP: user username field to match the username against like uid, cn whatever"
+    label: "LDAP: user username field"
+    required: false
+    type: "string"
+    default: "cn"
+  - variable: "CONCOURSE_LDAP_USER_SEARCH_ID_ATTR"
+    description: "LDAP: user id field like uid, cn"
+    label: "LDAP: user id field"
+    required: false
+    type: "string"
+    default: "cn"
+  - variable: "CONCOURSE_LDAP_USER_SEARCH_EMAIL_ATTR"
+    description: "LDAP: mail field like mail, email"
+    label: "LDAP: user email field"
+    required: false
+    type: "string"
+    default: "mail"
+  - variable: "CONCOURSE_LDAP_USER_SEARCH_NAME_ATTR"
+    description: "LDAP: name field like surname, firstname"
+    label: "LDAP: user speaking name field"
+    required: false
+    type: "string"
+    default: "mail"
+  - variable: "CONCOURSE_LDAP_USER_SEARCH_SCOPE"
+    description: "LDAP: search scope, sub for subtree search or one for one level only"
+    label: "LDAP: user search scope"
+    required: false
+    type: "enum"
+    default: "sub"
+    option:
+      - sub
+      - one
+  - variable: "CONCOURSE_LDAP_USER_SEARCH_FILTER"
+    description: "LDAP: filter users using this ldap filter. All not matching cannot login, e.g.: (memberOf=cn=concourse,ou=groups,dc=company,dc=de)"
+    label: "LDAP: user filter"
+    required: false
+    type: "string"
+    default: ""
+  - variable: "CONCOURSE_LDAP_GROUP_SEARCH_DN"
+    description: "LDAP: group search DN"
+    label: "LDAP: group search DN"
+    required: false
+    type: "string"
+  - variable: "CONCOURSE_LDAP_GROUP_SEARCH_NAME_ATTR"
+    description: "LDAP: group name field"
+    label: "LDAP: group name field"
+    required: false
+    type: "string"
+    default: "cn"
+  - variable: "CONCOURSE_LDAP_GROUP_SEARCH_SCOPE"
+    description: "LDAP: search scope, sub for subtree search or one for one level only"
+    label: "LDAP: group search scope"
+    required: false
+    type: "enum"
+    default: "sub"
+    option:
+      - sub
+      - one
+  - variable: "CONCOURSE_MAIN_TEAM_LDAP_USER"
+    description: "LDAP: list of admin users, seperated by comma (usernames)"
+    label: "LDAP: list of admin users"
+    required: false
+    type: "string"
+    default: ""
+  - variable: "CONCOURSE_MAIN_TEAM_LDAP_GROUP"
+    description: "LDAP: list of admin groups, seperated by comma (usernames)"
+    label: "LDAP: list of admin groups ( not working right now )"
+    required: false
+    type: "string"
+    default: ""
+`
+  - variable: "CONCOURSE_AUTH_DURATION"
+    label: "TSA: Auth duration - when should the auth expire"
+    required: true
+    default: "24h"
+    type: "string"
   - variable: "TSA_ATC_URL"
     label: "TSA_ATC_URL"
     required: true
@@ -141,11 +266,6 @@
     required: false
     default: "10.254.0.0/22"
     type: "string"
-  - variable: "CONCOURSE_AUTH_DURATION"
-    label: "TSA: Auth duration - when should the auth expire"
-    required: true
-    default: "24h"
-    type: "string"
   - variable: VAULT_START_PARAMS
     label: "TSA: Vault start params (optional)"
     description: |
@@ -200,7 +320,7 @@
   - variable: "TRAEFIK_FRONTEND_RULE"
     label: "Traefik: Frontend Rule"
     description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
-    default: 'Host:jira.company.tld'
+    default: 'Host:concourse.company.tld'
     type: "string"
     required: false
   - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"

@@ -1,7 +1,7 @@
 .catalog:
-  name: "Atlassian JIRA"
+  name: "Concourse CI Cluster"
   version: 3.13.0.1
-  description: "Atlassian Jira"
+  description: "Concourse CI Cluster"
   minimum_rancher_version: v1.5.0
   questions:
   - variable: "CONCOURSE_EXTERNAL_URL"
