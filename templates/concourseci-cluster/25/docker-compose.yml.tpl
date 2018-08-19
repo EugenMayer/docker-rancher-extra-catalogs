@@ -7,7 +7,7 @@ services:
       io.rancher.scheduler.affinity:{{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
     restart: unless-stopped # required so that it retries until conocurse-db comes up
-    image: vault:0.9.6
+    image: vault:0.10.4
     cap_add:
      - IPC_LOCK
     depends_on:
