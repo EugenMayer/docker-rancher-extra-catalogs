@@ -46,7 +46,6 @@
     label: "LOCAL: Admin password (auth-backend is local)"
     required: false
     type: "password"
-
   - variable: "CONCOURSE_LDAP_HOST"
     description: "LDAP: ldap FQDN with port like 'myldapserver.tld:389'"
     label: "LDAP: ldap <host>:<port>"
@@ -109,14 +108,14 @@
     label: "LDAP: user speaking name field"
     required: false
     type: "string"
-    default: "mail"
+    default: "cn"
   - variable: "CONCOURSE_LDAP_USER_SEARCH_SCOPE"
     description: "LDAP: search scope, sub for subtree search or one for one level only"
     label: "LDAP: user search scope"
     required: false
     type: "enum"
     default: "sub"
-    option:
+    options:
       - sub
       - one
   - variable: "CONCOURSE_LDAP_USER_SEARCH_FILTER"
@@ -142,7 +141,7 @@
     required: false
     type: "enum"
     default: "sub"
-    option:
+    options:
       - sub
       - one
   - variable: "CONCOURSE_MAIN_TEAM_LDAP_USER"
