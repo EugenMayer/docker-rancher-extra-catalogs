@@ -157,7 +157,6 @@
     required: false
     type: "string"
     default: ""
-`
   - variable: "CONCOURSE_AUTH_DURATION"
     label: "TSA: Auth duration - when should the auth expire"
     required: true

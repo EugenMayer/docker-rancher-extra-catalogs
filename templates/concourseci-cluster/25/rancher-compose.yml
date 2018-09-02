@@ -46,7 +46,6 @@
     label: "LOCAL: Admin password (auth-backend is local)"
     required: false
     type: "password"
-
   - variable: "CONCOURSE_LDAP_HOST"
     description: "LDAP: ldap FQDN with port like 'myldapserver.tld:389'"
     label: "LDAP: ldap <host>:<port>"
@@ -157,7 +156,6 @@
     required: false
     type: "string"
     default: ""
-`
   - variable: "CONCOURSE_AUTH_DURATION"
     label: "TSA: Auth duration - when should the auth expire"
     required: true
