@@ -1,6 +1,6 @@
 .catalog:
   name: "Atlassian JIRA"
-  version: 4.1.0.1
+  version: 4.1.0.2
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
@@ -144,6 +144,12 @@
     options:
       - sub
       - one
+  - variable: "CONCOURSE_LDAP_GROUP_SEARCH_GROUP_ATTR"
+    description: "LDAP: group attribute"
+    label: "LDAP: attribute for group member, like 'member'"
+    required: false
+    type: "string"
+    default: "member"
   - variable: "CONCOURSE_MAIN_TEAM_LDAP_USER"
     description: "LDAP: list of admin users, seperated by comma (usernames)"
     label: "LDAP: list of admin users"
