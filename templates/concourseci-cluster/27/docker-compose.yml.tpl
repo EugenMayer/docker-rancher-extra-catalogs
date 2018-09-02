@@ -115,12 +115,12 @@ services:
       CONCOURSE_SESSION_SIGNING_KEY: /run/secrets/concourse-tsa-session-signing-key
       CONCOURSE_AUTH_DURATION: ${CONCOURSE_AUTH_DURATION}
 
-      {{- if eq .Values.auth_backend "local"}}
+      {{- if eq .Values.AUTH_BACKEND "local" }}
       CONCOURSE_ADD_LOCAL_USER: "${LOCAL_ADMIN_USER}:${LOCAL_ADMIN_PASSWORD}"
       CONCOURSE_MAIN_TEAM_LOCAL_USER: "${LOCAL_ADMIN_USER}"
-      {{- end}}
+      {{- end }}
 
-      {{- if eq .Values.auth_backend "ldap"}}
+      {{- if eq .Values.AUTH_BACKEND "ldap" }}
       # for docs see https://github.com/EugenMayer/concourseci-server-boilerplate/blob/master/docker-compose-ldap-auth.yml
       CONCOURSE_LDAP_DISPLAY_NAME: "LDAP"
 
@@ -144,7 +144,7 @@ services:
       CONCOURSE_LDAP_GROUP_SEARCH_SCOPE: ${CONCOURSE_LDAP_GROUP_SEARCH_SCOPE}
       CONCOURSE_MAIN_TEAM_LDAP_USER: "${CONCOURSE_MAIN_TEAM_LDAP_USER}"
       CONCOURSE_MAIN_TEAM_LDAP_GROUP: "${CONCOURSE_MAIN_TEAM_LDAP_GROUP}"
-      {{- end}}
+      {{- end }}
 
       CONCOURSE_EXTERNAL_URL: ${CONCOURSE_EXTERNAL_URL}
       CONCOURSE_POSTGRES_HOST: db
