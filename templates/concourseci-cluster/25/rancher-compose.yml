@@ -115,7 +115,7 @@
     required: false
     type: "enum"
     default: "sub"
-    option:
+    options:
       - sub
       - one
   - variable: "CONCOURSE_LDAP_USER_SEARCH_FILTER"
@@ -141,7 +141,7 @@
     required: false
     type: "enum"
     default: "sub"
-    option:
+    options:
       - sub
       - one
   - variable: "CONCOURSE_MAIN_TEAM_LDAP_USER"
