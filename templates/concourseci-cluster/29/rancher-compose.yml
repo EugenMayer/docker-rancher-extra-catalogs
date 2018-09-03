@@ -168,6 +168,12 @@
     required: false
     type: "string"
     default: ""
+  - variable: "CONCOURSE_LDAP_GROUP_SEARCH_FILTER"
+    description: "LDAP: group filter"
+    label: "LDAP: filter to limit what is picked up as group, e.g: (objectClass=posixGroup) or (objectClass=groupOfUniqueNames)"
+    required: false
+    type: "string"
+    default: ""
   - variable: "CONCOURSE_AUTH_DURATION"
     label: "TSA: Auth duration - when should the auth expire"
     required: true
