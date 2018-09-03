@@ -145,14 +145,14 @@
       - sub
       - one
   - variable: "CONCOURSE_LDAP_GROUP_SEARCH_USER_ATTR"
-    description: "LDAP: group attribute"
-    label: "LDAP: attribute name for <group-user-attr> member, like 'member': <group-attr>=<group-user-attr>"
+    description: "LDAP: attribute name for <group-user-attr> member, like 'member' or 'memberOf': <group-attr>=<group-user-attr>"
+    label: ": LDAP: Group (user) <group-user-attr>"
     required: false
     type: "string"
-    default: "member"
+    default: "memberOf"
   - variable: "CONCOURSE_LDAP_GROUP_SEARCH_GROUP_ATTR"
     description: "LDAP: <group attr> match attribute <group-attr>=<group-user-attr>"
-    label: "LDAP: attribute for <group-attr> member, like 'uniqueMember'"
+    label: "LDAP: Group (group) attribute for <group-attr> , like 'uniqueMember'"
     required: false
     type: "string"
     default: "uniqueMember"
