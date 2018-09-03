@@ -169,8 +169,8 @@
     type: "string"
     default: ""
   - variable: "CONCOURSE_LDAP_GROUP_SEARCH_FILTER"
-    description: "LDAP: group filter"
-    label: "LDAP: filter to limit what is picked up as group, e.g: (objectClass=posixGroup) or (objectClass=groupOfUniqueNames)"
+    description: "LDAP: filter to limit what is picked up as group , e.g: (objectClass=posixGroup) or (objectClass=groupOfUniqueNames)"
+    label: "LDAP: group filter"
     required: false
     type: "string"
     default: ""
