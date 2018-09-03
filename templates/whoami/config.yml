@@ -1,0 +1,7 @@
+name: "who am i"
+description: |
+  Returns all request headers and fields for debugging. E.g. for checking a proxy
+version: 0.1
+category: Applications
+maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
+projectURL: https://hub.docker.com/r/eugenmayer

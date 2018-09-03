@@ -4,10 +4,10 @@ services:
   app:
     labels:
       traefik.enable: true
-      traefik.port: 8080
+      traefik.port: 80
       traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
       traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: 'environment'
       io.rancher.container.pull_image: always
-    image: eugenmayer/whatsmyip
+    image: emilevauge/whoami
