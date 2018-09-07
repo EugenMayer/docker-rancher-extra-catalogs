@@ -43,7 +43,7 @@
       label: "The jira version you want to use"
       description: "The jira version you want to use. This will change when upgrading the catalog, if you used default"
       required: false
-      default: "en-7.11.1"
+      default: "en-7.12.1"
       type: "enum"
       options:
         - en-7.12.1
