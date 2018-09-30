@@ -46,7 +46,7 @@
       default: "en-7.12.2"
       type: "enum"
       options:
-        - en-7.12.1
+        - en-7.12.2
         - en-7.12.1
         - en-7.12.0
         - en-7.11.2
