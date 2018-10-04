@@ -12,3 +12,4 @@ Be sure to add the `traefik_lb=true` label to the host you deploy this catalog o
 See https://docs.traefik.io/configuration/backends/docker/#on-containers for possible labels.
 Those labels are exposed using the rancher metadata api and then picked up by the traefik server
 
+You can use segments in the labels to expose several services per container
