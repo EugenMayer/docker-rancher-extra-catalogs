@@ -16,17 +16,6 @@ services:
       io.rancher.container.agent.role: environment
       io.rancher.container.create_agent: 'true'
     {{- end}}
-    {{- if or (eq .Values.rancher_integration "external") (eq .Values.acme_enable "true")}}
-      io.rancher.sidekicks: 
-        {{- if eq .Values.rancher_integration "external"}} traefik-conf
-            {{- if eq .Values.acme_enable "true" -}},{{- end -}}
-        {{- end -}}
-        {{- if eq .Values.acme_enable "true" -}}
-            {{- if ne .Values.rancher_integration "external"}} traefik-acme
-            {{- else -}}traefik-acme
-            {{- end -}}
-        {{- end -}}
-    {{- end}}
       io.rancher.container.hostname_override: container_name
     image: eugenmayer/traefik:1.7.1
     environment:
