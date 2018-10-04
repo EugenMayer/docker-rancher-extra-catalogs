@@ -314,13 +314,3 @@ catalog:
       default: "[0.1,0.3,1.2,5.0]"
       required: false
       type: "string"
-services:
-  traefik:
-    retain_ip: true
-    health_check:
-      healthy_threshold: 2
-      response_timeout: 5000
-      port: ${admin_port}
-      unhealthy_threshold: 3
-      interval: 5000
-      strategy: recreate
