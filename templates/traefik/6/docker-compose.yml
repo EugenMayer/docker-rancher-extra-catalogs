@@ -37,12 +37,6 @@ services:
     {{- if ne .Values.trusted_ips ""}}
       - TRAEFIK_TRUSTEDIPS=${trusted_ips}
     {{- end}}
-    {{- if ne .Values.ssl_key ""}}
-      - TRAEFIK_SSL_KEY=${ssl_key}
-    {{- end}}
-    {{- if ne .Values.ssl_crt ""}}
-      - TRAEFIK_SSL_CRT=${ssl_crt}
-    {{- end}}
       - TRAEFIK_INSECURE_SKIP=${insecure_skip}
       - TRAEFIK_ADMIN_ENABLE=true
       - TRAEFIK_ADMIN_PORT=${admin_port}

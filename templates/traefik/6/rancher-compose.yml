@@ -8,13 +8,6 @@ catalog:
   maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
   uuid: traefik-0
   questions:
-    - variable: "file_enable"
-      description: |
-        Also enable file based endpoints - you can use this in addition. Put your rules under /mnt/filestorage/rules.toml
-      label: "File based backend:"
-      required: true
-      default: false
-      type: "boolean"
     - variable: "rancher_integration"
       label: "Rancher based backend:"
       description: |
@@ -35,27 +28,6 @@ catalog:
       required: true
       default: false
       type: "boolean"
-    - variable: "usage_enable"
-      description: |
-        Enable/disable send anonymous usage collection to Traefik. See https://docs.traefik.io/basics/#collected-data
-      label: "Traefik send anonymous usage:"
-      required: true
-      default: false
-      type: "boolean"
-    - variable: "constraints"
-      description: |
-        Traefik constraints for rancher provider. Eg: "tag==api"
-        Only valid for api and metadata integration.
-      label: "Traefik constraints:"
-      required: false
-      default: ""
-      type: "string"
-    - variable: "host_label"
-      description: "Host label where to run traefik service."
-      label: "Host label:"
-      required: true
-      default: "traefik_lb=true"
-      type: "string"
     - variable: "http_port"
       description: "Traefik http public port to listen."
       label: "Http port:"
@@ -83,7 +55,7 @@ catalog:
     - variable: "https_enable"
       label: "Https enable:"
       description: |
-        Enable https working mode. If you activate, you need to fill SSL key and SSL crt in order to work.
+        Enable https working mode.
       default: false
       required: true
       type: enum
@@ -97,7 +69,7 @@ catalog:
         See the traefik documentation for allowed values. Default is `VersionTLS12`.
       label: "Https min tls:"
       required: false
-      default: ""
+      default: "VersionTLS12"
       type: "string"
     - variable: "trusted_ips"
       description: |
@@ -108,7 +80,7 @@ catalog:
       default: ""
       type: "string"
     - variable: "acme_enable"
-      description: "Enable acme support on traefik."
+      description: "Enable acme support on traefik to get SSL certificates."
       label: "ACME enable:"
       required: true
       default: false
@@ -167,51 +139,22 @@ catalog:
       description: "ACME user email."
       label: "ACME email:"
       required: true
-      default: "test@traefik.io"
+      default: "test@test.local"
       type: "string"
     - variable: "acme_onhostrule"
-      description: "Enable acme onHostRule."
+      description: "Enable acme onHostRule, so the ACME certficates are requested for the domain you define in the frontend.rule EXPR ."
       label: "ACME onHostRule:"
       required: true
       default: true
       type: "boolean"
     - variable: "acme_caserver"
-      description: "ACME caServer to use."
+      description: "ACME caServer to use. Use https://acme-staging.api.letsencrypt.org/directory for staging environments"
       label: "ACME caServer:"
       required: true
       default: "https://acme-v02.api.letsencrypt.org/directory"
       type: "string"
-    - variable: "acme_vol_name"
-      description: "The volume name shared to store ACME certs"
-      label: "ACME Volume Name"
-      required: true
-      default: "traefik_acme_vol"
-      type: "string"
-    - variable: "acme_vol_driver"
-      description: "The volume driver shared to store ACME certs"
-      label: "ACME Volume Driver"
-      required: true
-      default: "local"
-      type: enum
-      options: # List of options if using type of `enum`
-        - local
-        - rancher-nfs
-        - rancher-efs
-        - rancher-ebs
-    - variable: "ssl_key"
-      description: "SSL key to secure the service. *Required if you enable https or admin ssl"
-      label: "Https key"
-      type: "multiline"
-      required: false
-      default: ""
-    - variable: "ssl_crt"
-      description: "SSL cert to secure the service. *Required if you enable https or admin ssl"
-      label: "Https crt"
-      type: "multiline"
-      required: false
-      default: ""
     - variable: "insecure_skip"
-      description: "Enable InsecureSkipVerify param."
+      description: "Enable InsecureSkipVerify param so certificates for contacing TLS based backends are not verified."
       label: "InsecureSkipVerify:"
       required: true
       default: false
@@ -313,4 +256,32 @@ catalog:
       label: "Metrics prometheus buckets"
       default: "[0.1,0.3,1.2,5.0]"
       required: false
+      type: "string"
+    - variable: "usage_enable"
+      description: |
+        Enable/disable send anonymous usage collection to Traefik. See https://docs.traefik.io/basics/#collected-data
+      label: "Traefik send anonymous usage:"
+      required: true
+      default: false
+      type: "boolean"
+    - variable: "file_enable"
+      description: |
+        Also enable file based endpoints - you can use this in addition to other backends. Put your rules under /mnt/filestorage/rules.toml
+      label: "File based backend:"
+      required: true
+      default: false
+      type: "boolean"
+    - variable: "constraints"
+      description: |
+        Traefik constraints for rancher provider. Eg: "tag==api"
+        Only valid for api and metadata integration.
+      label: "Traefik constraints:"
+      required: false
+      default: ""
+      type: "string"
+    - variable: "host_label"
+      description: "Host label where to run traefik service. This label need to be added to the host so traefik can start a container for the server"
+      label: "Host label:"
+      required: true
+      default: "traefik_lb=true"
       type: "string"
