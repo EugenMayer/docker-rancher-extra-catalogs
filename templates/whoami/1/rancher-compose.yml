@@ -28,3 +28,9 @@
       required: false
       default: false
       type: "boolean"
+    - variable: "EXTRA_LABELS"
+      label: "EXTRA LABELS"
+      description: "Extra labels to add"
+      required: false
+      default: ''
+      type: "multiline"

@@ -3,6 +3,7 @@ version: "2"
 services:
   app:
     labels:
+      {{ .Values.EXTRA_LABELS}}
       {{- if eq .Values.MULTISERVICCE "true"}}
       traefik.wohami80.port: 80
       traefik.wohami80.frontend.rule: 'Host whoami80.${TRAEFIK_BASE_DOMAIN}'
