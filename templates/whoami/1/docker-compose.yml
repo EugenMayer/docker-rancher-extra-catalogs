@@ -10,8 +10,7 @@ services:
       traefik.wohami90.frontend.rule: 'Host whoami90.${TRAEFIK_BASE_DOMAIN}'
       traefik.wohami100.port: 100
       traefik.wohami100.frontend.rule: 'Host whoami100.${TRAEFIK_BASE_DOMAIN}'
-      {{- end}}
-      {{- if eq .Values.MULTISERVICCE "false"}}
+      {{- else}}
       traefik.port: 80
       traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
       {{- end}}
@@ -23,7 +22,6 @@ services:
 
     {{- if eq .Values.MULTISERVICCE "true"}}
     image: eugenmayer/whoami:multiple
-    {{- end}}
-    {{- if eq .Values.MULTISERVICCE "false"}}
+    {{- else}}
     image: eugenmayer/whoami:single
     {{- end}}
