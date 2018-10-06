@@ -137,6 +137,12 @@ catalog:
       required: true
       default: "https://acme-v02.api.letsencrypt.org/directory"
       type: "string"
+    - variable: "acme_logging"
+      description: "Log ACME request, mainly for debugging and fixing ACME challenged."
+      label: "ACME Logging:"
+      required: true
+      default: false
+      type: "boolean"
     - variable: "insecure_skip"
       description: "Enable InsecureSkipVerify param so certificates for contacing TLS based backends are not verified."
       label: "InsecureSkipVerify:"

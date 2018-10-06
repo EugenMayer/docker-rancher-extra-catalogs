@@ -46,6 +46,7 @@ services:
       - TRAEFIK_ADMIN_AUTH_USERS=${admin_users}
     {{- if eq .Values.acme_enable "true"}}
       - TRAEFIK_ACME_ENABLE=${acme_enable}
+      - TRAEFIK_ACME_LOGGING=${acme_logging}
       - TRAEFIK_ACME_EMAIL=${acme_email}
       - TRAEFIK_ACME_CHALLENGE=${acme_challenge}
       - TRAEFIK_ACME_CHALLENGE_HTTP_ENTRYPOINT=${acme_challenge}
