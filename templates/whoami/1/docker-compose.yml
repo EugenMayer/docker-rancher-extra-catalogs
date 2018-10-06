@@ -6,10 +6,10 @@ services:
       {{- if eq .Values.MULTISERVICCE "true"}}
       traefik.wohami80.port: 80
       traefik.wohami80.frontend.rule: 'Host whoami80.${TRAEFIK_BASE_DOMAIN}'
-      traefik.wohami80.port: 90
-      traefik.wohami80.frontend.rule: 'Host whoami90.${TRAEFIK_BASE_DOMAIN}'
-      traefik.wohami80.port: 100
-      traefik.wohami80.frontend.rule: 'Host whoami100.${TRAEFIK_BASE_DOMAIN}'
+      traefik.wohami90.port: 90
+      traefik.wohami90.frontend.rule: 'Host whoami90.${TRAEFIK_BASE_DOMAIN}'
+      traefik.wohami100.port: 100
+      traefik.wohami100.frontend.rule: 'Host whoami100.${TRAEFIK_BASE_DOMAIN}'
       {{- end}}
       {{- if eq .Values.MULTISERVICCE "false"}}
       traefik.port: 80
