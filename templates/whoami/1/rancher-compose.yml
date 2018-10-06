@@ -30,7 +30,7 @@
       type: "boolean"
     - variable: "EXTRA_LABELS"
       label: "EXTRA LABELS"
-      description: "Extra labels to add"
+      description: "Extra labels to add, ech line looks like foo.mybar: value' .. So exactly the yaml syntax you use"
       required: false
       default: ''
       type: "multiline"

@@ -9,8 +9,6 @@ services:
       traefik.wohami80.frontend.rule: 'Host whoami80.${TRAEFIK_BASE_DOMAIN}'
       traefik.wohami90.port: 90
       traefik.wohami90.frontend.rule: 'Host whoami90.${TRAEFIK_BASE_DOMAIN}'
-      traefik.wohami100.port: 100
-      traefik.wohami100.frontend.rule: 'Host whoami100.${TRAEFIK_BASE_DOMAIN}'
       {{- else}}
       traefik.port: 80
       traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
