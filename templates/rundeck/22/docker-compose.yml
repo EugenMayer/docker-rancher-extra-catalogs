@@ -53,6 +53,9 @@ services:
       traefik.port: 80
       traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
       traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
+{{- if .Values.EXTRA_LABELS }}
+{{.Values.EXTRA_LABELS | indent 6}}
+{{- end}}
   db:
     image: postgres:9.6
     volumes:

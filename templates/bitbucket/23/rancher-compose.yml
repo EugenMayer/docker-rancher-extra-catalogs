@@ -78,3 +78,9 @@
       required: false
       default: false
       type: "boolean"
+    - variable: "EXTRA_LABELS"
+      label: "EXTRA LABELS"
+      description: "Extra labels to add, ech line looks like foo.mybar: value' .. So exactly the yaml syntax you use. Use this for anything, e.g. traefik segments or whatever"
+      required: false
+      default: ''
+      type: "multiline"

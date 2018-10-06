@@ -4,6 +4,9 @@ services:
   bitbucket:
     image: eugenmayer/bitbucket:5.14.0
     labels:
+{{- if .Values.EXTRA_LABELS }}
+{{.Values.EXTRA_LABELS | indent 6}}
+{{- end}}
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: 'environment'
       traefik.enable: true

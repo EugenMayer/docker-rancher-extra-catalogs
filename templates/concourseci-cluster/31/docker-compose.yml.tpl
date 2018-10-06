@@ -69,6 +69,9 @@ services:
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   tsa:
     labels:
+{{- if .Values.EXTRA_LABELS }}
+{{.Values.EXTRA_LABELS | indent 6}}
+{{- end}}
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: config, vault
       traefik.enable: true

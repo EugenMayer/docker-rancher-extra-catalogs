@@ -18,3 +18,6 @@ rubygems:
   labels:
     io.rancher.container.create_agent: 'true'
     io.rancher.container.agent.role: 'environment'
+{{- if .Values.EXTRA_LABELS }}
+{{.Values.EXTRA_LABELS | indent 4}}
+{{- end}}

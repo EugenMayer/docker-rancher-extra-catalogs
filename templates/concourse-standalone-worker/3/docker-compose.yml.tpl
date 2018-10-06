@@ -22,6 +22,9 @@ services:
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   worker-standalone:
     labels:
+{{- if .Values.EXTRA_LABELS }}
+{{.Values.EXTRA_LABELS | indent 6}}
+{{- end}}
       {{- if .Values.HOST_WORKER_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
       {{- end }}
