@@ -4,10 +4,22 @@
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
+    - variable: "MULTISERVICCE"
+      label: "Multiservce Variant"
+      description: "If activated, a docker-image with multiple whomi service running on port 80/90/100 will be started. Otherwise its just 1 on pot 80"
+      required: false
+      default: false
+      type: "boolean"
     - variable: "TRAEFIK_FRONTEND_RULE"
       label: "Traefik: Frontend Rule"
-      description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
+      description: "If you are using ranchers Traefik catalog, define the frontend rule, like 'Host: service.mydomain.tld' or whatever you need"
       default: 'Host:myip.company.tld'
+      type: "string"
+      required: false
+    - variable: "TRAEFIK_BASE_DOMAIN"
+      label: "Traefik Base domain"
+      description: "Only applied if you use multiserivce, in this case the frontend rule will look like 'Host: whoami80.${TRAEFIK_BASE_DOMAIN}' and 'Host: whoami90.${TRAEFIK_BASE_DOMAIN}' and 'Host: whoami100.${TRAEFIK_BASE_DOMAIN}'"
+      default: 'mytestdomain.tld'
       type: "string"
       required: false
     - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"

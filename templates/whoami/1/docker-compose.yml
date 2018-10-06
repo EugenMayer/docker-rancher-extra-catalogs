@@ -3,11 +3,27 @@ version: "2"
 services:
   app:
     labels:
-      traefik.enable: true
+      {{- if eq .Values.MULTISERVICCE "true"}}
+      traefik.wohami80.port: 80
+      traefik.wohami80.frontend.rule: 'Host whoami80.${TRAEFIK_BASE_DOMAIN}'
+      traefik.wohami80.port: 90
+      traefik.wohami80.frontend.rule: 'Host whoami90.${TRAEFIK_BASE_DOMAIN}'
+      traefik.wohami80.port: 100
+      traefik.wohami80.frontend.rule: 'Host whoami100.${TRAEFIK_BASE_DOMAIN}'
+      {{- end}}
+      {{- if eq .Values.MULTISERVICCE "false"}}
       traefik.port: 80
       traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
+      {{- end}}
+      traefik.enable: true
       traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: 'environment'
       io.rancher.container.pull_image: always
-    image: emilevauge/whoami
+
+    {{- if eq .Values.MULTISERVICCE "true"}}
+    image: eugenmayer/whoami:multiple
+    {{- end}}
+    {{- if eq .Values.MULTISERVICCE "false"}}
+    image: eugenmayer/whoami:single
+    {{- end}}
