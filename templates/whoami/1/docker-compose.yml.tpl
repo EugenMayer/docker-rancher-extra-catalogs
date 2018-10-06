@@ -6,7 +6,7 @@ services:
 {{- if .Values.EXTRA_LABELS }}
 {{.Values.EXTRA_LABELS | indent 6}}
 {{- end}}
-      {{- if eq .Values.MULTISERVICCE "true"}}
+      {{- if eq .Values.MULTISERVICE "true"}}
       traefik.wohami80.port: 80
       traefik.wohami80.frontend.rule: 'Host whoami80.${TRAEFIK_BASE_DOMAIN}'
       traefik.wohami90.port: 90
@@ -21,7 +21,7 @@ services:
       io.rancher.container.agent.role: 'environment'
       io.rancher.container.pull_image: always
 
-    {{- if eq .Values.MULTISERVICCE "true"}}
+    {{- if eq .Values.MULTISERVICE "true"}}
     image: eugenmayer/whoami:multiple
     {{- else}}
     image: eugenmayer/whoami:single
