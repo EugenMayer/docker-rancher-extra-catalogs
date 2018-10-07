@@ -9,6 +9,7 @@ services:
     - ${https_port}:${https_port}/tcp
   {{- end}}
     labels:
+      io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
       io.rancher.scheduler.affinity:host_label: ${host_label}
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
