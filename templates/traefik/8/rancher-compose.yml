@@ -215,7 +215,7 @@ catalog:
         - basic
         - digest
     - variable: "admin_users"
-      description: "Admin auth user list on api, rest and webui. Generate with htpassword for basic or htdigest with traefik realm for digest. IMPORTANT!: escape all $ with $$ due to docker-compose"
+      description: "Admin auth user list on api, rest and webui. Generate with htpassword for basic or htdigest with traefik realm for digest."
       label: "Admin users:"
       type: "multiline"
       required: false
