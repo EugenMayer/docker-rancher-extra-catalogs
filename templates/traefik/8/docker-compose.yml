@@ -19,18 +19,18 @@ services:
       io.rancher.container.hostname_override: container_name
     image: eugenmayer/traefik:1.7.2
     environment:
-      TRAEFIK_HTTP_PORT: ${http_port}
-      TRAEFIK_HTTP_COMPRESSION: ${compress_enable}
-      TRAEFIK_HTTPS_PORT: ${https_port}
-      TRAEFIK_HTTPS_ENABLE: ${https_enable}
-      TRAEFIK_HTTPS_COMPRESSION: ${compress_enable}
-      TRAEFIK_USAGE_ENABLE: ${usage_enable}
-      TRAEFIK_TIMEOUT_READ: ${timeout_read}
-      TRAEFIK_TIMEOUT_WRITE: ${timeout_write}
-      TRAEFIK_TIMEOUT_IDLE: ${timeout_idle}
-      TRAEFIK_TIMEOUT_DIAL: ${timeout_dial}
-      TRAEFIK_TIMEOUT_HEADER: ${timeout_header}
-      TRAEFIK_CONSTRAINTS: ${constraints}
+      TRAEFIK_HTTP_PORT: '${http_port}'
+      TRAEFIK_HTTP_COMPRESSION: '${compress_enable}'
+      TRAEFIK_HTTPS_PORT: '${https_port}'
+      TRAEFIK_HTTPS_ENABLE: '${https_enable}'
+      TRAEFIK_HTTPS_COMPRESSION: '${compress_enable}'
+      TRAEFIK_USAGE_ENABLE: '${usage_enable}'
+      TRAEFIK_TIMEOUT_READ: '${timeout_read}'
+      TRAEFIK_TIMEOUT_WRITE: '${timeout_write}'
+      TRAEFIK_TIMEOUT_IDLE: '${timeout_idle}'
+      TRAEFIK_TIMEOUT_DIAL: '${timeout_dial}'
+      TRAEFIK_TIMEOUT_HEADER: '${timeout_header}'
+      TRAEFIK_CONSTRAINTS: '${constraints}'
     {{- if ne .Values.https_min_tls ""}}
       TRAEFIK_HTTPS_MIN_TLS: ${https_min_tls}
     {{- end}}
@@ -38,12 +38,12 @@ services:
       TRAEFIK_TRUSTEDIPS: ${trusted_ips}
     {{- end}}
       TRAEFIK_INSECURE_SKIP: ${insecure_skip}
-      TRAEFIK_ADMIN_ENABLE=true
-      TRAEFIK_ADMIN_PORT: ${admin_port}
+      TRAEFIK_ADMIN_ENABLE: true
+      TRAEFIK_ADMIN_PORT: '${admin_port}'
       TRAEFIK_ADMIN_SSL: ${admin_ssl}
       TRAEFIK_ADMIN_STATISTICS: ${admin_statistics}
       TRAEFIK_ADMIN_AUTH_METHOD: ${admin_auth_method}
-      TRAEFIK_ADMIN_AUTH_USERS: "${admin_users}"
+      TRAEFIK_ADMIN_AUTH_USERS: '${admin_users}'
     {{- if eq .Values.acme_enable "true"}}
       TRAEFIK_ACME_ENABLE: ${acme_enable}
       TRAEFIK_ACME_LOGGING: ${acme_logging}
