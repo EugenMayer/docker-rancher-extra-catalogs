@@ -3,8 +3,8 @@ nexus:
   volumes:
     - ${DATA}:/nexus-data
   labels:
-{{- if .Values.TRAEFIK_FRONTEND_RULE }}
     traefik.enable: true
+{{- if .Values.TRAEFIK_FRONTEND_RULE }}
     traefik.port: 8081
     traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
 {{- end}}
