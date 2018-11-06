@@ -1,0 +1,7 @@
+name: "fakemta"
+description: |
+  Test-Service: A SMTP Fake service which you an use to send emails pseudo, so do SMTP tests with an GUI
+version: 0.1
+category: Applications
+maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
+projectURL: https://github.com/natevw/fermata
