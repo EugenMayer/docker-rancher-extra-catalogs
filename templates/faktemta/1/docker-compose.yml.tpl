@@ -17,3 +17,6 @@ services:
     image:  eugenmayer/fakemta
     ports:
     - ${MTAPORT}:2500
+    {{- if ne .Values.GUIPORT ""}}
+    - ${GUIPORT}:8090
+    {{- end}}
