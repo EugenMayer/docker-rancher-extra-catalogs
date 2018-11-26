@@ -47,7 +47,7 @@ You cannot have both or mix them. If you switch backends during an upgrade, i ha
 To ease up the dependencies concourse implies on you, especially regarding the resource usage with s3, a Minio S3 server is 
 included, so you do not need to signup for AWS or even host your artifacts on AWS at all.
 
-If you want to access Minios API/GUI from the outside, be sure to expose the port 9000 e.g. using a Traefik segment
+If you want to access Minio API/GUI from the outside, be sure to expose the port 9000 e.g. using a Traefik segment
 
 ## Traefik 
 

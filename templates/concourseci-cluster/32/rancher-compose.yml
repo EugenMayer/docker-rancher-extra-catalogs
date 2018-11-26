@@ -357,9 +357,15 @@
     required: false
     type: "int"
   - variable: "TRAEFIK_FRONTEND_RULE"
-    label: "Traefik: Frontend Rule"
-    description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
+    label: "Traefik: Frontend Rule (Concourse Frontend/API)"
+    description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:ci.mydomain.tld or whatever you need to expose your concourse api/gui"
     default: 'Host:concourse.company.tld'
+    type: "string"
+    required: false
+  - variable: "TRAEFIK_FRONTEND_RULE_MINIO"
+    label: "Traefik: Frontend Rule (Minio API/Backend)"
+    description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:minio.ci.mydomain.tld or whatever you need"
+    default: 'Host:minio.company.tld'
     type: "string"
     required: false
   - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"

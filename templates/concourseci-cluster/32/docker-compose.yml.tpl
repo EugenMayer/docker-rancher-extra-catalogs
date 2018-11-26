@@ -223,6 +223,11 @@ services:
     environment:
       MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+    labels:
+      traefik.enable: true
+      traefik.port: 9000
+      traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE_MINIO}
+      traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
 {{- end }}
 
 volumes:
