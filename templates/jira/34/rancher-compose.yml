@@ -1,6 +1,6 @@
 .catalog:
   name: "Atlassian JIRA"
-  version: 7.10.1.0
+  version: 7.13.0.0
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
@@ -43,9 +43,18 @@
       label: "The jira version you want to use"
       description: "The jira version you want to use. This will change when upgrading the catalog, if you used default"
       required: false
-      default: "en-7.10.0"
+      default: "en-7.12.3"
       type: "enum"
       options:
+        - en-7.13.0
+        - en-7.12.3
+        - en-7.12.2
+        - en-7.12.1
+        - en-7.12.0
+        - en-7.11.2
+        - en-7.11.1
+        - en-7.11.0
+        - en-7.10.2
         - en-7.10.1
         - en-7.10.0
         - en-7.9.1
@@ -94,4 +103,9 @@
       required: false
       default: false
       type: "boolean"
-
+    - variable: "EXTRA_LABELS"
+      label: "EXTRA LABELS"
+      description: "Extra labels to add, ech line looks like foo.mybar: value' .. So exactly the yaml syntax you use. Use this for anything, e.g. traefik segments or whatever"
+      required: false
+      default: ''
+      type: "multiline"
