@@ -1,7 +1,7 @@
 name: Traefik
 description: |
   Traefik active load balancer
-version: v1.7.4.0
+version: v1.7.5.0
 category: Load Balancing
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de"
 license:
