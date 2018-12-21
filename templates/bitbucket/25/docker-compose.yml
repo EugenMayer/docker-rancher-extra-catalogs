@@ -12,6 +12,9 @@ services:
       traefik.enable: true
       traefik.port: 7990
       traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
+      {{- if .Values.TRAEFIK_ALLOWED_HOSTS }}
+      traefik.frontend.whiteList.sourceRange: ${TRAEFIK_ALLOWED_HOSTS}
+      {{- end}}
       traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
     {{- if .Values.BITBUCKET_SSH_EXPOSE_PORT }}
     ports:
