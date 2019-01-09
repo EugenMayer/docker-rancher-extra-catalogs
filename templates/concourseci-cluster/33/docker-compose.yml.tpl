@@ -7,7 +7,7 @@ services:
       io.rancher.scheduler.affinity:{{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
     restart: unless-stopped # required so that it retries until conocurse-db comes up
-    image: vault:0.9.5
+    image: vault:0.11.1
     cap_add:
      - IPC_LOCK
     depends_on:
@@ -69,13 +69,24 @@ services:
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   tsa:
     labels:
+{{- if .Values.EXTRA_LABELS }}
+{{.Values.EXTRA_LABELS | indent 6}}
+{{- end}}
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: config, vault
+      traefik.enable: true
+      traefik.port: 8080
+      traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
+      traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
     {{- if .Values.HOST_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
-    image: concourse/concourse:3.9.2
+    image: concourse/concourse:4.2.2
     command: web
+    {{- if .Values.TSA_HOST_EXPOSE_PORT }}
+    ports:
+    - ${TSA_HOST_EXPOSE_PORT}:2222
+    {{- end }}
     secrets:
       - concourse-tsa-authorized-workers
       - concourse-tsa-private-key
@@ -93,7 +104,6 @@ services:
     restart: unless-stopped # required so that it retries until conocurse-db comes up
     environment:
       CONCOURSE_LOG_LEVEL: ${CONCOURSE_LOG_LEVEL}
-
       # that seems to be important otherwise the workers seem to malfunction
       # most probably trying to use the CONCOURSE_EXTERNAL_URL for the connection, which might be inaccesible
       # if it is on a private network and the worker is outside this e.g. hosted on vultr
@@ -108,8 +118,41 @@ services:
       CONCOURSE_SESSION_SIGNING_KEY: /run/secrets/concourse-tsa-session-signing-key
       CONCOURSE_AUTH_DURATION: ${CONCOURSE_AUTH_DURATION}
 
-      CONCOURSE_BASIC_AUTH_USERNAME: ${ADMIN_USER}
-      CONCOURSE_BASIC_AUTH_PASSWORD: ${ADMIN_PASSWORD}
+      {{- if eq .Values.AUTH_BACKEND "local" }}
+      CONCOURSE_ADD_LOCAL_USER: "${LOCAL_ADMIN_USER}:${LOCAL_ADMIN_PASSWORD}"
+      CONCOURSE_MAIN_TEAM_LOCAL_USER: "${LOCAL_ADMIN_USER}"
+      {{- end }}
+
+      {{- if eq .Values.AUTH_BACKEND "ldap" }}
+      # for docs see https://github.com/EugenMayer/concourseci-server-boilerplate/blob/master/docker-compose-ldap-auth.yml
+      CONCOURSE_LDAP_DISPLAY_NAME: "LDAP"
+
+      CONCOURSE_LDAP_HOST: ${CONCOURSE_LDAP_HOST}
+      CONCOURSE_LDAP_BIND_DN: ${CONCOURSE_LDAP_BIND_DN}
+      CONCOURSE_LDAP_BIND_PW: ${CONCOURSE_LDAP_BIND_PW}
+      CONCOURSE_LDAP_INSECURE_NO_SSL: "${CONCOURSE_LDAP_INSECURE_NO_SSL}"
+      CONCOURSE_LDAP_START_TLS: "${CONCOURSE_LDAP_START_TLS}"
+      CONCOURSE_LDAP_INSECURE_SKIP_VERIFY: "${CONCOURSE_LDAP_INSECURE_SKIP_VERIFY}"
+
+      CONCOURSE_LDAP_USER_SEARCH_BASE_DN: "${CONCOURSE_LDAP_USER_SEARCH_BASE_DN}"
+      CONCOURSE_LDAP_USER_SEARCH_USERNAME: ${CONCOURSE_LDAP_USER_SEARCH_USERNAME}
+      CONCOURSE_LDAP_USER_SEARCH_ID_ATTR: ${CONCOURSE_LDAP_USER_SEARCH_ID_ATTR}
+      CONCOURSE_LDAP_USER_SEARCH_EMAIL_ATTR: ${CONCOURSE_LDAP_USER_SEARCH_EMAIL_ATTR}
+      CONCOURSE_LDAP_USER_SEARCH_NAME_ATTR: ${CONCOURSE_LDAP_USER_SEARCH_NAME_ATTR}
+      CONCOURSE_LDAP_USER_SEARCH_SCOPE: ${CONCOURSE_LDAP_USER_SEARCH_SCOPE}
+      CONCOURSE_LDAP_USER_SEARCH_FILTER: "${CONCOURSE_LDAP_USER_SEARCH_FILTER}"
+
+      CONCOURSE_LDAP_GROUP_SEARCH_DN: "${CONCOURSE_LDAP_GROUP_SEARCH_DN}"
+      CONCOURSE_LDAP_GROUP_SEARCH_NAME_ATTR: ${CONCOURSE_LDAP_GROUP_SEARCH_NAME_ATTR}
+      CONCOURSE_LDAP_GROUP_SEARCH_SCOPE: ${CONCOURSE_LDAP_GROUP_SEARCH_SCOPE}
+      CONCOURSE_LDAP_GROUP_SEARCH_USER_ATTR: ${CONCOURSE_LDAP_GROUP_SEARCH_USER_ATTR}
+      CONCOURSE_LDAP_GROUP_SEARCH_GROUP_ATTR: ${CONCOURSE_LDAP_GROUP_SEARCH_GROUP_ATTR}
+      CONCOURSE_LDAP_GROUP_SEARCH_FILTER: ${CONCOURSE_LDAP_GROUP_SEARCH_FILTER}
+
+      CONCOURSE_MAIN_TEAM_LDAP_USER: "${CONCOURSE_MAIN_TEAM_LDAP_USER}"
+      CONCOURSE_MAIN_TEAM_LDAP_GROUP: "${CONCOURSE_MAIN_TEAM_LDAP_GROUP}"
+      {{- end }}
+
       CONCOURSE_EXTERNAL_URL: ${CONCOURSE_EXTERNAL_URL}
       CONCOURSE_POSTGRES_HOST: db
       CONCOURSE_POSTGRES_USER: ${DB_USER}
@@ -144,7 +187,7 @@ services:
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
       {{- end }}
       io.rancher.container.pull_image: always
-    image: eugenmayer/concourse-worker-solid:3.9.2
+    image: eugenmayer/concourse-worker-solid:4.2.1
     privileged: true
     secrets:
       - concourse-worker-private-key
@@ -152,8 +195,7 @@ services:
     command: ${WORKER_DRAINING_STRATEGY}
     environment:
       CONCOURSE_GARDEN_PERSISTENT_IMAGE: ${CONCOURSE_GARDEN_PERSISTENT_IMAGE}
-      CONCOURSE_TSA_HOST: ${TSA_PEER_IP}
-      CONCOURSE_TSA_PORT: 2222
+      CONCOURSE_TSA_HOST: ${TSA_PEER_IP}:2222
       CONCOURSE_TSA_LOG_LEVEL: ${CONCOURSE_TSA_LOG_LEVEL}
       CONCOURSE_GARDEN_NETWORK_POOL: ${CONCOURSE_GARDEN_NETWORK_POOL}
       CONCOURSE_BAGGAGECLAIM_DRIVER: ${CONCOURSE_BAGGAGECLAIM_DRIVER}
@@ -167,6 +209,27 @@ services:
       CONCOURSE_GARDEN_MAX_CONTAINERS: ${CONCOURSE_GARDEN_MAX_CONTAINERS}
       CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE: ${CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE}
 {{- end }}
+{{- if eq .Values.START_INCLUDED_MINIO_S3 "true" }}
+  minio:
+    image: minio/minio
+    command: server /data
+    volumes:
+      {{- if .Values.MINIO_DATA_VOLUME_NAME}}
+      - {{.Values.MINIO_DATA_VOLUME_NAME}}:/data
+      {{- else}}
+      - minio-data:/data
+      {{- end }}
+      - minio-config:/root/.minio
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+    labels:
+      traefik.enable: true
+      traefik.port: 9000
+      traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE_MINIO}
+      traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
+{{- end }}
+
 volumes:
   {{- if .Values.DB_VOLUME_NAME}}
   {{- else}}
@@ -203,6 +266,16 @@ volumes:
   vault-client-config:
     driver: local
   {{- end }}
+
+{{- if eq .Values.START_INCLUDED_MINIO_S3 "true" }}
+  {{- if .Values.MINIO_DATA_VOLUME_NAME}}
+  {{- else}}
+  minio-data:
+    driver: local
+  {{- end }}
+  minio-config:
+    driver: local
+{{- end }}
 
 secrets:
   concourse-tsa-private-key:
