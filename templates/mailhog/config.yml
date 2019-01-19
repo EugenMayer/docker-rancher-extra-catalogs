@@ -1,6 +1,6 @@
-name: "fakemta"
+name: "mailhog"
 description: |
-  Test-Service: A SMTP Fake service which you an use to send emails pseudo, so do SMTP tests with an GUI
+  Test-Service: Simulates a SMTP server for you to send and receive email through / into. It's a catch-all setup.
 version: 0.1
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
