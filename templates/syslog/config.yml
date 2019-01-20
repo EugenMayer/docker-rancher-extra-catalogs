@@ -1,0 +1,7 @@
+name: "Syslog"
+description: |
+  A syslog server you can sink your remote client logs into
+version: 0.4
+category: Applications
+maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
+projectURL: https://github.com/EugenMayer/docker-rancher-extra-catalogs

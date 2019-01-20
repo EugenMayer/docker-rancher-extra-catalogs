@@ -1,0 +1,17 @@
+.catalog:
+  name: "syslog"
+  version: 0.1
+  description: "syslog"
+  minimum_rancher_version: v1.5.0
+  questions:
+    - variable: "SYSLOG_HOST_PORT"
+      label: "Host port"
+      description: "Which port should 514 UDP be exposed to. Keep empty to not expose on the host"
+      required: false
+      type: "int"
+    - variable: "EXTRA_LABELS"
+      label: "EXTRA LABELS"
+      description: "Extra labels to add, ech line looks like foo.mybar: value' .. So exactly the yaml syntax you use"
+      required: false
+      default: ''
+      type: "multiline"
