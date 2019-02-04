@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: traefik
-  version: v1.7.8.0
+  version: v1.7.9.0
   description: |
     Traefik load balancer.
   minimum_rancher_version: v0.59.0
