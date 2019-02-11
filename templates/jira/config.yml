@@ -1,7 +1,7 @@
 name: "Atlassian JIRA"
 description: |
   Atlassian Jira
-version: 7.13.0.0
+version: 8.0.0.0
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: https://de.atlassian.com/software/jira
