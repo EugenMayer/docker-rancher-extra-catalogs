@@ -3,6 +3,7 @@ version: '2'
 services:
   traefik:
     image: eugenmayer/traefik:1.7.8
+    ports:
     - ${admin_port}:${admin_port}/tcp
     - ${http_port}:${http_port}/tcp
   {{- if ne .Values.https_enable "false"}}
