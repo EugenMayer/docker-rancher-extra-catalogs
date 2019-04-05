@@ -29,6 +29,12 @@
       description: "Your main Domain, like kontextwork.de. This will become your base dn: dc=kontextwork,dc=de"
       required: true
       type: "string"
+    - variable: "SLAPD_BASE_DN"
+      label: "Your LDAP Base DN"
+      description: "If not set, defaults to the LDAP-Domain, see https://github.com/osixia/docker-openldap#defaultstartupyaml"
+      default: ""
+      required: false
+      type: "string"
     - variable: "SLAPD_EXTERNAL_DOMAIN"
       label: "Your External Damain"
       description: "The domain you will access your ldap from, like ldap.mycompany.tld"
@@ -124,12 +130,6 @@
       options:
         - mdb
         - hdb
-#    - variable: "SLAPD_TLS_PROTOCOL_MIN"
-#      label: "TLS minimum protocol version"
-#      description: "Min. protocol verison auf tls"
-#      required: true
-#      default: 3.1
-#      type: "int"
     - variable: "SLAPD_TLSPLAIN_EXPOSE_PORT"
       label: "Host Exposed Plain/TLS Port 389"
       description: "If not empty, this port will be used to expose 389 (plain/tlx) to the host"
