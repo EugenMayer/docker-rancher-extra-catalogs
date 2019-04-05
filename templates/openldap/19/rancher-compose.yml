@@ -95,8 +95,13 @@
       label: "TLS Validate client"
       description: "Shall the client certificate be verified: never, allow, demand"
       required: true
-      default: "never"
-      type: "string"
+      default: "demand"
+      type: "enum"
+      options:
+        - never
+        - demand
+        - allow
+        - try
     - variable: "SLAPD_LOG_LEVEL"
       label: "LOG_LEVEL"
       description: "Log leve - a space seperated list of: any, trace, packets,args,conns,config,stats,ACL or empty for no extra logging. Also see http://www.openldap.org/doc/admin24/slapdconf2.html under 5.2.1"
@@ -104,20 +109,20 @@
       default: ""
       type: "string"
     - variable: "SLAPD_BACKEND"
-      label: "LOG_LEVEL"
-      description: "Log leve - a space seperated list of: any, trace, packets,args,conns,config,stats,ACL or empty for no extra logging. Also see http://www.openldap.org/doc/admin24/slapdconf2.html under 5.2.1"
+      label: "BACKEND"
+      description: "the backend storage format to use, mdb ord hdb ( you should use the former)"
       required: true
       default: "mdb"
       type: "enum"
       options:
         - mdb
         - hdb
-    - variable: "SLAPD_TLS_PROTOCOL_MIN"
-      label: "TLS minimum protocol version"
-      description: "Min. protocol verison auf tls"
-      required: true
-      default: 3.1
-      type: "int"
+#    - variable: "SLAPD_TLS_PROTOCOL_MIN"
+#      label: "TLS minimum protocol version"
+#      description: "Min. protocol verison auf tls"
+#      required: true
+#      default: 3.1
+#      type: "int"
     - variable: "SLAPD_TLSPLAIN_EXPOSE_PORT"
       label: "Host Exposed Plain/TLS Port 389"
       description: "If not empty, this port will be used to expose 389 (plain/tlx) to the host"
