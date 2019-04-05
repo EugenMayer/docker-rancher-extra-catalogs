@@ -89,7 +89,7 @@
       label: "TLS Cipher suite"
       description: "The cipher suite to use for your TLS connections, see gnutls ciphers https://gnutls.org/manual/html_node/Priority-Strings.html"
       required: true
-      default: "NORMAL:+SECURE256:+MAC-ALL"
+      default: "SECURE256:+SECURE128:-VERS-TLS-ALL:+VERS-TLS1.2:-RSA:-DHE-DSS:-CAMELLIA-128-CBC:-CAMELLIA-256-CBC"
       type: "string"
     - variable: "SLAPD_TLS_VERIFY_CLIENT"
       label: "TLS Validate client"
@@ -104,10 +104,17 @@
         - try
     - variable: "SLAPD_LOG_LEVEL"
       label: "LOG_LEVEL"
-      description: "Log leve - a space seperated list of: any, trace, packets,args,conns,config,stats,ACL or empty for no extra logging. Also see http://www.openldap.org/doc/admin24/slapdconf2.html under 5.2.1"
+      description: "Log level, also see https://github.com/osixia/docker-openldap#debug"
       required: true
       default: ""
-      type: "string"
+      type: "enum"
+      options:
+        - none
+        - error
+        - warning
+        - info
+        - debug
+        - trace
     - variable: "SLAPD_BACKEND"
       label: "BACKEND"
       description: "the backend storage format to use, mdb ord hdb ( you should use the former)"

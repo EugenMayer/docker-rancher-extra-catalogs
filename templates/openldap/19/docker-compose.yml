@@ -1,5 +1,6 @@
 openldap:
   image: osixia/openldap:1.2.4
+  command: "--loglevel ${SLAPD_LOG_LEVEL}"
   environment:
     LDAP_TLS: ${SLAPD_TLS_ENABLE}
     LDAP_TLS_CRT_FILENAME: ${SLAPD_TLS_CERT_FILENAME}
@@ -18,7 +19,6 @@ openldap:
     LDAP_READONLY_USER_PASSWORD: ${SLAPD_READONLY_PASSWORD}
     LDAP_REPLICATION: "false"
     LDAP_SSL_HELPER_PREFIX: "ldap"
-    LDAP_LOG_LEVEL: "${SLAPD_LOG_LEVEL}"
     LDAP_BACKEND: "${SLAPD_BACKEND}"
 {{- if .Values.SLAPD_TLSPLAIN_EXPOSE_PORT }}
   ports:
