@@ -1,6 +1,6 @@
 .catalog:
   name: "Atlassian Bitbucket Server"
-  version: 5.12.0.0
+  version: 6.4.0.0
   description: "Atlassian Bitbucket Server"
   minimum_rancher_version: v1.5.0
   questions:
@@ -78,3 +78,15 @@
       required: false
       default: false
       type: "boolean"
+    - variable: "TRAEFIK_ALLOWED_HOSTS"
+      label: "Traefik: Allowed host CIDRs"
+      description: "See traefik.frontend.whiteList.sourceRang"
+      required: false
+      default: ''
+      type: "string"
+    - variable: "EXTRA_LABELS"
+      label: "EXTRA LABELS"
+      description: "Extra labels to add, ech line looks like foo.mybar: value' .. So exactly the yaml syntax you use. Use this for anything, e.g. traefik segments or whatever"
+      required: false
+      default: ''
+      type: "multiline"

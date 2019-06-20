@@ -2,13 +2,19 @@ version: "2"
 
 services:
   bitbucket:
-    image: eugenmayer/bitbucket:5.11.1
+    image: eugenmayer/bitbucket:6.4.0
     labels:
+{{- if .Values.EXTRA_LABELS }}
+{{.Values.EXTRA_LABELS | indent 6}}
+{{- end}}
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: 'environment'
       traefik.enable: true
       traefik.port: 7990
       traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
+      {{- if .Values.TRAEFIK_ALLOWED_HOSTS }}
+      traefik.frontend.whiteList.sourceRange: ${TRAEFIK_ALLOWED_HOSTS}
+      {{- end}}
       traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
     {{- if .Values.BITBUCKET_SSH_EXPOSE_PORT }}
     ports:
