@@ -1,6 +1,6 @@
 .catalog:
   name: "Atlassian JIRA"
-  version: 8.2.3.0
+  version: 8.2.2.0
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
@@ -43,10 +43,9 @@
       label: "The jira version you want to use"
       description: "The jira version you want to use. This will change when upgrading the catalog, if you used default"
       required: false
-      default: "en-8.2.3"
+      default: "en-8.2.2"
       type: "enum"
       options:
-        - en-8.2.3
         - en-8.2.2
         - en-8.2.0
         - en-8.1.2
