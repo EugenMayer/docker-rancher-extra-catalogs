@@ -2,7 +2,7 @@ version: "2"
 
 services:
   mattermost:
-    image: mattermost-team-edition:5.13.2
+    image: mattermost/mattermost-team-edition:5.13.2
     labels:
 {{- if .Values.EXTRA_LABELS }}
 {{.Values.EXTRA_LABELS | indent 6}}
