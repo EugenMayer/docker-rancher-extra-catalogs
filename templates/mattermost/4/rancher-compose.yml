@@ -25,11 +25,6 @@
       required: true
       type: "string"
       default: "mattermostdb"
-    - variable: "EXTERNAL_DB_SERVICE"
-      label: "Extern DB Service"
-      description: "External DB Service"
-      required: false
-      type: "service"
     - variable: "TRAEFIK_FRONTEND_RULE"
       label: "Traefik: Frontend Rule"
       description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
