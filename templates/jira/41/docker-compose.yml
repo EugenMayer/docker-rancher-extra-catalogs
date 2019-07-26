@@ -4,6 +4,9 @@ services:
   jira:
     image: eugenmayer/jira:${JIRA_VERSION}
     labels:
+{{- if .Values.EXTRA_LABELS }}
+{{.Values.EXTRA_LABELS | indent 6}}
+{{- end}}
       traefik.enable: true
       traefik.port: 8080
       traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
