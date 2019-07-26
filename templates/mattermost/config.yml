@@ -1,7 +1,7 @@
 name: "Mattermost"
 description: |
   Mattermost Team Edition
-version: 5.13.2.1
+version: 5.13.2.2
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: https://mattermost.com/
