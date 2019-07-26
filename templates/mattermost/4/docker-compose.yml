@@ -27,12 +27,6 @@ services:
       MM_SERVICESETTINGS_SITEURL: ${SITEURL}
       DB_HOST: db
       DB_PORT_NUMBER: 5432
-{{- if eq .Values.USE_EXTERNAL_DB_SERVICE "true" }}
-    external_links:
-      - ${EXTERNAL_DB_SERVICE}:db
-{{- end }}
-
-{{- if eq .Values.USE_EXTERNAL_DB_SERVICE "false" }}
   db:
     image: eugenmayer/mattermost-app:team-5.13.2
     volumes:
@@ -44,7 +38,6 @@ services:
       POSTGRES_ENCODING: "UNICODE"
       POSTGRES_COLLATE: "C"
       POSTGRES_COLLATE_TYPE: "C"
-{{- end }}
 
 volumes:
   mattermost_config:
