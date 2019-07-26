@@ -18,8 +18,7 @@ services:
       - mattermost_data:/mattermost/data
       - mattermost_logs:/mattermost/logs
       - mattermost_plugins:/mattermost/plugins
-      - mattermost_client:/mattermost/client
-      - mattermost_client_plugins:/mattermost/client_plugins
+      - mattermost_client_plugins:/mattermost/client/plugins
     environment:
       MM_USERNAME: ${DB_USER}
       MM_PASSWORD: ${DB_PASSWORD}
@@ -47,8 +46,6 @@ volumes:
   mattermost_logs:
     driver: local
   mattermost_plugins:
-    driver: local
-  mattermost_client:
     driver: local
   mattermost_client_plugins:
     driver: local
