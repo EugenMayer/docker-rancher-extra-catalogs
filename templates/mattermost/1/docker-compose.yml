@@ -1,6 +1,5 @@
 version: "2"
 
-# see https://github.com/mattermost/mattermost-docker/blob/master/docker-compose.yml
 services:
   mattermost:
     image: mattermost-team-edition:5.13.1-rc1
@@ -21,12 +20,10 @@ services:
       - mattermost_plugins:/mattermost/plugins
       - mattermost_client:/mattermost/client
       - mattermost_client_plugins:/mattermost/client_plugins
-      - /etc/localtime:/etc/localtime:ro
     environment:
       MM_USERNAME: ${DB_USER}
       MM_PASSWORD: ${DB_PASSWORD}
       MM_DBNAME: ${DB_NAME}
-      # MM_SQLSETTINGS_DRIVERNAME:
       DB_HOST: db
       DB_PORT_NUMBER: 9432
 {{- if eq .Values.USE_EXTERNAL_DB_SERVICE "true" }}
