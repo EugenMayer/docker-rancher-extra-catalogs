@@ -28,7 +28,7 @@ services:
       DB_HOST: db
       DB_PORT_NUMBER: 5432
   db:
-    image: eugenmayer/mattermost-app:team-5.13.2
+    image: eugenmayer/mattermost-db:team-5.13.2
     volumes:
       - mattermost_db:/var/lib/postgresql/data
     environment:
