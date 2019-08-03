@@ -46,7 +46,7 @@
       default: "en-8.3.1"
       type: "enum"
       options:
-        - en-8.3.0
+        - en-8.3.1
         - en-8.3.0
         - en-8.2.2
         - en-8.1.2
