@@ -110,7 +110,7 @@ services:
       # if it is on a private network and the worker is outside this e.g. hosted on vultr
       # but between all hosts we have an automatic ipsec based network which services can use to communicate
       CONCOURSE_TSA_ATC_URL: ${TSA_ATC_URL}
-      CONCOURSE_PEER_ADDRESS: ${TSA_PEER_IP}
+      CONCOURSE_PEER_ADDRESS: ${PEER_ADDRESS}
       CONCOURSE_TSA_LOG_LEVEL: ${CONCOURSE_TSA_LOG_LEVEL}
       CONCOURSE_TSA_AUTHORIZED_KEYS: /run/secrets/concourse-tsa-authorized-workers
       CONCOURSE_TSA_HEARTBEAT_INTERVAL: ${CONCOURSE_TSA_HEARTBEAT_INTERVAL}

@@ -200,7 +200,7 @@
     required: true
     type: "string"
     default: "http://tsa:8080"
-  - variable: "TSA_PEER_IP"
+  - variable: "PEER_ADDRESS"
     label: "PEER_ADDRESS"
     required: true
     type: "string"
