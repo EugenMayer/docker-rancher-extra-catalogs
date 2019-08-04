@@ -204,7 +204,7 @@
     label: "PEER_ADDRESS"
     required: true
     type: "string"
-    default: "tsa"
+    default: "127.0.0.1"
   - variable: "WORKER_KEEP_IMAGES"
     label: "WORKER: Which images should never get removed on the worker"
     required: false
