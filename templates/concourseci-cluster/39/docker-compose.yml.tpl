@@ -7,7 +7,7 @@ services:
       io.rancher.scheduler.affinity:{{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
     restart: unless-stopped # required so that it retries until conocurse-db comes up
-    image: vault:0.10.4
+    image: vault:1.2.0
     cap_add:
      - IPC_LOCK
     depends_on:
@@ -30,7 +30,7 @@ services:
     labels:
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
-    image: postgres:10.1
+    image: postgres:11
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
@@ -43,11 +43,12 @@ services:
       {{- end }}
 
   config:
-    {{- if .Values.HOST_AFFINITY_LABEL}}
     labels:
+{{- if .Values.HOST_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
-    {{- end }}
-    image: eugenmayer/concourse-configurator
+{{- end }}
+      io.rancher.container.pull_image: always
+    image: eugenmayer/concourse-configurator:5.x
     volumes:
       {{- if .Values.VAULT_CLIENT_CONFIG_VOLUME_NAME}}
       - {{.Values.VAULT_CLIENT_CONFIG_VOLUME_NAME}}:/vault/concourse
@@ -69,6 +70,9 @@ services:
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   tsa:
     labels:
+{{- if .Values.EXTRA_LABELS }}
+{{.Values.EXTRA_LABELS | indent 6}}
+{{- end}}
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: config, vault
       traefik.enable: true
@@ -78,8 +82,13 @@ services:
     {{- if .Values.HOST_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
-    image: concourse/concourse:4.1.0
+    image: concourse/concourse:5.4.1
+    {{- if eq .Values.GLOBAL_RESOURCES "true" }}
+    command: web --enable-global-resources
+    {{- else}}
     command: web
+    {{- end }}
+
     {{- if .Values.TSA_HOST_EXPOSE_PORT }}
     ports:
     - ${TSA_HOST_EXPOSE_PORT}:2222
@@ -106,7 +115,7 @@ services:
       # if it is on a private network and the worker is outside this e.g. hosted on vultr
       # but between all hosts we have an automatic ipsec based network which services can use to communicate
       CONCOURSE_TSA_ATC_URL: ${TSA_ATC_URL}
-      CONCOURSE_TSA_PEER_IP: ${TSA_PEER_IP}
+      CONCOURSE_PEER_ADDRESS: ${PEER_ADDRESS}
       CONCOURSE_TSA_LOG_LEVEL: ${CONCOURSE_TSA_LOG_LEVEL}
       CONCOURSE_TSA_AUTHORIZED_KEYS: /run/secrets/concourse-tsa-authorized-workers
       CONCOURSE_TSA_HEARTBEAT_INTERVAL: ${CONCOURSE_TSA_HEARTBEAT_INTERVAL}
@@ -139,10 +148,12 @@ services:
       CONCOURSE_LDAP_USER_SEARCH_SCOPE: ${CONCOURSE_LDAP_USER_SEARCH_SCOPE}
       CONCOURSE_LDAP_USER_SEARCH_FILTER: "${CONCOURSE_LDAP_USER_SEARCH_FILTER}"
 
-      CONCOURSE_LDAP_GROUP_SEARCH_DN: "${CONCOURSE_LDAP_GROUP_SEARCH_DN}"
+      CONCOURSE_LDAP_GROUP_SEARCH_BASE_DN: "${CONCOURSE_LDAP_GROUP_SEARCH_DN}"
       CONCOURSE_LDAP_GROUP_SEARCH_NAME_ATTR: ${CONCOURSE_LDAP_GROUP_SEARCH_NAME_ATTR}
       CONCOURSE_LDAP_GROUP_SEARCH_SCOPE: ${CONCOURSE_LDAP_GROUP_SEARCH_SCOPE}
+      CONCOURSE_LDAP_GROUP_SEARCH_USER_ATTR: ${CONCOURSE_LDAP_GROUP_SEARCH_USER_ATTR}
       CONCOURSE_LDAP_GROUP_SEARCH_GROUP_ATTR: ${CONCOURSE_LDAP_GROUP_SEARCH_GROUP_ATTR}
+      CONCOURSE_LDAP_GROUP_SEARCH_FILTER: ${CONCOURSE_LDAP_GROUP_SEARCH_FILTER}
 
       CONCOURSE_MAIN_TEAM_LDAP_USER: "${CONCOURSE_MAIN_TEAM_LDAP_USER}"
       CONCOURSE_MAIN_TEAM_LDAP_GROUP: "${CONCOURSE_MAIN_TEAM_LDAP_GROUP}"
@@ -162,7 +173,8 @@ services:
       CONCOURSE_VAULT_CLIENT_CERT: /vault/client/cert.pem
       CONCOURSE_VAULT_CLIENT_KEY: /vault/client/key.pem
       CONCOURSE_VAULT_CA_CERT: /vault/client/server.crt
-
+      CONCOURSE_SECRET_CACHE_ENABLED: true
+      CONCOURSE_SECRET_CACHE_DURATION: 30m
       CONCOURSE_RESOURCE_CHECKING_INTERVAL: 10m
 
 {{- if eq .Values.START_INCLUDED_WORKERS "true" }}
@@ -182,12 +194,12 @@ services:
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
       {{- end }}
       io.rancher.container.pull_image: always
-    image: eugenmayer/concourse-worker-solid:4.1.0
+    image: concourse/concourse:5.4.1
     privileged: true
     secrets:
       - concourse-worker-private-key
       - concourse-tsa-public-key
-    command: ${WORKER_DRAINING_STRATEGY}
+    command: worker
     environment:
       CONCOURSE_GARDEN_PERSISTENT_IMAGE: ${CONCOURSE_GARDEN_PERSISTENT_IMAGE}
       CONCOURSE_TSA_HOST: ${TSA_PEER_IP}:2222
@@ -204,6 +216,28 @@ services:
       CONCOURSE_GARDEN_MAX_CONTAINERS: ${CONCOURSE_GARDEN_MAX_CONTAINERS}
       CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE: ${CONCOURSE_GARDEN_CPU_QUOTA_PER_SHARE}
 {{- end }}
+{{- if eq .Values.START_INCLUDED_MINIO_S3 "true" }}
+  minio:
+    image: minio/minio
+    command: server /data
+    volumes:
+      {{- if .Values.MINIO_DATA_VOLUME_NAME}}
+      - {{.Values.MINIO_DATA_VOLUME_NAME}}:/data
+      {{- else}}
+      - minio-data:/data
+      {{- end }}
+      - minio-config:/root/.minio
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+    labels:
+      io.rancher.container.pull_image: always
+      traefik.enable: true
+      traefik.port: 9000
+      traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE_MINIO}
+      traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
+{{- end }}
+
 volumes:
   {{- if .Values.DB_VOLUME_NAME}}
   {{- else}}
@@ -240,6 +274,16 @@ volumes:
   vault-client-config:
     driver: local
   {{- end }}
+
+{{- if eq .Values.START_INCLUDED_MINIO_S3 "true" }}
+  {{- if .Values.MINIO_DATA_VOLUME_NAME}}
+  {{- else}}
+  minio-data:
+    driver: local
+  {{- end }}
+  minio-config:
+    driver: local
+{{- end }}
 
 secrets:
   concourse-tsa-private-key:

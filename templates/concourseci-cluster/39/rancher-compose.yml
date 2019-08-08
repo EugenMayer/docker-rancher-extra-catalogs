@@ -1,12 +1,12 @@
 .catalog:
-  name: "Atlassian JIRA"
-  version: 4.0.0.0
+  name: "Concourse Cluster"
+  version: 5.4.1.0
   description: "Atlassian Jira"
   minimum_rancher_version: v1.5.0
   questions:
   - variable: "CONCOURSE_EXTERNAL_URL"
-    label: "Your external proxy domain"
-    description: "Your external proxy domain concourseci.domain.tld"
+    label: "Your external proxy URL WITH scheme"
+    description: "Your external proxy domain https://concourseci.domain.tld"
     required: true
     type: "string"
   - variable: "START_INCLUDED_WORKERS"
@@ -14,6 +14,12 @@
     description: "If false, no workers would be started and you would need to start and configure them yourself standalone"
     required: true
     default: true
+    type: "boolean"
+  - variable: "GLOBAL_RESOURCES"
+    label: "Global Resources"
+    description: "Use the experimental global resources feature"
+    required: true
+    default: false
     type: "boolean"
   - variable: "DB_PASSWORD"
     label: "Database password"
@@ -29,6 +35,22 @@
     required: true
     type: "string"
     default: "concourse"
+  - variable: "START_INCLUDED_MINIO_S3"
+    label: "Start included Minio Server for artifact storage"
+    description: "Concourse relies on a object storage for artifacts for proper resource handling very much. Minio could help you to avoid AWS S3 but use a local s3 storage for that"
+    required: true
+    default: false
+    type: "boolean"
+  - variable: "MINIO_ACCESS_KEY"
+    label: "Minio ACCESS_KEY"
+    description: "The access key minio should be configured/provisioned with. This is what you should use in your pipelines then"
+    required: false
+    type: "password"
+  - variable: "MINIO_SECRET_KEY"
+    label: "Minio SECRET_KEY"
+    description: "The secret key minio should be configured/provisioned with. This is what you should use in your pipelines then"
+    required: false
+    type: "password"
   - variable: "AUTH_BACKEND"
     label: "AUTH Backend"
     required: true
@@ -87,7 +109,7 @@
     type: "string"
   - variable: "CONCOURSE_LDAP_USER_SEARCH_USERNAME"
     description: "LDAP: user username field to match the username against like uid, cn whatever"
-    label: "LDAP: user username field"
+    label: "LDAP: user username field (Bug: must match 'LDAP: name field' right now)"
     required: false
     type: "string"
     default: "cn"
@@ -105,10 +127,10 @@
     default: "mail"
   - variable: "CONCOURSE_LDAP_USER_SEARCH_NAME_ATTR"
     description: "LDAP: name field like surname, firstname"
-    label: "LDAP: user speaking name field"
+    label: "LDAP: user speaking name field (Bug: must match 'LDAP: user username' field right now)"
     required: false
     type: "string"
-    default: "mail"
+    default: "cn"
   - variable: "CONCOURSE_LDAP_USER_SEARCH_SCOPE"
     description: "LDAP: search scope, sub for subtree search or one for one level only"
     label: "LDAP: user search scope"
@@ -144,6 +166,18 @@
     options:
       - sub
       - one
+  - variable: "CONCOURSE_LDAP_GROUP_SEARCH_USER_ATTR"
+    description: "LDAP: attribute name for <group-user-attr> member, like 'member' or 'memberOf': <group-attr>=<group-user-attr>"
+    label: ": LDAP: Group (user) <group-user-attr>"
+    required: false
+    type: "string"
+    default: "memberOf"
+  - variable: "CONCOURSE_LDAP_GROUP_SEARCH_GROUP_ATTR"
+    description: "LDAP: <group attr> match attribute <group-attr>=<group-user-attr>"
+    label: "LDAP: Group (group) attribute for <group-attr> , like 'uniqueMember'"
+    required: false
+    type: "string"
+    default: "uniqueMember"
   - variable: "CONCOURSE_MAIN_TEAM_LDAP_USER"
     description: "LDAP: list of admin users, seperated by comma (usernames)"
     label: "LDAP: list of admin users"
@@ -153,6 +187,12 @@
   - variable: "CONCOURSE_MAIN_TEAM_LDAP_GROUP"
     description: "LDAP: list of admin groups, seperated by comma (usernames)"
     label: "LDAP: list of admin groups ( not working right now )"
+    required: false
+    type: "string"
+    default: ""
+  - variable: "CONCOURSE_LDAP_GROUP_SEARCH_FILTER"
+    description: "LDAP: filter to limit what is picked up as group , e.g: (objectClass=posixGroup) or (objectClass=groupOfUniqueNames)"
+    label: "LDAP: group filter"
     required: false
     type: "string"
     default: ""
@@ -166,11 +206,11 @@
     required: true
     type: "string"
     default: "http://tsa:8080"
-  - variable: "TSA_PEER_IP"
-    label: "TSA_PEER_IP"
+  - variable: "PEER_ADDRESS"
+    label: "PEER_ADDRESS"
     required: true
     type: "string"
-    default: "tsa"
+    default: "127.0.0.1"
   - variable: "WORKER_KEEP_IMAGES"
     label: "WORKER: Which images should never get removed on the worker"
     required: false
@@ -298,6 +338,13 @@
     required: true
     type: string
     default: '/mnt/data_fast/stacks/concourseci_cluster/vault_server_data'
+  - variable: MINIO_DATA_VOLUME_NAME
+    label: "VOLUME: minio_data / Path"
+    description: |
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+    required: true
+    type: string
+    default: '/mnt/data_fast/stacks/concourseci_cluster/minio_data'
   - variable: HOST_AFFINITY_LABEL
     label: "RANCHER: Affinity label for all services BUT the workers . If blank, no affinity will be set"
     description: |
@@ -316,9 +363,15 @@
     required: false
     type: "int"
   - variable: "TRAEFIK_FRONTEND_RULE"
-    label: "Traefik: Frontend Rule"
-    description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
+    label: "Traefik: Frontend Rule (Concourse Frontend/API)"
+    description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:ci.mydomain.tld or whatever you need to expose your concourse api/gui"
     default: 'Host:concourse.company.tld'
+    type: "string"
+    required: false
+  - variable: "TRAEFIK_FRONTEND_RULE_MINIO"
+    label: "Traefik: Frontend Rule (Minio API/Backend)"
+    description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:minio.ci.mydomain.tld or whatever you need"
+    default: 'Host:minio.company.tld'
     type: "string"
     required: false
   - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"
@@ -327,3 +380,9 @@
     required: false
     default: false
     type: "boolean"
+  - variable: "EXTRA_LABELS"
+    label: "EXTRA LABELS"
+    description: "Extra labels to add, ech line looks like foo.mybar: value' .. So exactly the yaml syntax you use. Use this for anything, e.g. traefik segments or whatever"
+    required: false
+    default: ''
+    type: "multiline"
