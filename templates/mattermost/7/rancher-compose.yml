@@ -1,0 +1,45 @@
+.catalog:
+  name: "Mattermost Team Edition"
+  version: 5.13.2.8
+  description: "Mattermost Team Edition"
+  minimum_rancher_version: v1.5.0
+  questions:
+    - variable: "SITEURL"
+      label: "SITEURL"
+      description: "Your mattermost URL, like https://chat.company.tld"
+      required: true
+      type: "string"
+    - variable: "DB_USER"
+      label: "DB user"
+      description: "db user"
+      required: true
+      type: "string"
+      default: "mattermost"
+    - variable: "DB_PASSWORD"
+      label: "Database password"
+      required: true
+      type: "password"
+    - variable: "DB_NAME"
+      label: "DB Name"
+      description: "db name for mattermost"
+      required: true
+      type: "string"
+      default: "mattermostdb"
+    - variable: "TRAEFIK_FRONTEND_RULE"
+      label: "Traefik: Frontend Rule"
+      description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
+      default: 'Host:chat.company.tld'
+      type: "string"
+      required: false
+    - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"
+      label: "Traefik: Enable SSL"
+      description: "If you are using ranchers Traefik catalog, decide if you want to get a SSL cetificate for this service using ACME"
+      required: false
+      default: false
+      type: "boolean"
+    - variable: "EXTRA_LABELS"
+      label: "EXTRA LABELS"
+      description: "Extra labels to add, ech line looks like foo.mybar: value' .. So exactly the yaml syntax you use. Use this for anything, e.g. traefik segments or whatever"
+      required: false
+      default: ''
+      type: "multiline"
