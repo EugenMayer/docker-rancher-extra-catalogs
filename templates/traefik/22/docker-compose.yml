@@ -59,7 +59,6 @@ services:
     {{- if ne .Values.rancher_integration "external"}}
       TRAEFIK_RANCHER_ENABLE: true
       TRAEFIK_RANCHER_HEALTHCHECK: ${rancher_healthcheck}
-      TRAEFIK_RANCHER_MODE: ${rancher_integration}
     {{- end}}
       TRAEFIK_FILE_ENABLE: ${file_enable}
     {{- if eq .Values.metrics_enable "true"}}

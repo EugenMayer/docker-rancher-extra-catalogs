@@ -8,16 +8,6 @@ catalog:
   maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
   uuid: traefik-0
   questions:
-    - variable: "rancher_integration"
-      label: "Rancher based backend:"
-      description: |
-        Enable rancher integration mode. Traefik built in integration - wioth Traefik 2.0 there is only metadata
-      default: metadata
-      required: true
-      type: enum
-      options:
-        - off
-        - metadata
     - variable: "https_enable"
       label: "Https enable:"
       description: |
