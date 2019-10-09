@@ -22,31 +22,31 @@
       label: "VOLUME: db / Path"
       description: |
         Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
-      required: true
+      required: false
       type: string
     - variable: CONF_VOLUME_NAME
       label: "VOLUME: conf / Path"
       description: |
         Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
-      required: true
+      required: false
       type: string
     - variable: DATA_VOLUME_NAME
       label: "VOLUME: data / Path"
       description: |
         Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
-      required: true
+      required: false
       type: string
     - variable: LOG_VOLUME_NAME
       label: "VOLUME: log / Path"
       description: |
         Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
-      required: true
+      required: false
       type: string
     - variable: EXTENSIONS_VOLUME_NAME
       label: "VOLUME: extensions / Path"
       description: |
         Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
-      required: true
+      required: false
       type: string
     - variable: "TRAEFIK_FRONTEND_RULE"
       label: "Traefik: Frontend Rule"
