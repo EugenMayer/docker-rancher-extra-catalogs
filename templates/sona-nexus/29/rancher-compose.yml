@@ -1,0 +1,30 @@
+.catalog:
+  name: "Sona nexus"
+  version: 3.19.0.0
+  description: "A docker-registry, gem, npm, java and more server with permissions, authentication backends a lot more:"
+  minimum_rancher_version: v0.63.0
+  questions:
+    - variable: "DATA"
+      label: "Volume name or host path for the nexus server storage"
+      description: "Volume name you want the data to be stored on"
+      required: true
+      type: "string"
+    - variable: "TRAEFIK_FRONTEND_RULE"
+      label: "Traefik: Frontend Rule"
+      description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
+      default: 'Host:nexus.company.tld'
+      type: "string"
+      required: false
+    - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"
+      label: "Traefik: Enable SSL"
+      description: "If you are using ranchers Traefik catalog, decide if you want to get a SSL cetificate for this service using ACME"
+      required: false
+      default: false
+      type: "boolean"
+    - variable: "EXTRA_LABELS"
+      label: "EXTRA LABELS"
+      description: "Extra labels to add, ech line looks like foo.mybar: value' .. So exactly the yaml syntax you use. Use this for anything, e.g. traefik segments or whatever"
+      required: false
+      default: ''
+      type: "multiline"
+
