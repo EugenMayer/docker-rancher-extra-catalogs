@@ -2,6 +2,7 @@ version: "2"
 
 services:
   app:
+    image: sonarqube:lts
     labels:
 {{- if .Values.EXTRA_LABELS }}
 {{.Values.EXTRA_LABELS | indent 6}}
@@ -13,7 +14,10 @@ services:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: 'environment'
       io.rancher.container.pull_image: always
-    image: sonarqube:lts
+  environment:
+    sonar.jdbc.username: ${DB_USER}
+    sonar.jdbc.password: ${DB_PASSWORD}
+    sonar.jdbc.url=jdbc:postgresql://db/${DB_NAME}
   db:
     image: postgres:11
     {{- if .Values.HOST_AFFINITY_LABEL}}
