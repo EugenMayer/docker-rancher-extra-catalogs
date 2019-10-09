@@ -17,7 +17,7 @@ services:
     environment:
       sonar.jdbc.username: ${DB_USER}
       sonar.jdbc.password: ${DB_PASSWORD}
-      sonar.jdbc.url=jdbc:postgresql://db/${DB_NAME}
+      sonar.jdbc.url: "jdbc:postgresql://db/${DB_NAME}"
   db:
     image: postgres:11
     {{- if .Values.HOST_AFFINITY_LABEL}}
