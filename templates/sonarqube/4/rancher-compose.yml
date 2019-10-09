@@ -1,6 +1,6 @@
 .catalog:
   name: "Sonarqube"
-  version: 7.9.1.2
+  version: 7.9.1.3
   description: "Sonarqube"
   minimum_rancher_version: v1.5.0
   questions:
