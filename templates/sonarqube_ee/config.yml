@@ -1,7 +1,7 @@
-name: "Sonarqube Community Edition"
+name: "Sonarqube Enterprise Edition"
 description: |
   SonarQube is an open source platform for continuous inspection of code quality.
-version: 7.9.1.3
+version: 8.0.0.0
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: https://www.sonarqube.org/
