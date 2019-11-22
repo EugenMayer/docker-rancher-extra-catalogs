@@ -177,6 +177,8 @@ services:
       CONCOURSE_SECRET_CACHE_DURATION: 30m
       CONCOURSE_RESOURCE_CHECKING_INTERVAL: 10m
 
+      CONCOURSE_ENABLE_LIDAR: ${ENABLE_LIDAR}
+
 {{- if eq .Values.START_INCLUDED_WORKERS "true" }}
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   worker-standalone:

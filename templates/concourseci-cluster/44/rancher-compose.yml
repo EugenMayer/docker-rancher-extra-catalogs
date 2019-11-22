@@ -21,7 +21,13 @@
     required: true
     default: false
     type: "boolean"
-  - variable: "DB_PASSWORD"
+  - variable: "ENABLE_LIDAR"
+    label: "Enable LIDAR"
+    description: "Enable LIDAR strategy for resource checks"
+    required: true
+    default: false
+    type: "boolean"
+    - variable: "DB_PASSWORD"
     label: "Database password"
     required: true
     type: "password"
