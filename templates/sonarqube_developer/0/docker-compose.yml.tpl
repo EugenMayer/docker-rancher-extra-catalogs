@@ -2,7 +2,7 @@ version: "2"
 
 services:
   app:
-    image: sonarqube:8-enterprise-beta
+    image: sonarqube:8-developer-beta
     labels:
 {{- if .Values.EXTRA_LABELS }}
 {{.Values.EXTRA_LABELS | indent 6}}

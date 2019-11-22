@@ -1,4 +1,4 @@
-name: "Sonarqube Enterprise Edition"
+name: "Sonarqube Developer Edition"
 description: |
   SonarQube is an open source platform for continuous inspection of code quality.
 version: 8.0.0.0
