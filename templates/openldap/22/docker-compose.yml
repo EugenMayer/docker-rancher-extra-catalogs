@@ -1,5 +1,5 @@
 openldap:
-  image: osixia/openldap:1.3.0
+  image: obourdon/osixia-openldap:fix-v1.3.0
   environment:
     LDAP_TLS: ${SLAPD_TLS_ENABLE}
     LDAP_TLS_CRT_FILENAME: ${SLAPD_TLS_CERT_FILENAME}
