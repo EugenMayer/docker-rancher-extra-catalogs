@@ -33,7 +33,7 @@ services:
 
 {{- if eq .Values.USE_EXTERNAL_DB_SERVICE "false" }}
   db:
-    image: postgres:9.6
+    image: postgres:9.4
     volumes:
       - jira_db:/var/lib/postgresql/data
     environment:
