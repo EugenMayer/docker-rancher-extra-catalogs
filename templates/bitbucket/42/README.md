@@ -64,5 +64,5 @@ Now upgrade the catalog and you should be up and running again
 if it is all up and running, remove your inline backup
 
 ```
-cd <bitbucket-volume-location>/_data/old-backup
+rm -fr <bitbucket-volume-location>/_data/old-backup
 ```
