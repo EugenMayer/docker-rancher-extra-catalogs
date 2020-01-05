@@ -30,9 +30,11 @@ So just stop you stack
  
 ## Migration from < 8.6.0.5 ( <52 )
  
+!! Be sure to have done the 8.6.0.1 before you continue with this! 
+
 You will need to migrate your database postgresql from 9.4 to 10 - in this case you will need to do something like this
 
-_before_ you upgrade the catalog to >= 8.6.0.2
+**Before** you upgrade the catalog to >= 8.6.0.2
 
 !!!!!!! DO A BACKUP OF THE DATABASE BEFORE YOU START !!!!!!!!!
 
@@ -46,7 +48,7 @@ sudo -s
 docker volume create newdb
 docker inspect jira-db-container
 # not down the volume name, we call it jira-volume here
-docker run -v jira-volume:/var/lib/postgresql/9.4/data -v newdb:/var/lib/postgresql/10/data tianon/postgres-upgrade:9.4-to-10
+docker run --rm -v jira-volume:/var/lib/postgresql/9.4/data -v newdb:/var/lib/postgresql/10/data tianon/postgres-upgrade:9.4-to-10
 docker inspect jira-volume
 cd <jira-volume-location>/_data
 # create an inline backup
