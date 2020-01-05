@@ -37,7 +37,7 @@ services:
 
 {{- if eq .Values.USE_EXTERNAL_DB_SERVICE "false" }}
   db:
-    image: postgresql:9.4
+    image: postgres:9.4
     volumes:
       - bitbucket_db:/var/lib/postgresql/data
     environment:
