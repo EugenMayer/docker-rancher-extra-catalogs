@@ -1,21 +1,21 @@
-## Atlassian JIRA server
+## Atlassian Bitbucket server
 
-Helps you setting up a jira server, running on a local or external database.
+Helps you setting up a bitbucket server, running on a local or external database.
 
-Based on https://github.com/eugenmayer/jira and https://hub.docker.com/r/eugenmayer/jira
+Based on https://github.com/eugenmayer/docker-image-atlassian-bitbucket and https://hub.docker.com/r/eugenmayer/bitbucket
 
 ## Ports
 
-- 8080/TCP for http
+- 8080/TCP for http and 2201/TCP for SSH
 
 ## Traefik 
 
 Integrates with with ranchers traefik catalog https://github.com/rancher/community-catalog/tree/master/templates/traefik
 using rancher metadata
 
-## Migration from < 8.6.0.1 ( <51 )
+## Migration from <  6.9.0.1 ( <39)
 
-If you migrate to this version from earlier releases ( <39 aka 8.6.0.1 ) you will need to move your postgresql volume contant
+If you migrate to this version from earlier releases ( <39 aka 6.9.0.1 ) you will need to move your postgresql volume contant
 from `./data` to `./` in the volume, since the official postgresql image expects the mount in `/var/lib/postgresql/data` but the old
 `pg` image we use had `/var/lib/postgresql`
 
@@ -27,35 +27,33 @@ So just stop you stack
  - `cd <location>` 
  - `mv ./data/* ./`
  - `rm -fr ./data`
- 
-## Migration from < 8.6.0.5 ( <52 )
- 
-You will need to migrate your database postgresql from 9.4 to 10 - in this case you will need to do something like this
 
-_before_ you upgrade the catalog to >= 8.6.0.2
+## Migration from < 6.9.0.2 ( <52 )
+ 
+You will need to migrate your database postgresql from 9.4 to 11 - in this case you will need to do something like this
+
+_before_ you upgrade the catalog to >= 6.9.0.2
+
 
 !!!!!!! DO A BACKUP OF THE DATABASE BEFORE YOU START !!!!!!!!!
 
-1. stop the stack
+1. stop your stack
 
 2. do this
-
 ```
 ssh rancherserver
 sudo -s
 docker volume create newdb
-docker inspect jira-db-container
-# not down the volume name, we call it jira-volume here
-docker run -v jira-volume:/var/lib/postgresql/9.4/data -v newdb:/var/lib/postgresql/10/data tianon/postgres-upgrade:9.4-to-10
-docker inspect jira-volume
-cd <jira-volume-location>/_data
+docker run -v bitbucket-volume:/var/lib/postgresql/9.4/data -v newdb:/var/lib/postgresql/10/data tianon/postgres-upgrade:9.4-to-10
+docker inspect bitbucket-volume
+cd <bitbucket-volume-location>/_data
 # create an inline backup
 mkdir old-backup
 mv * old
 # now move the migrated data onto our old volume
 docker inspect newdb
 echo "host all all all md5" >> <newdb-location>/_data/pg_hba.conf
-mv <newdb-location>/_data/* <jira-volume-location>/_data
+mv <newdb-location>/_data/* <bitbucket-volume-location>/_data
 docker volume rm newdb
 ```
 
@@ -64,6 +62,5 @@ Now upgrade the catalog and you should be up and running again
 if it is all up and running, remove your inline backup
 
 ```
-cd <jira-volume-location>/_data/old-backup
+cd <bitbucket-volume-location>/_data/old-backup
 ```
-
