@@ -1,7 +1,7 @@
 name: "Atlassian Confluence"
 description: |
   Atlassian Confluence
-version: 7.2.0.0
+version: 7.2.1.0
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: https://de.atlassian.com/software/confluence
