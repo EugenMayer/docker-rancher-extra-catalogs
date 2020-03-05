@@ -1,7 +1,7 @@
 name: "Sonarqube Developer Edition"
 description: |
   SonarQube is an open source platform for continuous inspection of code quality.
-version: 8.1.0.0
+version: 8.2.0.0
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: https://www.sonarqube.org/
