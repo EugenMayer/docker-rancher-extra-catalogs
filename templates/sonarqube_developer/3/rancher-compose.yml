@@ -1,5 +1,5 @@
 .catalog:
-  name: "Sonarqube Community Edition"
+  name: "Sonarqube Developer Edition"
   version: 8.2.0.1
   description: "Sonarqube"
   minimum_rancher_version: v1.5.0
