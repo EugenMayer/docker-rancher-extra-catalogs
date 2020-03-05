@@ -2,7 +2,8 @@ version: "2"
 
 services:
   app:
-    image: sonarqube:8.2-community
+    # https://hub.docker.com/_/sonarqube?tab=description
+    image: sonarqube:8.2-developer
     labels:
 {{- if .Values.EXTRA_LABELS }}
 {{.Values.EXTRA_LABELS | indent 6}}
