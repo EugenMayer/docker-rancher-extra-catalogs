@@ -2,7 +2,7 @@ version: "2"
 
 services:
   jira:
-    image: eugenmayer/jira:${JIRA_VERSION}
+    image: eugenmayer/jira:en-8.8.1
     labels:
 {{- if .Values.EXTRA_LABELS }}
 {{.Values.EXTRA_LABELS | indent 6}}
@@ -16,9 +16,10 @@ services:
     volumes:
       - jira_data:/var/atlassian/jira
     environment:
-      JIRA_DELAYED_START: 10
       JIRA_DATABASE_URL: "postgresql://${JIRA_DB_USER}@db/${JIRA_DB_NAME}"
       JIRA_DB_PASSWORD: ${DB_PASSWORD}
+      DOCKER_WAIT_HOST: db
+      DOCKER_WAIT_PORT: 5432
       CATALINA_OPTS: ${CATALINA_OPTS}
 {{- if eq .Values.USE_PROXY "true" }}
       JIRA_PROXY_NAME: ${JIRA_PROXY_DOMAIN}
@@ -32,16 +33,16 @@ services:
 
 {{- if eq .Values.USE_EXTERNAL_DB_SERVICE "false" }}
   db:
-    image: blacklabelops/postgres:9.4.9
+    image: postgres:10
     volumes:
-      - jira_db:/var/lib/postgresql
+      - jira_db:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: ${JIRA_DB_NAME}
       POSTGRES_USER: ${JIRA_DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_ENCODING: "UNICODE"
-      POSTGRES_COLLATE: "C"
-      POSTGRES_COLLATE_TYPE: "C"
+      POSTGRES_ENCODING: UTF8
+      POSTGRES_COLLATE: C
+      POSTGRES_COLLATE_TYPE: C
 {{- end }}
 volumes:
   jira_data:
