@@ -1,4 +1,5 @@
 nexus:
+  # https://hub.docker.com/r/sonatype/nexus3/tags
   image: sonatype/nexus3:3.23.0
   volumes:
     - ${DATA}:/nexus-data
