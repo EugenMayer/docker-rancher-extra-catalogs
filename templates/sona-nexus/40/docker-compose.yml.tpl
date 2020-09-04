@@ -1,6 +1,6 @@
 nexus:
   # https://hub.docker.com/r/sonatype/nexus3/tags
-  image: sonatype/nexus3:3.26.2
+  image: sonatype/nexus3:3.27.0
   volumes:
     - ${DATA}:/nexus-data
   labels:

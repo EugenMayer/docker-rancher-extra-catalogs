@@ -1,7 +1,7 @@
 name: "Sona-nexus registry"
 description: |
   Docker-registry, npm, java and ruby server with permissions and authentication backend
-version: 3.26.2.0
+version: 3.27.0.0
 category: Applications
 maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
 projectURL: https://www.sonatype.com/nexus-repository-oss

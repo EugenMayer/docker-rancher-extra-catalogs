@@ -1,18 +1,34 @@
 .catalog:
-  name: "Sona nexus"
-  version: 3.27.0
-  description: "A docker-registry, gem, npm, java and more server with permissions, authentication backends a lot more:"
-  minimum_rancher_version: v0.63.0
+  name: "Mattermost Team Edition"
+  version: 5.26.2.0
+  description: "Mattermost Team Edition"
+  minimum_rancher_version: v1.5.0
   questions:
-    - variable: "DATA"
-      label: "Volume name or host path for the nexus server storage"
-      description: "Volume name you want the data to be stored on"
+    - variable: "SITEURL"
+      label: "SITEURL"
+      description: "Your mattermost URL, like https://chat.company.tld"
       required: true
       type: "string"
+    - variable: "DB_USER"
+      label: "DB user"
+      description: "db user"
+      required: true
+      type: "string"
+      default: "mattermost"
+    - variable: "DB_PASSWORD"
+      label: "Database password"
+      required: true
+      type: "password"
+    - variable: "DB_NAME"
+      label: "DB Name"
+      description: "db name for mattermost"
+      required: true
+      type: "string"
+      default: "mattermostdb"
     - variable: "TRAEFIK_FRONTEND_RULE"
       label: "Traefik: Frontend Rule"
       description: "If you are using ranchers Traefik catalog, define the frontend rule, like Host:service.mydomain.tld or whatever you need"
-      default: 'Host:nexus.company.tld'
+      default: 'Host:chat.company.tld'
       type: "string"
       required: false
     - variable: "TRAEFIK_FRONTEND_HTTPS_ENABLE"
@@ -27,4 +43,3 @@
       required: false
       default: ''
       type: "multiline"
-

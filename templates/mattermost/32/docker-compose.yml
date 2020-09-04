@@ -1,0 +1,55 @@
+version: "2"
+
+services:
+  mattermost:
+    image: eugenmayer/mattermost-app:team-5.26.2
+    labels:
+{{- if .Values.EXTRA_LABELS }}
+{{.Values.EXTRA_LABELS | indent 6}}
+{{- end}}
+      traefik.enable: true
+      traefik.port: 8000
+      traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
+      traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent.role: 'environment'
+    volumes:
+      - mattermost_config:/mattermost/config
+      - mattermost_data:/mattermost/data
+      - mattermost_logs:/mattermost/logs
+      - mattermost_plugins:/mattermost/plugins
+      - mattermost_client_plugins:/mattermost/client/plugins
+    environment:
+      MM_USERNAME: ${DB_USER}
+      MM_PASSWORD: ${DB_PASSWORD}
+      MM_DBNAME: ${DB_NAME}
+      MM_SERVICESETTINGS_SITEURL: ${SITEURL}
+      DB_HOST: db
+      DB_PORT_NUMBER: 5432
+      # mandatory to fix the mattermost cli https://github.com/mattermost/mattermost-docker/issues/399#issuecomment-508991021
+      MM_SQLSETTINGS_DATASOURCE: "postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?sslmode=disable&connect_timeout=10"
+  db:
+    image: eugenmayer/mattermost-db:team-5.26.2
+    volumes:
+      - mattermost_db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_ENCODING: "UNICODE"
+      POSTGRES_COLLATE: "C"
+      POSTGRES_COLLATE_TYPE: "C"
+
+volumes:
+  mattermost_config:
+    driver: local
+  mattermost_data:
+    driver: local
+  mattermost_logs:
+    driver: local
+  mattermost_plugins:
+    driver: local
+  mattermost_client_plugins:
+    driver: local
+  mattermost_db:
+    driver: local
