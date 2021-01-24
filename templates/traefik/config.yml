@@ -1,8 +1,8 @@
 name: Traefik
 description: |
   Traefik active load balancer
-version: v1.7.25.0
+version: v1.7.28.0
 category: Load Balancing
-maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de"
+maintainer: 'Eugen Mayer <eugen.mayer@kontextwork.de'
 license:
 projectURL: https://github.com/EugenMayer/docker-image-rancher-traefik
