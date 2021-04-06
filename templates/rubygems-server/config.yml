@@ -1,7 +1,0 @@
-name: "Geminabox Rubygems-Server"
-description: |
-  A Geminabox rubygems server to host your private ruby gems
-version: 0.0.4
-category: Applications
-maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
-projectURL: https://github.com/EugenMayer/kontextwork-catalog/tree/master/templates/rubygems-server

@@ -3,7 +3,10 @@
 Nothing really special, just some public catalog files i use and have to share.
 Partially, some have been forked from the community library, in most cases due to version updates or similar. In those all the credits for the hard work shall go to the initial authors.
 
+You find older, non maintained but mostly working catalogs under `archive/`
+
 # License
+
 Copyright (c) 2014-2016 [Rancher Labs, Inc.](http://rancher.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
