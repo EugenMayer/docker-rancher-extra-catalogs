@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+  app:
+    labels:
+      io.rancher.container.pull_image: always
+      traefik.enable: true
+      traefik.port: 80
+      traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
+      traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
+    image: eugenmayer/gdpr-csp-nginx

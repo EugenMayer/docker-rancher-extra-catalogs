@@ -1,0 +1,50 @@
+version: "2"
+
+services:
+  bitbucket:
+    image: eugenmayer/bitbucket:5.13.0
+    labels:
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent.role: 'environment'
+      traefik.enable: true
+      traefik.port: 7990
+      traefik.frontend.rule: ${TRAEFIK_FRONTEND_RULE}
+      traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
+    {{- if .Values.BITBUCKET_SSH_EXPOSE_PORT }}
+    ports:
+      - ${BITBUCKET_SSH_EXPOSE_PORT}:${BITBUCKET_SSH_PORT}
+    {{- end }}
+    environment:
+      BITBUCKET_DELAYED_START: 10
+{{- if eq .Values.USE_PROXY "true" }}
+      BITBUCKET_PROXY_NAME: ${BITBUCKET_PROXY_NAME}
+      BITBUCKET_PROXY_PORT: ${BITBUCKET_PROXY_PORT}
+      BITBUCKET_PROXY_SCHEME: ${BITBUCKET_PROXY_SCHEME}
+{{- end }}
+    volumes:
+      - bitbucket_data:/var/atlassian/bitbucket
+
+{{- if eq .Values.USE_EXTERNAL_DB_SERVICE "true" }}
+    external_links:
+      - ${EXTERNAL_DB_SERVICE}:db
+{{- end }}
+
+{{- if eq .Values.USE_EXTERNAL_DB_SERVICE "false" }}
+  db:
+    image: blacklabelops/postgres:9.4.9
+    volumes:
+      - bitbucket_db:/var/lib/postgresql
+    environment:
+      POSTGRES_DB: ${BITBUCKET_DB_NAME}
+      POSTGRES_USER: ${BITBUCKET_DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_ENCODING: "UNICODE"
+      POSTGRES_COLLATE: "C"
+      POSTGRES_COLLATE_TYPE: "C"
+{{- end }}
+
+volumes:
+  bitbucket_data:
+    driver: local
+  bitbucket_db:
+    driver: local

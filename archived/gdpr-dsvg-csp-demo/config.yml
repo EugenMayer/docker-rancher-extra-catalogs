@@ -1,0 +1,7 @@
+name: "gdpr csp demo"
+description: |
+   Implementation of a CSP based cookie switch to forbind loading ANY 3rd party resources without having the consent cookie set.
+version: 0.1
+category: Applications
+maintainer: "Eugen Mayer <eugen.mayer@kontextwork.de>"
+projectURL: https://hub.docker.com/r/eugenmayer/whatsmyip/

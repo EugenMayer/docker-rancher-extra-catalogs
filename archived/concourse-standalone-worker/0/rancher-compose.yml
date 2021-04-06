@@ -1,0 +1,72 @@
+.catalog:
+  name: "Concourse CI Standalone worker"
+  version: 3.8.0.0
+  description: "Atlassian Jira"
+  minimum_rancher_version: v1.5.0
+  questions:
+  - variable: "CONCOURSE_TSA_HOST"
+    label: "Your external proxy domain"
+    description: "The hostname of your TSA, no scheme"
+    required: true
+    type: "string"
+  - variable: "CONCOURSE_TSA_PORT"
+    label: "Your TSA port"
+    description: "The port of your TSA"
+    required: true
+    type: "int"
+    default: 2222
+  - variable: "TSA_EXISTING_PUBLIC_KEY"
+    label: "TSA public key"
+    description: "Your TSA public key to expect (host verficiation)"
+    required: true
+    type: "text"
+  - variable: "WORKER_EXISTING_PRIVATE_KEY"
+    label: "The workery private key"
+    description: " the private key of an existing worker (shared key) or an key you deployed into authorized_workers on the tsa"
+    required: true
+    type: "text"
+  - variable: "CONCOURSE_BAGGAGECLAIM_DRIVER"
+    label: "Volume driver"
+    description: "Driver to use for managing volumes"
+    required: true
+    default: "overlay"
+    type: "enum"
+    options:
+    - overlay
+    - detect
+    - naive
+    - btrfs
+  - variable: "CONCOURSE_BAGGAGECLAIM_LOG_LEVEL"
+    label: "Baggageclaim loglevel"
+    description: "Driver to use for managing volumes"
+    required: true
+    default: "info"
+    type: "enum"
+    options:
+    - debug
+    - info
+    - error
+    - fatal
+  - variable: "CONCOURSE_GARDEN_LOG_LEVEL"
+    label: "Garden loglevel"
+    required: true
+    default: "info"
+    type: "enum"
+    options:
+    - debug
+    - info
+    - error
+    - fatal
+  - variable: "CONCOURSE_GARDEN_NETWORK_POOL"
+    label: "Network pool"
+    description: "Network range to use for dynamically allocated container subnets."
+    required: false
+    default: "10.254.0.0/22"
+    type: "string"
+  - variable: WORKER_KEYS_VOLUME_NAME
+    label: "VOLUME: worker_keys / Path"
+    description: |
+      Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+    required: true
+    type: string
+    default: 'concourse-worker-keys'
