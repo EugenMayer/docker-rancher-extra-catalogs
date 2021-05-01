@@ -13,6 +13,7 @@ services:
       traefik.acme: ${TRAEFIK_FRONTEND_HTTPS_ENABLE}
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: 'environment'
+      io.rancher.container.pull_image: always
     volumes:
       - jira_data:/var/atlassian/jira
     environment:
@@ -43,6 +44,8 @@ services:
       POSTGRES_ENCODING: UTF8
       POSTGRES_COLLATE: C
       POSTGRES_COLLATE_TYPE: C
+    labels:
+      io.rancher.container.pull_image: always
 {{- end }}
 volumes:
   jira_data:
