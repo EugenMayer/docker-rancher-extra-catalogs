@@ -1,7 +1,7 @@
 name: 'jFrog OSS Cpp Community Edition'
 description: |
   Jfrog community edition server for conan packaging
-version: 7.18.3.5 # https://www.jfrog.com/confluence/display/JFROG/Artifactory+Release+Notes
+version: 7.18.3.6 # https://www.jfrog.com/confluence/display/JFROG/Artifactory+Release+Notes
 category: Applications
 maintainer: 'Eugen Mayer <eugen.mayer@kontextwork.de>'
 projectURL: https://jfrog.com/open-source/#conan
