@@ -16,15 +16,11 @@ services:
       io.rancher.container.agent.role: 'environment'
       io.rancher.container.pull_image: always
     environment:
-      DB_TYPE: postgresql
-      # not working
-      #DB_HOST: db
-      # not working
-      #DB_PORT: 5432
-      # not working
-      #DB_URL: jdbc:postgresql://db:5432/artifactory
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
+      JF_SHARED_DATABASE_TYPE: postgresql
+      JF_SHARED_DATABASE_DRIVER: org.postgresql.Driver
+      JF_SHARED_DATABASE_USERNAME: ${DB_USER}
+      JF_SHARED_DATABASE_PASSWORD: ${DB_PASSWORD}
+      JF_SHARED_DATABASE_URL: jdbc:postgresql://db:5432/${DB_NAME}
     volumes:
     {{- if .Values.DATA_VOLUME_NAME}}
     - {{.Values.DATA_VOLUME_NAME}}:/var/opt/jfrog/artifactory
@@ -32,11 +28,15 @@ services:
     - jfrogdata:/var/opt/jfrog/artifactory
     {{- end }}
   # has to be named postgresql since app expects it and neither DB_URL nor DB_HOSt works
-  postgresql:
-    image: postgres:10
+  db:
+    image: postgres:12
+    {{- if .Values.HOST_AFFINITY_LABEL}}
+    labels:
+      io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
+    {{- end }}
     environment:
       # has to be artifactory since app DB_NAME does not work
-      POSTGRES_DB: artifactory
+      POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
