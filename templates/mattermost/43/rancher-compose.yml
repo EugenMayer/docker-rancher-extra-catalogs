@@ -1,6 +1,6 @@
 .catalog:
   name: 'Mattermost Team Edition'
-  version: 5.34.2.0
+  version: 5.35.2.0
   description: 'Mattermost Team Edition'
   minimum_rancher_version: v1.5.0
   questions:

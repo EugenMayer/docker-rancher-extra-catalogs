@@ -2,7 +2,7 @@ version: "2"
 
 services:
   mattermost:
-    image: eugenmayer/mattermost-app:team-5.34.2
+    image: eugenmayer/mattermost-app:team-5.35.2
     labels:
 {{- if .Values.EXTRA_LABELS }}
 {{.Values.EXTRA_LABELS | indent 6}}
@@ -29,7 +29,7 @@ services:
       # mandatory to fix the mattermost cli https://github.com/mattermost/mattermost-docker/issues/399#issuecomment-508991021
       MM_SQLSETTINGS_DATASOURCE: "postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?sslmode=disable&connect_timeout=10"
   db:
-    image: eugenmayer/mattermost-db:team-5.34.2
+    image: eugenmayer/mattermost-db:team-5.35.2
     volumes:
       - mattermost_db:/var/lib/postgresql/data
     environment:
