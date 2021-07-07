@@ -3,6 +3,7 @@ version: "2"
 services:
   rundeck:
     image: eugenmayer/rundeck:3.4.0-20210614
+    labels:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: 'environment'
       io.rancher.container.pull_image: always
