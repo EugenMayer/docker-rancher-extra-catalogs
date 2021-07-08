@@ -45,6 +45,7 @@ services:
     {{- if .Values.HOST_AFFINITY_LABEL}}
     labels:
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
+      io.rancher.container.pull_image: always
     {{- end }}
     environment:
       POSTGRES_DB: ${DB_NAME}
