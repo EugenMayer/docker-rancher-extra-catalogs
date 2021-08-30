@@ -2,7 +2,7 @@ version: "2"
 
 services:
   jira:
-    image: eugenmayer/jira:en-8.19.0
+    image: eugenmayer/jira:en-8.18.1
     labels:
 {{- if .Values.EXTRA_LABELS }}
 {{.Values.EXTRA_LABELS | indent 6}}
