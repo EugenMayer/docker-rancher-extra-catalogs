@@ -1,0 +1,68 @@
+.catalog:
+  name: 'Sonarqube Developer Edition'
+  version: 9.1.0.0
+  description: 'Sonarqube'
+  minimum_rancher_version: v1.5.0
+  questions:
+    - variable: 'DB_PASSWORD'
+      label: 'Database password'
+      required: true
+      type: 'password'
+    - variable: 'DB_USER'
+      label: 'Database user'
+      required: true
+      type: 'string'
+      default: 'sonarqube'
+    - variable: 'DB_NAME'
+      label: 'Database name'
+      required: true
+      type: 'string'
+      default: 'sonarqube'
+    - variable: DB_VOLUME_NAME
+      label: 'VOLUME: db / Path'
+      description: |
+        Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+      required: false
+      type: string
+    - variable: CONF_VOLUME_NAME
+      label: 'VOLUME: conf / Path'
+      description: |
+        Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+      required: false
+      type: string
+    - variable: DATA_VOLUME_NAME
+      label: 'VOLUME: data / Path'
+      description: |
+        Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+      required: false
+      type: string
+    - variable: LOG_VOLUME_NAME
+      label: 'VOLUME: log / Path'
+      description: |
+        Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+      required: false
+      type: string
+    - variable: EXTENSIONS_VOLUME_NAME
+      label: 'VOLUME: extensions / Path'
+      description: |
+        Enter either a full-qualified path for a host mount (/foo/path) or just a name 'myvolume' for volume mounts
+      required: false
+      type: string
+    - variable: 'TRAEFIK_FRONTEND_RULE'
+      label: 'Traefik: Frontend Rule'
+      description: "If you are using ranchers Traefik catalog, define the frontend rule, like 'Host: service.mydomain.tld' or whatever you need"
+      default: 'Host:myip.company.tld'
+      type: 'string'
+      required: false
+    - variable: 'TRAEFIK_FRONTEND_HTTPS_ENABLE'
+      label: 'Traefik: Enable SSL'
+      description: 'If you are using ranchers Traefik catalog, decide if you want to get a SSL cetificate for this service using ACME'
+      required: false
+      default: false
+      type: 'boolean'
+    - variable: 'EXTRA_LABELS'
+      label: 'EXTRA LABELS'
+      description: "Extra labels to add, ech line looks like foo.mybar: value' .. So exactly the yaml syntax you use"
+      required: false
+      default: ''
+      type: 'multiline'
