@@ -116,10 +116,10 @@ services:
       # but between all hosts we have an automatic ipsec based network which services can use to communicate
       CONCOURSE_TSA_ATC_URL: ${TSA_ATC_URL}
       CONCOURSE_PEER_ADDRESS: ${PEER_ADDRESS}
+      CONCOURSE_TSA_LOG_LEVEL: ${CONCOURSE_TSA_LOG_LEVEL}
       CONCOURSE_TSA_AUTHORIZED_KEYS: /run/secrets/concourse-tsa-authorized-workers
       CONCOURSE_TSA_HEARTBEAT_INTERVAL: ${CONCOURSE_TSA_HEARTBEAT_INTERVAL}
       CONCOURSE_TSA_HOST_KEY: /run/secrets/concourse-tsa-private-key
-      CONCOURSE_TSA_LOG_LEVEL: ${CONCOURSE_TSA_LOG_LEVEL}
       # its not, even though it should be CONCOURSE_TSA_SESSION_SIGNING_KEY according to `concourse web --help`
       CONCOURSE_SESSION_SIGNING_KEY: /run/secrets/concourse-tsa-session-signing-key
       CONCOURSE_AUTH_DURATION: ${CONCOURSE_AUTH_DURATION}
@@ -176,8 +176,6 @@ services:
       CONCOURSE_SECRET_CACHE_ENABLED: true
       CONCOURSE_SECRET_CACHE_DURATION: 30m
       CONCOURSE_RESOURCE_CHECKING_INTERVAL: 10m
-
-      CONCOURSE_ENABLE_LIDAR: ${ENABLE_LIDAR}
 
 {{- if eq .Values.START_INCLUDED_WORKERS "true" }}
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
