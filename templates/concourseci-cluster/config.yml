@@ -1,7 +1,13 @@
 name: 'Concourse CI Cluster'
 description: |
   Concourse CI Cluster version with spreaded workers
+<<<<<<< HEAD
 version: 5.8.1.0
+||||||| 1abe4a5
+version: 5.8.0.1
+=======
+version: 5.7.2.0
+>>>>>>> 36aa7ecdcd89597990e9a04579e869dedc7ce6cf
 category: Applications
 maintainer: 'Eugen Mayer <eugen.mayer@kontextwork.de>'
 projectURL: http://concourse.ci/

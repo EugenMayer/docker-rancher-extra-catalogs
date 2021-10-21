@@ -82,7 +82,7 @@ services:
     {{- if .Values.HOST_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
-    image: concourse/concourse:5.8.1
+    image: concourse/concourse:5.7.2
     {{- if eq .Values.GLOBAL_RESOURCES "true" }}
     command: web --enable-global-resources
     {{- else}}
@@ -196,7 +196,7 @@ services:
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
       {{- end }}
       io.rancher.container.pull_image: always
-    image: concourse/concourse:5.8.1
+    image: concourse/concourse:5.7.2
     privileged: true
     secrets:
       - concourse-worker-private-key

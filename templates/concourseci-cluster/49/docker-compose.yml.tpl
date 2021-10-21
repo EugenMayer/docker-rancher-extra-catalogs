@@ -48,7 +48,7 @@ services:
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
 {{- end }}
       io.rancher.container.pull_image: always
-    image: eugenmayer/concourse-configurator:5.x
+    image: ghcr.io/eugenmayer/concourse-configurator:7.x
     volumes:
       {{- if .Values.VAULT_CLIENT_CONFIG_VOLUME_NAME}}
       - {{.Values.VAULT_CLIENT_CONFIG_VOLUME_NAME}}:/vault/concourse
@@ -82,7 +82,7 @@ services:
     {{- if .Values.HOST_AFFINITY_LABEL}}
       io.rancher.scheduler.affinity: {{.Values.HOST_AFFINITY_LABEL}}
     {{- end }}
-    image: concourse/concourse:5.7.1
+    image: concourse/concourse:5.7.2
     {{- if eq .Values.GLOBAL_RESOURCES "true" }}
     command: web --enable-global-resources
     {{- else}}
@@ -177,8 +177,6 @@ services:
       CONCOURSE_SECRET_CACHE_DURATION: 30m
       CONCOURSE_RESOURCE_CHECKING_INTERVAL: 10m
 
-      CONCOURSE_ENABLE_LIDAR: ${ENABLE_LIDAR}
-
 {{- if eq .Values.START_INCLUDED_WORKERS "true" }}
   # see https://github.com/concourse/concourse-docker/blob/master/Dockerfile
   worker-standalone:
@@ -196,7 +194,7 @@ services:
       io.rancher.scheduler.affinity: {{.Values.HOST_WORKER_AFFINITY_LABEL}}
       {{- end }}
       io.rancher.container.pull_image: always
-    image: concourse/concourse:5.7.1
+    image: concourse/concourse:5.7.2
     privileged: true
     secrets:
       - concourse-worker-private-key
