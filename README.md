@@ -1,3 +1,5 @@
+IMPORTANT: This repository will soon be archived, since we no longer use rancher 1.x. Please be sure to update your applications otherwise or fork this repository!
+
 # Public Catalogs to be used free of everything
 
 Nothing really special, just some public catalog files i use and have to share.
